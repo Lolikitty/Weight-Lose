@@ -1,6 +1,6 @@
 ## 減重 App
 
-[Wiki](https://github.com/Lolikitty/Weight-Lose/wiki)
+[減重 App Wiki](https://github.com/Lolikitty/Weight-Lose/wiki)
 
 目錄說明：
 
