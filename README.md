@@ -2,4 +2,4 @@
 
 目錄說明：
 
-Unity Project ( 存放Unity整個專案，含 Android / iOS )
+Unity Project：存放 Unity 整個專案，含 Android / iOS
