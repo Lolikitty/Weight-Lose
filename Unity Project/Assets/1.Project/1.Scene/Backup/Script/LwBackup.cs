@@ -63,7 +63,7 @@ public class LwBackup : MonoBehaviour {
 			#if UNITY_ANDROID
 				wf.AddField("device", "Android");
 			#endif
-			wf.AddBinaryData("file", b, path);
+			wf.AddBinaryData("file", b, WWW.EscapeURL(path));
 			WWW w = new WWW(LwInit.HttpServerPath+"/Backup", wf);
 			yield return w;
 			err = w.error;
