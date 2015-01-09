@@ -7,6 +7,10 @@ package server.http.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -65,11 +69,17 @@ public class Backup extends HttpServlet {
 
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
-        System.out.println(contentDisp);
         String[] items = contentDisp.split(";");
         for (String s : items) {
             if (s.trim().startsWith("filename")) {
-                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+                String url = s.substring(s.indexOf("=") + 2, s.length() - 1);
+                try {
+                    String urlDecode = URLDecoder.decode(url, "UTF-8");
+                    return urlDecode;
+                } catch (UnsupportedEncodingException ex) {
+                    System.out.println(ex);
+                    return "";
+                }
             }
         }
         return "";

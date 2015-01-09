@@ -41,20 +41,26 @@ public class ReadBackup extends HttpServlet {
 //    }
 //    ArrayList<String> a = new ArrayList<String>();
     ArrayList<String> getFilePath(String path) {
-        ArrayList<String> a = new ArrayList<String>();
+        try {
+            ArrayList<String> a = new ArrayList<>();
 
-        for (String p : new File(path).list()) {
-            String sp = path + "\\" + p;
-            if (new File(sp).isDirectory()) {
-                ArrayList<String> aa = getFilePath(sp);
-                for (String data : aa) {
-                    a.add(data);
+            for (String p : new File(path).list()) {
+                String sp = path + "\\" + p;
+                if (new File(sp).isDirectory()) {
+                    System.out.println(getFilePath(sp));
+                    ArrayList<String> aa = getFilePath(sp);
+                    for (String data : aa) {
+                        a.add(data);
+                    }
+                } else {
+                  a.add(sp.split("Netbeans Project")[1].replaceAll("\\\\", "/"));             
                 }
-            } else {
-                a.add(sp.split("LwServer")[1].replaceAll("\\\\", "/"));
             }
+            return a;
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        return a;
+        return null;
     }
 
 }
