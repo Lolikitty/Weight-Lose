@@ -34,7 +34,15 @@ public class LwInit : MonoBehaviour {
 		string headPath = Application.persistentDataPath + "/User.png";
 
 		if (File.Exists (headPath)) {
-			Application.LoadLevel ("MainMenu");
+			string [] files = Directory.GetFiles (Application.persistentDataPath, "*.pw");
+
+			if(files.Length == 0){
+				Application.LoadLevel ("MainMenu");
+			}else{
+				Application.LoadLevel ("InputPassword");
+			}
+
+
 		} else {
 			System.IO.File.WriteAllBytes(headPath, head.EncodeToPNG());
 			WWW www = new WWW(HttpServerPath+"/SignID");

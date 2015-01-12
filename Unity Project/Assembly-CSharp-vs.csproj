@@ -70,6 +70,9 @@
      <Compile Include="Assets\1.Project\1.Scene\MainMenu\Script\FoodStatusCircle.cs" />
      <Compile Include="Assets\1.Project\1.Scene\MainMenu\Script\LwMainMenu.cs" />
      <Compile Include="Assets\1.Project\1.Scene\MainMenu\Script\MainMenu_SceneButton.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Password\1.Scene\InputPassword\Script\InputPassword.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Password\1.Scene\SetPassword\Script\SetPassword.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Password\1.Scene\SetPassword2\Script\SetPassword2.cs" />
      <Compile Include="Assets\1.Project\1.Scene\ReadBackup\Script\ReadBackup.cs" />
      <Compile Include="Assets\1.Project\1.Scene\SetBirthday\Script\LwBirthday.cs" />
      <Compile Include="Assets\1.Project\1.Scene\SetWeight\Script\LwWeight.cs" />
@@ -86,6 +89,7 @@
      <Compile Include="Assets\1.Project\1.Scene\WeightMeasurements\Script\LwWeightMeasurements.cs" />
      <Compile Include="Assets\1.Project\1.Scene\WeightMeasurements2\Script\LwWeightMeasurements2.cs" />
      <Compile Include="Assets\1.Project\2.Script\ChooseNumber.cs" />
+     <Compile Include="Assets\1.Project\2.Script\ChooseNumberNGUI.cs" />
      <Compile Include="Assets\1.Project\2.Script\LwChooseFood.cs" />
      <Compile Include="Assets\1.Project\2.Script\LwFoodHistory_Food.cs" />
      <Compile Include="Assets\1.Project\2.Script\LwUser_Food.cs" />
@@ -95,6 +99,7 @@
      <Compile Include="Assets\1.Project\2.Script\SelectNumber2.cs" />
      <Compile Include="Assets\1.Project\2.Script\ShowNumber.cs" />
      <Compile Include="Assets\1.Project\2.Script\TextureScale.cs" />
+     <Compile Include="Assets\1.Project\2.Script\ToScene.cs" />
      <Compile Include="Assets\Facebook\Scripts\AndroidFacebook.cs" />
      <Compile Include="Assets\Facebook\Scripts\AndroidFacebookLoader.cs" />
      <Compile Include="Assets\Facebook\Scripts\CanvasFacebookLoader.cs" />
