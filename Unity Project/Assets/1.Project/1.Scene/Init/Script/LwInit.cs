@@ -12,7 +12,7 @@ public class LwInit : MonoBehaviour {
 	public Texture2D head;
 
 //	public static string ServerIP = "54.69.109.145";
-	public static string ServerIP = "192.168.1.103";
+	public static string ServerIP = "192.168.2.207";//"127.0.0.1";//"192.168.1.103";
 	public static int ServerPort = 4040;
 	public static int TalkServerPort = 4041;
 	public static string HttpServerPath = "http://" + ServerIP + ":" + ServerPort;
