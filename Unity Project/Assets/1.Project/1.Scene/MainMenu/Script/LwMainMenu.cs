@@ -28,14 +28,19 @@ public class LwMainMenu : MonoBehaviour {
 
 		UIEventListener.Get(buttonAddFoodFinishExit).onClick = ButtonAddFoodFinishExit;
 
-
+		float nowKG = PlayerPrefs.GetFloat("Weight9");
 		float WeightFirst = float.Parse (PlayerPrefs.GetString ("WeightFirst"));
 		float WeightTarget = float.Parse (PlayerPrefs.GetString ("WeightTarget"));
-		float nowKG = 50;
 
-		WeightLoss.text = (WeightFirst-WeightTarget).ToString ("0.0");
+
+		WeightLoss.text = (nowKG-WeightTarget).ToString ("0.0");
 
 		WeightLossSlider.value = 1 - ((nowKG - WeightTarget) / (WeightFirst - WeightTarget));
+	}
+
+	void OnGUI(){
+		GUILayout.Label ("" + PlayerPrefs.GetFloat("Weight0"));
+		GUILayout.Label ("" + PlayerPrefs.GetFloat("Weight9"));
 	}
 
 	IEnumerator Start () {
