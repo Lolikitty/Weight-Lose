@@ -11,6 +11,7 @@ public class LwMainMenu : MonoBehaviour {
 	public UILabel AddFoodFinish_Title;
 	public UILabel AddFoodFinish_Kal;
 	public UILabel WeightLoss;
+	public UISlider WeightLossSlider;
 
 	public UITexture AddFoodFinish_Food;
 	public Texture2D defaultFood;
@@ -27,8 +28,14 @@ public class LwMainMenu : MonoBehaviour {
 
 		UIEventListener.Get(buttonAddFoodFinishExit).onClick = ButtonAddFoodFinishExit;
 
+		float nowKG = PlayerPrefs.GetFloat("Weight9");
+		float WeightFirst = float.Parse (PlayerPrefs.GetString ("WeightFirst"));
+		float WeightTarget = float.Parse (PlayerPrefs.GetString ("WeightTarget"));
 
-		WeightLoss.text = (float.Parse (PlayerPrefs.GetString ("WeightFirst")) - float.Parse (PlayerPrefs.GetString ("WeightTarget"))).ToString ("0.0");
+
+		WeightLoss.text = (nowKG-WeightTarget).ToString ("0.0");
+
+		WeightLossSlider.value = 1 - ((nowKG - WeightTarget) / (WeightFirst - WeightTarget));
 	}
 
 	IEnumerator Start () {
