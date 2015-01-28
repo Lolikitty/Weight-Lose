@@ -1,12 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Project/1.Scene/MainMenu/Script/LwMainMenu.cs">
     <Files>
-      <File FileName="Assets/1.Project/1.Scene/MainMenu/Script/LwMainMenu.cs" Line="52" Column="75" />
+      <File FileName="Assets/1.Project/1.Scene/MainMenu/Script/LwMainMenu.cs" Line="21" Column="45" />
       <File FileName="Assets/1.Project/2.Script/ToScene.cs" Line="1" Column="1" />
       <File FileName="Assets/1.Project/1.Scene/Password/1.Scene/InputPassword/Script/InputPassword.cs" Line="1" Column="1" />
       <File FileName="Assets/1.Project/1.Scene/Password/1.Scene/SetPassword2/Script/SetPassword2.cs" Line="1" Column="1" />
       <File FileName="Assets/1.Project/1.Scene/ReadBackup/Script/ReadBackup.cs" Line="1" Column="1" />
+      <File FileName="Assets/1.Project/1.Scene/WeightMeasurements/Script/LwWeightMeasurements.cs" Line="74" Column="50" />
+      <File FileName="Assets/1.Project/1.Scene/WeightMeasurements2/Script/LwWeightMeasurements2.cs" Line="29" Column="36" />
+      <File FileName="Assets/1.Project/2.Script/NewBehaviourScript.cs" Line="28" Column="47" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

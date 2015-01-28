@@ -38,11 +38,6 @@ public class LwMainMenu : MonoBehaviour {
 		WeightLossSlider.value = 1 - ((nowKG - WeightTarget) / (WeightFirst - WeightTarget));
 	}
 
-	void OnGUI(){
-		GUILayout.Label ("" + PlayerPrefs.GetFloat("Weight0"));
-		GUILayout.Label ("" + PlayerPrefs.GetFloat("Weight9"));
-	}
-
 	IEnumerator Start () {
 		if(UploadBirthdayAndWeight){
 			UploadBirthdayAndWeight = false;
