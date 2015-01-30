@@ -86,8 +86,8 @@
      <Compile Include="Assets\1.Project\1.Scene\User2\Script\LwUser2.cs" />
      <Compile Include="Assets\1.Project\1.Scene\User3\Script\LwUser3.cs" />
      <Compile Include="Assets\1.Project\1.Scene\UserCamera\Script\LwUserCamera.cs" />
-     <Compile Include="Assets\1.Project\1.Scene\Waiter\Script\LwWaiter.cs" />
-     <Compile Include="Assets\1.Project\1.Scene\Waiter2\Script\LwWaiter2.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Waiter\Waiter1\Script\LwWaiter.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Waiter\Waiter2\Script\LwWaiter2.cs" />
      <Compile Include="Assets\1.Project\1.Scene\WeightMeasurements\Script\LwWeightMeasurements.cs" />
      <Compile Include="Assets\1.Project\1.Scene\WeightMeasurements2\Script\LwWeightMeasurements2.cs" />
      <Compile Include="Assets\1.Project\2.Script\ChooseNumber.cs" />
