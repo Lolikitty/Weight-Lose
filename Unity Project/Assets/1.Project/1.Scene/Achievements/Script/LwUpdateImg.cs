@@ -15,6 +15,7 @@ public class LwUpdateImg : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+	
 		for (int i=0; i<Target.Length; i++) { //重置 TargetGrade
 			TargetGrade[i] = 0;
 		}
@@ -24,7 +25,8 @@ public class LwUpdateImg : MonoBehaviour {
 					switch (TargetState [i,j]) { //判斷mark的狀態值
 						case 1:
 							TargetGrade [i] += 1; //累加
-								break;
+							
+							break;
 					}
 			}
 		}
@@ -32,6 +34,10 @@ public class LwUpdateImg : MonoBehaviour {
 		for (int i=0; i<Target.Length; i++) { //更新圖片
 			Target[i].mainTexture = Img[TargetGrade [i]];
 	    }
-
+		/*
+		//更新
+		for (int i=0; i<BlueMark.Length; i++) {
+			BlueMark[i].SetActive((State==1)?true:false);				
+		}*/
 	}
 }
