@@ -44,7 +44,11 @@ public class ToScene : MonoBehaviour {
 		Waiter,
 		Waiter2,
 		WeightMeasurements,
-		WeightMeasurements2
+		WeightMeasurements2,
+		Step1,
+		Step2,
+		Step3,
+		Step4
 	};
 
 	public CommunityScene communityScene;

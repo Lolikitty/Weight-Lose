@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\Documents\New Unity Project 1\Assets\Test1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\1.Project\1.Scene\Achievements\Script\LwAchievements.cs">
     <Files>
-      <File FileName="..\..\..\..\Documents\New Unity Project 1\Assets\Test1.cs" Line="8" Column="2" />
+      <File FileName="Assets\1.Project\1.Scene\Achievements\Script\LwUpdateImg.cs" Line="19" Column="23" />
+      <File FileName="Assets\1.Project\1.Scene\Achievements\Script\LwAchievements.cs" Line="23" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

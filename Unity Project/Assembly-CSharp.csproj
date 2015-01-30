@@ -46,7 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\1.Project\1.Scene\Achievements\Script\BarControl.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Achievements\Script\LwAchievements.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Achievements\Script\LwUpdateImg.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Backup\Script\LwBackup.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Community\1.Scene\AddFriend\Script\LwAddFriend.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Community\1.Scene\AddFriend\Script\LwAddFriendInformation.cs" />
