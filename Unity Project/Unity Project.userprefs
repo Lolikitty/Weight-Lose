@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\1.Project\1.Scene\Setting\Script\Setting.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\1.Project\1.Scene\Init\Script\LwInit.cs">
     <Files>
-      <File FileName="Assets\1.Project\1.Scene\Setting\Script\Setting.cs" Line="52" Column="4" />
+      <File FileName="Assets\1.Project\1.Scene\Init\Script\LwInit.cs" Line="145" Column="1" />
+      <File FileName="Assets\Water_alarm.cs" Line="140" Column="36" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

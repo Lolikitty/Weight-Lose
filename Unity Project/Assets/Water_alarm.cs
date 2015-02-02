@@ -17,6 +17,8 @@ public class Water_alarm : MonoBehaviour {
 	public GameObject ct1;
 	public GameObject ct2;
 
+	public GameObject script;
+	LwInit script_sc;
 
 	//轉化09群
 	string st_h;
@@ -31,10 +33,6 @@ public class Water_alarm : MonoBehaviour {
 	//離開
 	public GameObject Exit;
 
-	//聲音
-	public AudioSource audio_s;
-	public AudioClip audio_c;
-
 	//文化時間
 	IFormatProvider culture;
 
@@ -46,64 +44,40 @@ public class Water_alarm : MonoBehaviour {
 	DateTime now;
 
 	//條件成立嗎
-	public bool go = false ;
+
+
+	public GameObject error;
 
 
 
 	void Start () {
 
-		audio_s = this.gameObject.GetComponent<AudioSource>();
-
-
-		audio_s.Play ();
+		script = GameObject.Find("Script");
+		script_sc = script.GetComponent<LwInit>();
 
 		culture = new System.Globalization.CultureInfo("zh-TW", true);
 
 		UIEventListener.Get (Exit).onClick = Exit_d;
+		UIEventListener.Get (error).onClick = go_back;
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
 
+	void Update(){
 
-		if (go == true) {
+		if (script_sc.go == true) {
 
-			now = DateTime.Now;
+			next_time.text = script_sc.next_time;
+		
+		}else{
 
-
-			next_time.text = Convert.ToInt32(Math.Ceiling( clock.Subtract(now).TotalMinutes)).ToString();
-
-			//Debug.Log(clock.Subtract(now).TotalMinutes).ToString());
-
-			if(DateTime.Compare(now , clock) >= 0 ){
-
-				Debug.Log("time_out");
-
-				Call() ;
-
-			}
-
-		}
-	
-	}
-
-	void Call(){
-
-		audio_s.Play ();
-		//audio_s.SetScheduledEndTime (30);
-
-		clock = clock.AddMinutes (Convert.ToDouble(ct));
-
-		Debug.Log (clock.ToString ());
-
-		if(DateTime.Compare(clock , et) >= 0 ){
-			
-			go = false;
 
 			next_time.text = "0";
-			
 		}
+
+		next_time.text = Convert.ToInt32(Math.Ceiling( clock.Subtract(now).TotalMinutes)).ToString();
+
 
 	}
 
@@ -122,43 +96,62 @@ public class Water_alarm : MonoBehaviour {
 			now = DateTime.Now;
 			
 			//dateTime
-			st = DateTime.ParseExact(st_h + st_m , "HHmm", culture);
-			et = DateTime.ParseExact(et_h + et_m , "HHmm", culture);
+
+			try{
+				st = DateTime.ParseExact(st_h + st_m , "HHmm", culture);
+				et = DateTime.ParseExact(et_h + et_m , "HHmm", culture);
 
 
-			if(DateTime.Compare(st , et) >= 0 ){
-				
-				et =  et.AddDays(1);
-				
-				Debug.Log(et.ToString());
-				
-			} 
-			
-			clock = st.AddMinutes (Convert.ToDouble(ct));
-			
-			DateTime Dt ;
-			
-			while(DateTime.Compare(now ,clock)>= 0){
-				
-				clock =  clock.AddMinutes(Convert.ToDouble(ct));
+				if(DateTime.Compare(now , et) >= 0 ){
+					
+					et =  et.AddDays(1);
+					
+					Debug.Log(et.ToString());
+					
+				} 
 				
 				
+				//幫數字合理化
+				if(DateTime.Compare(st , et) >= 0 ){
+					
+					et =  et.AddDays(1);
+					
+					Debug.Log(et.ToString());
+					
+				} 
+				
+				clock = st.AddMinutes (Convert.ToDouble(ct));
+				
+				
+				while(DateTime.Compare(now ,clock)>= 0){
+					
+					clock =  clock.AddMinutes(Convert.ToDouble(ct));
+					
+					
+				}
+				
+				Debug.Log (now.ToString());
+				
+				if(DateTime.Compare(clock , now) >= 0){
+
+
+					script_sc.clock_start(st , et , clock , ct);
+
+					Application.LoadLevel("Setting");
+				}
+			}catch{
+
+				error.transform.localPosition = new Vector3(0,0,0);
+
 			}
-			
-			Debug.Log (now.ToString());
-			
-			if(DateTime.Compare(clock , now) >= 0){
-				
-				Debug.Log("goooo");
-				go = true;
-			}
-		
-		
-		
-		
+
 		}
 
+	}
 
+	void go_back(GameObject obj){
+
+		Application.LoadLevel ("Setting");
 
 	}
 }

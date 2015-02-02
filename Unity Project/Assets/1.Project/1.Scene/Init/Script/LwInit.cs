@@ -9,6 +9,12 @@ using System.Threading;
 
 public class LwInit : MonoBehaviour {
 
+	//聲音
+	public AudioSource audio_s;
+	public AudioClip audio_c;
+
+	public bool go = false ;
+
 	public Texture2D head;
 
 //	public static string ServerIP = "54.69.109.145";
@@ -19,11 +25,36 @@ public class LwInit : MonoBehaviour {
 
 	// Unity Override Methods ==============================================================================================================================
 
+	IFormatProvider culture;
+
+	DateTime st;
+	DateTime et;
+	DateTime clock;
+	DateTime now;
+
+	string ct;
+
+	public string next_time;
+
+
+
 	void Awake(){
 		StartCoroutine (InitMix ());
+
+		DontDestroyOnLoad (this.gameObject);
 	}
 
 	// Custom Methods ======================================================================================================================================
+
+	void Start(){
+
+		audio_s = this.gameObject.GetComponent<AudioSource>();
+		audio_s.Play ();
+
+
+	}
+
+
 
 	IEnumerator InitMix () {
 		print (Application.persistentDataPath);
@@ -64,6 +95,56 @@ public class LwInit : MonoBehaviour {
 		}
 	}
 
+	void Update () {
+		
+		
+		if (go == true) {
+			
+			now = DateTime.Now;
+			
+			//Debug.Log(clock.Subtract(now).TotalMinutes).ToString());
+			
+			if(DateTime.Compare(now , clock) >= 0 ){
+				
+				Debug.Log("time_out");
+				
+				Call() ;
+				
+			}
+			
+		}
+		
+	}
+
+
+
+
+	void Call(){
+		
+		audio_s.Play ();
+		//audio_s.SetScheduledEndTime (30);
+		
+		clock = clock.AddMinutes (Convert.ToDouble(ct));
+		
+		Debug.Log (clock.ToString ());
+		
+		if(DateTime.Compare(clock , et) >= 0 ){
+			
+			go = false;
+
+		}
+		
+	}
+
+	public void clock_start(DateTime c_st , DateTime c_et  ,DateTime c_clock,string c_ct){
+
+		st = c_st;
+		et = c_et;
+		clock = c_clock;
+		ct = c_ct;
+
+		go = true;
+	}
 }
 
 
