@@ -13,7 +13,11 @@ public class LwInit : MonoBehaviour {
 	public AudioSource audio_s;
 	public AudioClip audio_c;
 
-	public bool go = false ;
+	public bool go_clock = false ;
+	public bool go_food = false;
+	public bool go_password = false;
+
+	public bool go = false;
 
 	public Texture2D head;
 
@@ -39,17 +43,42 @@ public class LwInit : MonoBehaviour {
 
 
 	void Awake(){
-		StartCoroutine (InitMix ());
+
+		string p_clock = PlayerPrefs.GetString ("go_clock");
+		string p_food = PlayerPrefs.GetString ("go_food");
+		string p_password = PlayerPrefs.GetString ("go_password");
+		
+		if (p_clock == "true") {
+			
+			go_clock = true;
+		}
+		
+		if (p_food == "true") {
+			
+			go_food = true;
+		}
+		
+		if (p_password == "true") {
+			
+			go_password = true;
+		}
+		
+		audio_s = this.gameObject.GetComponent<AudioSource>();
+		audio_s.Play ();
 
 		DontDestroyOnLoad (this.gameObject);
+		
+
+		StartCoroutine (InitMix ());
+
+
 	}
 
 	// Custom Methods ======================================================================================================================================
 
 	void Start(){
 
-		audio_s = this.gameObject.GetComponent<AudioSource>();
-		audio_s.Play ();
+
 
 
 	}
@@ -98,7 +127,7 @@ public class LwInit : MonoBehaviour {
 	void Update () {
 		
 		
-		if (go == true) {
+		if (go_clock == true || go == true) {
 			
 			now = DateTime.Now;
 			

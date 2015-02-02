@@ -20,6 +20,7 @@ public class LwBackup : MonoBehaviour {
 
 	// Unity Override Methods ==============================================================================================================================
 
+#if !UNITY_EDITOR
 	void Awake () {
 		UIEventListener.Get (buttonExit).onClick = ButtonExit;
 
@@ -87,5 +88,5 @@ public class LwBackup : MonoBehaviour {
 		}
 	}
 
-
+#endif
 }
