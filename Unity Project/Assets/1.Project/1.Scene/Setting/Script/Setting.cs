@@ -32,6 +32,8 @@ public class Setting : MonoBehaviour {
 	public string st;
 	public string gt;
 
+	public bool time_good = true;
+
 
 	void Start () {
 
@@ -80,21 +82,30 @@ public class Setting : MonoBehaviour {
 
 		note_time ();
 
-		Application.LoadLevel ("Water_clock");
+		if(time_good == true){
+
+			Application.LoadLevel ("Water_clock");
+		}
 	}
 
 	void Password_click(GameObject obj){
 
 		note_time ();
+
+		if (time_good == true) {
 		
-		Application.LoadLevel ("SetPassword");
+			Application.LoadLevel ("SetPassword");
+		}
 	}
 
 	void exit_click(GameObject obj){
 
 		note_time ();
 
-		Application.LoadLevel ("MainMenu");
+
+		if(time_good == true){
+			Application.LoadLevel ("MainMenu");
+		}
 
 	}
 
@@ -215,14 +226,29 @@ public class Setting : MonoBehaviour {
 
 
 	void note_time(){
-		st = st1.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
-			+st2.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
-			+st3.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
-			+st4.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString();
-		gt = gt1.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
-			+gt2.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
-			+gt3.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
-			+gt4.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString();
+
+
+		if (st1.GetComponent<ChooseNumberNGUI> ().chooseNumber > 2 || st3.GetComponent<ChooseNumberNGUI> ().chooseNumber > 5
+		|| gt1.GetComponent<ChooseNumberNGUI> ().chooseNumber > 2 || gt3.GetComponent<ChooseNumberNGUI> ().chooseNumber > 5) {
+			time_good = false;
+
+		}else{
+			time_good = true;
+
+			st = st1.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
+				+st2.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
+				+st3.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
+				+st4.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString();
+			gt = gt1.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
+				+gt2.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
+				+gt3.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString()
+				+gt4.GetComponent<ChooseNumberNGUI> ().chooseNumber.ToString();
+
+
+
+
+
+		}
 
 	}
 

@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\1.Project\1.Scene\Community\1.Scene\AddFriend\Script\LwAddFriend.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Water_alarm.cs">
     <Files>
-      <File FileName="Assets\1.Project\1.Scene\Setting\Script\Setting.cs" Line="31" Column="15" />
-      <File FileName="Assets\Water_alarm.cs" Line="99" Column="1" />
+      <File FileName="Assets\1.Project\1.Scene\Community\2.Script\TopButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Water_alarm.cs" Line="94" Column="20" />
       <File FileName="Assets\1.Project\1.Scene\Community\1.Scene\AddFriend\Script\LwAddFriend.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
