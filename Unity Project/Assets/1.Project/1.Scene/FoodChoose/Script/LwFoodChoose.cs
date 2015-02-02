@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using Prime31;
 
 public class LwFoodChoose : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class LwFoodChoose : MonoBehaviour {
 	public GameObject buttonFind;
 
 	public GameObject buttonDIY_Add;
+
+	public GameObject search;
 
 	public GameObject buttonFoodDIY;
 	public GameObject buttonFood1;
@@ -46,6 +49,7 @@ public class LwFoodChoose : MonoBehaviour {
 		UIEventListener.Get(buttonFind).onClick = ButtonFind;
 
 		UIEventListener.Get(buttonDIY_Add).onClick = ButtonDIY_Add;
+		UIEventListener.Get (search).onClick = Button_Search;
 
 		UIEventListener.Get(buttonFoodDIY).onClick = ButtonFoodDIY;
 		UIEventListener.Get(buttonFood1).onClick = ButtonFood1;
@@ -79,6 +83,8 @@ public class LwFoodChoose : MonoBehaviour {
 
 		buttonDIY_Add.SetActive (true);
 		fsv.gameObject.SetActive (false);
+
+		EtceteraAndroid.initTTS();
 	}
 
 	public static string FoodName;
@@ -187,6 +193,25 @@ public class LwFoodChoose : MonoBehaviour {
 		}
 	}
 
+	void OnEnable(){
+		// Listen to the texture loaded methods so we can load up the image on our plane
+		EtceteraAndroidManager.albumChooserSucceededEvent += imageLoaded;
+		EtceteraAndroidManager.photoChooserSucceededEvent += imageLoaded;
+	}
+	
+	
+	void OnDisable(){
+		EtceteraAndroidManager.albumChooserSucceededEvent -= imageLoaded;
+		EtceteraAndroidManager.photoChooserSucceededEvent -= imageLoaded;
+	}
+
+	public void imageLoaded(string imagePath){
+		// 後面的 1f 代表解析度的意思，1 為最大
+		EtceteraAndroid.scaleImageAtPath( imagePath, 1f );
+		//testPlane.renderer.material.mainTexture = EtceteraAndroid.textureFromFileAtPath( imagePath );
+	}
+
+
 	public UILabel findText;
 	string temp = "";
 	TouchScreenKeyboard tsk;
@@ -199,6 +224,13 @@ public class LwFoodChoose : MonoBehaviour {
 		LwMainMenu.IsChooseAddFood = true;
 		LwMainMenu.IsAddFood = true;
 		Application.LoadLevel ("FoodCamera");
+	}
+
+
+	void Button_Search(GameObject button){
+
+
+
 	}
 
 	bool isDIY = false;

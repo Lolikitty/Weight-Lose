@@ -127,11 +127,11 @@
  <Reference Include="IFacebook">
  <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
  </Reference>
- <Reference Include="Vectrosity">
- <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
- </Reference>
  <Reference Include="P31RestKit">
  <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>
+ </Reference>
+ <Reference Include="Vectrosity">
+ <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -94,7 +94,7 @@ public class Setting : MonoBehaviour {
 
 		if (time_good == true) {
 		
-			Application.LoadLevel ("SetPassword");
+			Application.LoadLevel ("InputPassword");
 		}
 	}
 
