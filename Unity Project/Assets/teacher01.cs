@@ -9,12 +9,6 @@ public class teacher01 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		UIEventListener.Get (cancel).onClick = Cancel;
-		UIEventListener.Get (agree).onClick = Agree;
-
-
-
-	
 	}
 	
 	// Update is called once per frame
