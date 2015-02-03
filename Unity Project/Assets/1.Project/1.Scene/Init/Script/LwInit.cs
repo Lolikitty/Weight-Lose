@@ -9,6 +9,16 @@ using System.Threading;
 
 public class LwInit : MonoBehaviour {
 
+	//聲音
+	public AudioSource audio_s;
+	public AudioClip audio_c;
+
+	public bool go_clock = false ;
+	public bool go_food = false;
+	public bool go_password = false;
+
+	public bool go = false;
+
 	public Texture2D head;
 
 //	public static string ServerIP = "54.69.109.145";
@@ -19,11 +29,61 @@ public class LwInit : MonoBehaviour {
 
 	// Unity Override Methods ==============================================================================================================================
 
+	IFormatProvider culture;
+
+	DateTime st;
+	DateTime et;
+	DateTime clock;
+	DateTime now;
+
+	string ct;
+
+	public string next_time;
+
+
+
 	void Awake(){
+
+		string p_clock = PlayerPrefs.GetString ("go_clock");
+		string p_food = PlayerPrefs.GetString ("go_food");
+		string p_password = PlayerPrefs.GetString ("go_password");
+		
+		if (p_clock == "true") {
+			
+			go_clock = true;
+		}
+		
+		if (p_food == "true") {
+			
+			go_food = true;
+		}
+		
+		if (p_password == "true") {
+			
+			go_password = true;
+		}
+		
+		audio_s = this.gameObject.GetComponent<AudioSource>();
+		audio_s.Play ();
+
+		DontDestroyOnLoad (this.gameObject);
+		
+
 		StartCoroutine (InitMix ());
+
+
 	}
 
 	// Custom Methods ======================================================================================================================================
+
+	void Start(){
+
+
+
+
+	}
+
+
 
 	IEnumerator InitMix () {
 		print (Application.persistentDataPath);
@@ -34,7 +94,15 @@ public class LwInit : MonoBehaviour {
 		string headPath = Application.persistentDataPath + "/User.png";
 
 		if (File.Exists (headPath)) {
-			Application.LoadLevel ("MainMenu");
+			string [] files = Directory.GetFiles (Application.persistentDataPath, "*.pw");
+
+			if(files.Length == 0){
+				Application.LoadLevel ("MainMenu");
+			}else{
+				Application.LoadLevel ("InputPassword");
+			}
+
+
 		} else {
 			System.IO.File.WriteAllBytes(headPath, head.EncodeToPNG());
 			WWW www = new WWW(HttpServerPath+"/SignID");
@@ -56,6 +124,56 @@ public class LwInit : MonoBehaviour {
 		}
 	}
 
+	void Update () {
+		
+		
+		if (go_clock == true || go == true) {
+			
+			now = DateTime.Now;
+			
+			//Debug.Log(clock.Subtract(now).TotalMinutes).ToString());
+			
+			if(DateTime.Compare(now , clock) >= 0 ){
+				
+				Debug.Log("time_out");
+				
+				Call() ;
+				
+			}
+			
+		}
+		
+	}
+
+
+
+
+	void Call(){
+		
+		audio_s.Play ();
+		//audio_s.SetScheduledEndTime (30);
+		
+		clock = clock.AddMinutes (Convert.ToDouble(ct));
+		
+		Debug.Log (clock.ToString ());
+		
+		if(DateTime.Compare(clock , et) >= 0 ){
+			
+			go = false;
+
+		}
+		
+	}
+
+	public void clock_start(DateTime c_st , DateTime c_et  ,DateTime c_clock,string c_ct){
+
+		st = c_st;
+		et = c_et;
+		clock = c_clock;
+		ct = c_ct;
+
+		go = true;
+	}
 }
 
 

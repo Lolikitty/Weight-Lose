@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -70,22 +70,26 @@
      <Compile Include="Assets\1.Project\1.Scene\MainMenu\Script\FoodStatusCircle.cs" />
      <Compile Include="Assets\1.Project\1.Scene\MainMenu\Script\LwMainMenu.cs" />
      <Compile Include="Assets\1.Project\1.Scene\MainMenu\Script\MainMenu_SceneButton.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Password\1.Scene\InputPassword\Script\InputPassword.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Password\1.Scene\SetPassword\Script\SetPassword.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Password\1.Scene\SetPassword2\Script\SetPassword2.cs" />
      <Compile Include="Assets\1.Project\1.Scene\ReadBackup\Script\ReadBackup.cs" />
      <Compile Include="Assets\1.Project\1.Scene\SetBirthday\Script\LwBirthday.cs" />
      <Compile Include="Assets\1.Project\1.Scene\SetWeight\Script\LwWeight.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Setting\Script\FBInit.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Setting\Script\Setting.cs" />
-     <Compile Include="Assets\1.Project\1.Scene\Sports\Script\LwSports.cs" />
-     <Compile Include="Assets\1.Project\1.Scene\Sports2\Script\LwSports2.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Sports\Scene\Sports1\Script\LwSports.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Sports\Scene\Sports2\Script\LwSports2.cs" />
      <Compile Include="Assets\1.Project\1.Scene\User\Script\User.cs" />
      <Compile Include="Assets\1.Project\1.Scene\User2\Script\LwUser2.cs" />
      <Compile Include="Assets\1.Project\1.Scene\User3\Script\LwUser3.cs" />
      <Compile Include="Assets\1.Project\1.Scene\UserCamera\Script\LwUserCamera.cs" />
-     <Compile Include="Assets\1.Project\1.Scene\Waiter\Script\LwWaiter.cs" />
-     <Compile Include="Assets\1.Project\1.Scene\Waiter2\Script\LwWaiter2.cs" />
-     <Compile Include="Assets\1.Project\1.Scene\WeightMeasurements\Script\LwWeightMeasurements.cs" />
-     <Compile Include="Assets\1.Project\1.Scene\WeightMeasurements2\Script\LwWeightMeasurements2.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Waiter\Waiter1\Script\LwWaiter.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Waiter\Waiter2\Script\LwWaiter2.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\WeightMeasurements\Scene\WeightMeasurements1\Script\LwWeightMeasurements.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\WeightMeasurements\Scene\WeightMeasurements2\Script\LwWeightMeasurements2.cs" />
      <Compile Include="Assets\1.Project\2.Script\ChooseNumber.cs" />
+     <Compile Include="Assets\1.Project\2.Script\ChooseNumberNGUI.cs" />
      <Compile Include="Assets\1.Project\2.Script\LwChooseFood.cs" />
      <Compile Include="Assets\1.Project\2.Script\LwFoodHistory_Food.cs" />
      <Compile Include="Assets\1.Project\2.Script\LwUser_Food.cs" />
@@ -95,6 +99,7 @@
      <Compile Include="Assets\1.Project\2.Script\SelectNumber2.cs" />
      <Compile Include="Assets\1.Project\2.Script\ShowNumber.cs" />
      <Compile Include="Assets\1.Project\2.Script\TextureScale.cs" />
+     <Compile Include="Assets\1.Project\2.Script\ToScene.cs" />
      <Compile Include="Assets\Facebook\Scripts\AndroidFacebook.cs" />
      <Compile Include="Assets\Facebook\Scripts\AndroidFacebookLoader.cs" />
      <Compile Include="Assets\Facebook\Scripts\CanvasFacebookLoader.cs" />
@@ -211,6 +216,8 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
+     <Compile Include="Assets\Result.cs" />
+     <Compile Include="Assets\Water_alarm.cs" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_tooltip_bubble.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
@@ -229,6 +236,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_check.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_blue.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar.xml" />
+     <None Include="Assets\Plugins\EtceteraAndroid\Manifest.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_activity_circle_row.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
@@ -281,14 +289,21 @@
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_search_box.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_list_row.xml" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
+ <HintPath>F:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="IFacebook">
- <HintPath>C:/Users/Loli/Documents/GitHub/Weight-Lose/Unity Project/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ </Reference>
+ <Reference Include="P31RestKit">
+ <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>
  </Reference>
  <Reference Include="Vectrosity">
- <HintPath>C:/Users/Loli/Documents/GitHub/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
+ <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{C65DF7E6-5082-3454-2A7F-EDDBED1731B5}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

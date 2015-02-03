@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.IO;
+using Prime31;
 
 public class User : MonoBehaviour {
 
@@ -10,9 +11,10 @@ public class User : MonoBehaviour {
 	public GameObject buttonEdit;
 
 	public UILabel id;
-	public TextMesh birthday;
-	public TextMesh weightFirst;
-	public TextMesh weightTarget;
+	public UILabel birthday;
+	public UILabel weightFirst;
+	public UILabel weightTarget;
+	public UILabel weightToday;
 
 	public GameObject FoodFather;
 	public GameObject Food;
@@ -42,6 +44,14 @@ public class User : MonoBehaviour {
 			name.text = "請至編輯區輸入姓名";
 		}
 		id.text = PlayerPrefs.GetString ("ID");
+
+		#if UNITY_ANDROID
+		EtceteraAndroid.initTTS();
+		#endif
+
+		#if !UNITY_ANDROID
+		#endif
+
 	}
 
 	IEnumerator Start(){
@@ -73,6 +83,20 @@ public class User : MonoBehaviour {
 
 		nbs.isUserPage = true;
 		vc = GameObject.Find ("VectorCam");
+
+		EtceteraAndroid.promptForPictureFromAlbum( "a" );
+	}
+
+	void OnEnable(){
+		// Listen to the texture loaded methods so we can load up the image on our plane
+		EtceteraAndroidManager.albumChooserSucceededEvent += imageLoaded;
+		EtceteraAndroidManager.photoChooserSucceededEvent += imageLoaded;
+	}
+	
+	
+	void OnDisable(){
+		EtceteraAndroidManager.albumChooserSucceededEvent -= imageLoaded;
+		EtceteraAndroidManager.photoChooserSucceededEvent -= imageLoaded;
 	}
 
 	void Update () {
@@ -106,6 +130,14 @@ public class User : MonoBehaviour {
 				nbs.enabled = false;
 			}
 		}
+	}
+
+
+	// 載入圖片
+	public void imageLoaded(string imagePath){
+		// 後面的 1f 代表解析度的意思，1 為最大
+		EtceteraAndroid.scaleImageAtPath( imagePath, 1f );
+		//testPlane.renderer.material.mainTexture = EtceteraAndroid.textureFromFileAtPath( imagePath );
 	}
 
 	// Custom Methods ======================================================================================================================================
