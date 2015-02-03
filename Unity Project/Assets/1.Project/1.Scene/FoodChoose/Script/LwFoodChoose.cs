@@ -229,7 +229,7 @@ public class LwFoodChoose : MonoBehaviour {
 
 	void Button_Search(GameObject button){
 
-
+		EtceteraAndroid.promptForPictureFromAlbum( "a" );
 
 	}
 
