@@ -9,6 +9,7 @@ public class User : MonoBehaviour {
 	public GameObject buttonExit;
 	public GameObject buttonHead;
 	public GameObject buttonEdit;
+	public GameObject coach;
 
 	public UILabel id;
 	public UILabel birthday;
@@ -20,8 +21,8 @@ public class User : MonoBehaviour {
 	public GameObject Food;
 
 	public UILabel name;
-
 	public UITexture head;
+
 
 	public UICamera cam;
 
@@ -39,6 +40,7 @@ public class User : MonoBehaviour {
 		UIEventListener.Get(buttonExit).onClick = ButtonExit;
 		UIEventListener.Get(buttonHead).onClick = ButtonHead;
 		UIEventListener.Get(buttonEdit).onClick = ButtonEdit;
+//		UIEventListener.Get (coach).onClick = Coach;
 		name.text = PlayerPrefs.GetString ("name");
 		if(name.text == ""){
 			name.text = "請至編輯區輸入姓名";
@@ -46,7 +48,6 @@ public class User : MonoBehaviour {
 		id.text = PlayerPrefs.GetString ("ID");
 
 		#if UNITY_ANDROID
-		EtceteraAndroid.initTTS();
 		#endif
 
 		#if !UNITY_ANDROID
@@ -84,19 +85,6 @@ public class User : MonoBehaviour {
 		nbs.isUserPage = true;
 		vc = GameObject.Find ("VectorCam");
 
-		EtceteraAndroid.promptForPictureFromAlbum( "a" );
-	}
-
-	void OnEnable(){
-		// Listen to the texture loaded methods so we can load up the image on our plane
-		EtceteraAndroidManager.albumChooserSucceededEvent += imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent += imageLoaded;
-	}
-	
-	
-	void OnDisable(){
-		EtceteraAndroidManager.albumChooserSucceededEvent -= imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent -= imageLoaded;
 	}
 
 	void Update () {
@@ -133,14 +121,11 @@ public class User : MonoBehaviour {
 	}
 
 
-	// 載入圖片
-	public void imageLoaded(string imagePath){
-		// 後面的 1f 代表解析度的意思，1 為最大
-		EtceteraAndroid.scaleImageAtPath( imagePath, 1f );
-		//testPlane.renderer.material.mainTexture = EtceteraAndroid.textureFromFileAtPath( imagePath );
-	}
+
 
 	// Custom Methods ======================================================================================================================================
+
+
 
 	void ButtonExit(GameObject button){
 		Application.LoadLevel ("MainMenu");

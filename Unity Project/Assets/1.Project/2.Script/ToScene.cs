@@ -44,7 +44,11 @@ public class ToScene : MonoBehaviour {
 		Waiter,
 		Waiter2,
 		WeightMeasurements,
-		WeightMeasurements2
+		WeightMeasurements2,
+		Teacher01,
+		Teacher02,
+		Teacher03,
+		Teacher04
 	};
 
 	public CommunityScene communityScene;
@@ -66,6 +70,8 @@ public class ToScene : MonoBehaviour {
 	}
 
 	void OnClick () {
+
+		Debug.Log ("test");
 		if(useClick){
 			StatusControl();
 		}
