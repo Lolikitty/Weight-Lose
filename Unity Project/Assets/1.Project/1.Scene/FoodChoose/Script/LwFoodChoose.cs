@@ -15,8 +15,6 @@ public class LwFoodChoose : MonoBehaviour {
 
 	public GameObject buttonDIY_Add;
 
-	public GameObject search;
-
 	public GameObject buttonFoodDIY;
 	public GameObject buttonFood1;
 	public GameObject buttonFood2;
@@ -49,7 +47,7 @@ public class LwFoodChoose : MonoBehaviour {
 		UIEventListener.Get(buttonFind).onClick = ButtonFind;
 
 		UIEventListener.Get(buttonDIY_Add).onClick = ButtonDIY_Add;
-		UIEventListener.Get (search).onClick = Button_Search;
+
 
 		UIEventListener.Get(buttonFoodDIY).onClick = ButtonFoodDIY;
 		UIEventListener.Get(buttonFood1).onClick = ButtonFood1;
@@ -193,23 +191,6 @@ public class LwFoodChoose : MonoBehaviour {
 		}
 	}
 
-	void OnEnable(){
-		// Listen to the texture loaded methods so we can load up the image on our plane
-		EtceteraAndroidManager.albumChooserSucceededEvent += imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent += imageLoaded;
-	}
-	
-	
-	void OnDisable(){
-		EtceteraAndroidManager.albumChooserSucceededEvent -= imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent -= imageLoaded;
-	}
-
-	public void imageLoaded(string imagePath){
-		// 後面的 1f 代表解析度的意思，1 為最大
-		EtceteraAndroid.scaleImageAtPath( imagePath, 1f );
-		//testPlane.renderer.material.mainTexture = EtceteraAndroid.textureFromFileAtPath( imagePath );
-	}
 
 
 	public UILabel findText;

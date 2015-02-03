@@ -1,16 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Result.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\1.Project\1.Scene\FoodCamera\Script\LwFoodCamera.cs">
     <Files>
-      <File FileName="Assets\1.Project\1.Scene\FoodChoose\Script\LwFoodChoose.cs" Line="224" Column="37" />
-      <File FileName="Assets\1.Project\1.Scene\User\Script\User.cs" Line="1" Column="1" />
-      <File FileName="Assets\1.Project\1.Scene\Community\2.Script\TopButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Water_alarm.cs" Line="1" Column="1" />
-      <File FileName="Assets\1.Project\1.Scene\Community\1.Scene\AddFriend\Script\LwAddFriend.cs" Line="1" Column="1" />
-      <File FileName="Assets\1.Project\1.Scene\Password\1.Scene\InputPassword\Script\InputPassword.cs" Line="1" Column="1" />
-      <File FileName="Assets\1.Project\1.Scene\Setting\Script\Setting.cs" Line="1" Column="1" />
-      <File FileName="Assets\1.Project\1.Scene\FoodHistory\Script\LwFoodHistory.cs" Line="1" Column="1" />
-      <File FileName="Assets\Result.cs" Line="77" Column="48" />
+      <File FileName="F:\test\Assets\test.cs" Line="11" Column="2" />
+      <File FileName="Assets\1.Project\1.Scene\FoodChoose\Script\LwFoodChoose.cs" Line="50" Column="1" />
+      <File FileName="Assets\1.Project\1.Scene\FoodCamera\Script\LwFoodCamera.cs" Line="105" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
