@@ -2,27 +2,24 @@
 using System.Collections;
 using System;
 using System.IO;
-using Prime31;
 
 public class User : MonoBehaviour {
 
 	public GameObject buttonExit;
 	public GameObject buttonHead;
 	public GameObject buttonEdit;
-	public GameObject coach;
 
 	public UILabel id;
-	public UILabel birthday;
-	public UILabel weightFirst;
-	public UILabel weightTarget;
-	public UILabel weightToday;
+	public TextMesh birthday;
+	public TextMesh weightFirst;
+	public TextMesh weightTarget;
 
 	public GameObject FoodFather;
 	public GameObject Food;
 
 	public UILabel name;
-	public UITexture head;
 
+	public UITexture head;
 
 	public UICamera cam;
 
@@ -40,19 +37,11 @@ public class User : MonoBehaviour {
 		UIEventListener.Get(buttonExit).onClick = ButtonExit;
 		UIEventListener.Get(buttonHead).onClick = ButtonHead;
 		UIEventListener.Get(buttonEdit).onClick = ButtonEdit;
-//		UIEventListener.Get (coach).onClick = Coach;
 		name.text = PlayerPrefs.GetString ("name");
 		if(name.text == ""){
 			name.text = "請至編輯區輸入姓名";
 		}
 		id.text = PlayerPrefs.GetString ("ID");
-
-		#if UNITY_ANDROID
-		#endif
-
-		#if !UNITY_ANDROID
-		#endif
-
 	}
 
 	IEnumerator Start(){
@@ -84,7 +73,6 @@ public class User : MonoBehaviour {
 
 		nbs.isUserPage = true;
 		vc = GameObject.Find ("VectorCam");
-
 	}
 
 	void Update () {
@@ -120,12 +108,7 @@ public class User : MonoBehaviour {
 		}
 	}
 
-
-
-
 	// Custom Methods ======================================================================================================================================
-
-
 
 	void ButtonExit(GameObject button){
 		Application.LoadLevel ("MainMenu");
