@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class FoodStatusCircle : MonoBehaviour {
 
@@ -16,29 +18,42 @@ public class FoodStatusCircle : MonoBehaviour {
 	// Unity Override Methods ==============================================================================================================================
 
 	void Awake () {
-		string nowDate = DateTime.Now.ToString ("yyyy-MM-dd");
-		string path= Application.persistentDataPath + "/" + nowDate;
+//		string nowDate = DateTime.Now.ToString ("yyyy-MM-dd");
+//		string path= Application.persistentDataPath + "/" + nowDate;
+
+		string JsonFoodDataPath = Application.persistentDataPath + "/Food.txt";
 		
-		if(!Directory.Exists(path)){
+		if(!File.Exists(JsonFoodDataPath)){
 			return;
 		}
 
-		string [] filesInfo = Directory.GetFiles (path, "*.info");
+		path = JsonFoodDataPath;
+
+//		string [] filesInfo = Directory.GetFiles (path, "*.info");
 		int AllKal = 0;
-		
-		for(int i = 0; i<filesInfo.Length; i++){
-			int kal = int.Parse(filesInfo[i].Split('_')[1]);
-			AllKal += kal;
+
+		JArray ja = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath)) ["Food"] as JArray;
+
+		for(int i = 0; i < ja.Count; i++){
+			AllKal+=int.Parse(ja[i]["Kal"].ToString());
+			msg += ja[i]["Kal"].ToString() + ", ";
 		}
+
+//		for(int i = 0; i<filesInfo.Length; i++){
+//			int kal = int.Parse(filesInfo[i].Split('_')[1]);
+//			AllKal += kal;
+//		}
 		
 		float az = 0;
 
 		List<float> angles = new List<float>();
 
-		for(int i = 0; i<filesInfo.Length; i++){
-			string [] foodInfoArray = filesInfo[i].Split('_');
-			int kal = int.Parse(foodInfoArray[1]);
-			string foodName = foodInfoArray[2];
+		for(int i = 0; i < ja.Count; i++){
+//			string [] foodInfoArray = filesInfo[i].Split('_');
+//			int kal = int.Parse(foodInfoArray[1]);
+//			string foodName = foodInfoArray[2];
+			int kal = int.Parse(ja[i]["Kal"].ToString());
+			string foodName = ja[i]["Name"].ToString();
 			// Create Pin Prefab
 			Transform t = Instantiate(pin) as Transform;
 			t.transform.parent = root.transform;
@@ -50,10 +65,15 @@ public class FoodStatusCircle : MonoBehaviour {
 			angles.Add(az);
 		}
 
-		for(int i = 0; i<filesInfo.Length; i++){
-			string [] foodInfoArray = filesInfo[i].Split('_');
-			int kal = int.Parse(foodInfoArray[1]);
-			string foodName = foodInfoArray[2];
+		int k = 0;
+
+		for(int i = 0; i < ja.Count; i++){
+//			string [] foodInfoArray = filesInfo[i].Split('_');
+//			int kal = int.Parse(foodInfoArray[1]);
+//			string foodName = foodInfoArray[2];
+
+			int kal = int.Parse(ja[i]["Kal"].ToString());
+			string foodName = ja[i]["Name"].ToString();
 
 			GameObject f = Instantiate(food) as GameObject;
 			f.GetComponent<Food>().foodName.text = foodName;
@@ -61,13 +81,14 @@ public class FoodStatusCircle : MonoBehaviour {
 			f.transform.parent = root.transform;
 			f.transform.localScale = Vector3.one;
 			f.transform.localPosition = Vector3.zero;
-			if(i == 0){
+			if(k == 0){
 				f.transform.localEulerAngles = new Vector3(0, 0, angles[0]%360 + ((360-angles[0]%360)/2));
-			}else if(i == angles.Count-1){
-				f.transform.localEulerAngles = new Vector3(0, 0, angles[i]%360 + ((angles[i-1]%360-0%360)/2));
+			}else if(k == angles.Count-1){
+				f.transform.localEulerAngles = new Vector3(0, 0, angles[k]%360 + ((angles[k-1]%360-0%360)/2));
 			}else{
-				f.transform.localEulerAngles = new Vector3(0, 0, angles[i]%360 + ((angles[i-1]%360-angles[i]%360)/2));
+				f.transform.localEulerAngles = new Vector3(0, 0, angles[k]%360 + ((angles[k-1]%360-angles[k]%360)/2));
 			}
+			k++;
 		}
 		
 		float kalInit = 2000;
@@ -83,7 +104,11 @@ public class FoodStatusCircle : MonoBehaviour {
 	
 	// Custom Methods ======================================================================================================================================
 
-	void Update () {
-	
+	string msg = "Msg : ";
+	string path = "Path : ";
+
+	void OnGUI () {
+		GUILayout.Label (path);
+		GUILayout.Label (msg);
 	}
 }

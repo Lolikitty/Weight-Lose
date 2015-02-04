@@ -4,7 +4,6 @@ using Facebook.MiniJSON;
 
 public class FBInit : MonoBehaviour {
 
-	#if !UNITY_EDITOR
 	public static string FB_JSON_DATA = "No Data";
 	public static string FB_USER_NAME = "No Name";
 	public static string FB_USER_ID = "No Data";
@@ -65,5 +64,4 @@ public class FBInit : MonoBehaviour {
 			FB.Login ("public_profile,user_birthday,email,user_friends",Login); // 登入，並設定要取得的資料
 		}
 	}
-	#endif
 }

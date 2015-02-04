@@ -66,7 +66,7 @@ public class LwInit : MonoBehaviour {
 		audio_s = this.gameObject.GetComponent<AudioSource>();
 		audio_s.Play ();
 
-		DontDestroyOnLoad (this.gameObject);
+		DontDestroyOnLoad (this.transform.gameObject);
 		
 
 		StartCoroutine (InitMix ());
@@ -75,15 +75,6 @@ public class LwInit : MonoBehaviour {
 	}
 
 	// Custom Methods ======================================================================================================================================
-
-	void Start(){
-
-
-
-
-	}
-
-
 
 	IEnumerator InitMix () {
 		print (Application.persistentDataPath);
@@ -118,9 +109,6 @@ public class LwInit : MonoBehaviour {
 				LwError.Show("LwInit.Start() : " + ex);
 			}
 
-		}
-		if(!Directory.Exists(Application.persistentDataPath+"/Food")){
-			Directory.CreateDirectory(Application.persistentDataPath+"/Food");
 		}
 	}
 

@@ -32,6 +32,10 @@ public class Water_alarm : MonoBehaviour {
 
 	//離開
 	public GameObject Exit;
+	public GameObject error_check;
+
+
+	public GameObject error;
 
 	//文化時間
 	IFormatProvider culture;
@@ -46,11 +50,11 @@ public class Water_alarm : MonoBehaviour {
 	//條件成立嗎
 
 
-	public GameObject error;
 
 
 
 	void Start () {
+
 
 		script = GameObject.Find("Script");
 		script_sc = script.GetComponent<LwInit>();
@@ -58,8 +62,14 @@ public class Water_alarm : MonoBehaviour {
 		culture = new System.Globalization.CultureInfo("zh-TW", true);
 
 		UIEventListener.Get (Exit).onClick = Exit_d;
-		UIEventListener.Get (error).onClick = go_back;
+		UIEventListener.Get (error_check).onClick = error_check_f;
 
+		if (script_sc.go == true) {
+
+
+
+		}
+	
 	}
 	
 	// Update is called once per frame
@@ -149,9 +159,12 @@ public class Water_alarm : MonoBehaviour {
 
 	}
 
-	void go_back(GameObject obj){
+	void error_check_f(GameObject obj){
+		script_sc.go = false;
 
 		Application.LoadLevel ("Setting");
 
 	}
+
+
 }

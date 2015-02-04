@@ -212,6 +212,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_checkbox.xml" />
      <None Include="Assets\1.Project\7.Shader\Mask.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_loginbutton_silver.xml" />
+     <None Include="Assets\JsonDotNet\ReadMe.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
      <None Include="Assets\Plugins\Android\facebook\bin\proguard.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\values-ldpi\dimens.xml" />
@@ -230,6 +231,9 @@
  </Reference>
  <Reference Include="IFacebook">
  <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ </Reference>
+ <Reference Include="SampleClassLibrary">
+ <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/JsonDotNet/Examples/Tests/TestModels/SampleClassLibrary.dll</HintPath>
  </Reference>
  <Reference Include="P31RestKit">
  <HintPath>C:/Users/NN/Desktop/Weight-Lose/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>

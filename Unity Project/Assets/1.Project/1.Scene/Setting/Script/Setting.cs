@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Setting : MonoBehaviour {
 
@@ -37,8 +38,13 @@ public class Setting : MonoBehaviour {
 
 	void Start () {
 
+		try{
+
 		script = GameObject.Find ("Script");
 		script_sc = script.GetComponent<LwInit>();
+
+
+		
 
 		if (script_sc.go_clock == true) {
 			Bg_alarm.spriteName = "open";
@@ -75,6 +81,13 @@ public class Setting : MonoBehaviour {
 		UIEventListener.Get (Sw_alarm).onDragEnd = Sw_dragend;
 		UIEventListener.Get (Sw_food).onDragEnd = Sw_dragend;
 		UIEventListener.Get (Sw_password).onDragEnd = Sw_dragend;
+
+		}catch(Exception e){
+			LwError.Show("Setting.Start() : " + e);
+			
+		}
+
+		
 	}
 
 
@@ -251,5 +264,7 @@ public class Setting : MonoBehaviour {
 		}
 
 	}
+
+	
 
 }
