@@ -53,25 +53,32 @@ public class LwBirthday : MonoBehaviour {
 
 		// 之後這裡要做檢查
 
-		PlayerPrefs.SetString ("Sex", "" + sex);
-		PlayerPrefs.SetString ("BirthdayYear", "" + yyyy);
-		PlayerPrefs.SetString ("BirthdayMonth", "" + MM);
-		PlayerPrefs.SetString ("BirthdayDay", "" + dd);
-		PlayerPrefs.Save ();
+//		PlayerPrefs.SetString ("Sex", "" + sex);
+//		PlayerPrefs.SetString ("BirthdayYear", "" + yyyy);
+//		PlayerPrefs.SetString ("BirthdayMonth", "" + MM);
+//		PlayerPrefs.SetString ("BirthdayDay", "" + dd);
+//		PlayerPrefs.Save ();
 
 		LwMainMenu.UploadBirthdayAndWeight = true;
 
+		//---------- Json
+
 		string JsonUserDataPath = Application.persistentDataPath + "/User.txt";
+		object data = null;
+		if(File.Exists(JsonUserDataPath)){
+			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonUserDataPath));
+			obj["Birthday"] = DateTime.Parse(yyyy+"/"+MM+"/"+dd);
+			obj["Sex"] = sex;
+			data = obj;
+		}else{
+			data = new {
+				Birthday = DateTime.Parse(yyyy+"/"+MM+"/"+dd),
+				Sex = sex
+			};
+		}
+		File.WriteAllText(JsonUserDataPath, JsonConvert.SerializeObject(data,Formatting.Indented));
 
-		var data = new {
-			Birthday = DateTime.Parse(yyyy+"/"+MM+"/"+dd),
-			Name = "No Name",
-			Sex = sex
-		};
-
-		List<object> User = null;
-		User = new List<object> (){data};
-		File.WriteAllText(JsonUserDataPath, JsonConvert.SerializeObject(new{User},Formatting.Indented));
+		//---------- Json
 
 		Application.LoadLevel ("SetWeight");
 	}

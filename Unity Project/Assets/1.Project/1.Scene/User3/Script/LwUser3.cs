@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwUser3 : MonoBehaviour {
 
@@ -86,6 +88,22 @@ public class LwUser3 : MonoBehaviour {
 
 		PlayerPrefs.SetString ("name", uiName.text);
 		PlayerPrefs.Save ();
+
+		string JsonUserDataPath = Application.persistentDataPath + "/User.txt";
+		object data = null;
+		if(File.Exists(JsonUserDataPath)){
+			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonUserDataPath));
+			obj["Name"] = uiName.text;
+			data = obj;
+		}else{
+			data = new {
+				Name = uiName.text
+			};
+		}
+		File.WriteAllText(JsonUserDataPath, JsonConvert.SerializeObject(data,Formatting.Indented));
+
+
+
 
 		StartCoroutine (UploadData());
 

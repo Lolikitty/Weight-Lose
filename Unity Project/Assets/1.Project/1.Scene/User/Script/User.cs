@@ -1,4 +1,4 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using System.IO;
@@ -42,7 +42,7 @@ public class User : MonoBehaviour {
 		UIEventListener.Get(buttonEdit).onClick = ButtonEdit;
 		name.text = PlayerPrefs.GetString ("name");
 		if(name.text == ""){
-			name.text = "è«‹è‡³ç·¨è¼¯å€è¼¸å…¥å§“å";
+			name.text = "ÕˆÖÁ¾İ‹…^İ”ÈëĞÕÃû";
 		}
 		id.text = PlayerPrefs.GetString ("ID");
 
@@ -71,7 +71,7 @@ public class User : MonoBehaviour {
 
 				DateTime dt = (DateTime) ja[i]["Date"];
 
-				if(dt > DateTime.Now.AddDays(-1)){
+				if(dt.Date == DateTime.Today){
 					GameObject newFood = Instantiate(Food) as GameObject;
 					newFood.transform.parent = FoodFather.transform;
 					newFood.transform.localPosition = new Vector3 (x, -37, 0);
@@ -89,6 +89,15 @@ public class User : MonoBehaviour {
 			
 			nbs.isUserPage = true;
 			vc = GameObject.Find ("VectorCam");
+
+		}
+
+		string JsonUserDataPath = Application.persistentDataPath + "/User.txt";
+
+		if(File.Exists(JsonUserDataPath)){
+			JArray ja = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonUserDataPath)) ["User"] as JArray;
+
+
 
 		}
 	}
@@ -129,9 +138,9 @@ public class User : MonoBehaviour {
 	}
 
 
-	// è¼‰å…¥åœ–ç‰‡
+	// İdÈëˆDÆ¬
 	public void imageLoaded(string imagePath){
-		// å¾Œé¢çš„ 1f ä»£è¡¨è§£æåº¦çš„æ„æ€ï¼Œ1 ç‚ºæœ€å¤§
+		// ááÃæµÄ 1f ´ú±í½âÎö¶ÈµÄÒâË¼£¬1 é×î´ó
 		EtceteraAndroid.scaleImageAtPath( imagePath, 1f );
 		//testPlane.renderer.material.mainTexture = EtceteraAndroid.textureFromFileAtPath( imagePath );
 	}

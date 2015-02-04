@@ -31,10 +31,13 @@ public class LwInit : MonoBehaviour {
 
 	IFormatProvider culture;
 
-	DateTime st;
-	DateTime et;
-	DateTime clock;
-	DateTime now;
+	public DateTime st = new DateTime();
+	public DateTime et = new DateTime();
+	public DateTime clock = new DateTime();
+	public DateTime now = new DateTime();
+
+	string wc_from;
+	string wc_end;
 
 	string ct;
 
@@ -64,7 +67,6 @@ public class LwInit : MonoBehaviour {
 		}
 		
 		audio_s = this.gameObject.GetComponent<AudioSource>();
-		audio_s.Play ();
 
 		DontDestroyOnLoad (this.transform.gameObject);
 		
@@ -115,9 +117,11 @@ public class LwInit : MonoBehaviour {
 	void Update () {
 		
 		
-		if (go_clock == true || go == true) {
+		if (go_clock == true && go == true) {
 			
 			now = DateTime.Now;
+
+			next_time = Convert.ToInt32(Math.Ceiling( clock.Subtract(now).TotalMinutes)).ToString();
 			
 			//Debug.Log(clock.Subtract(now).TotalMinutes).ToString());
 			

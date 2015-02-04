@@ -6,16 +6,16 @@ public class Water_alarm : MonoBehaviour {
 
 
 	//0~9群
-	public GameObject st1;
-	public GameObject st2;
-	public GameObject st3;
-	public GameObject st4;
-	public GameObject et1;
-	public GameObject et2;
-	public GameObject et3;
-	public GameObject et4;
-	public GameObject ct1;
-	public GameObject ct2;
+	public ChooseNumberNGUI st1;
+	public ChooseNumberNGUI st2;
+	public ChooseNumberNGUI st3;
+	public ChooseNumberNGUI st4;
+	public ChooseNumberNGUI et1;
+	public ChooseNumberNGUI et2;
+	public ChooseNumberNGUI et3;
+	public ChooseNumberNGUI et4;
+	public ChooseNumberNGUI ct1;
+	public ChooseNumberNGUI ct2;
 
 	public GameObject script;
 	LwInit script_sc;
@@ -56,18 +56,39 @@ public class Water_alarm : MonoBehaviour {
 	void Start () {
 
 
-		script = GameObject.Find("Script");
-		script_sc = script.GetComponent<LwInit>();
+		try{
+			script = GameObject.Find("Script");
+			script_sc = script.GetComponent<LwInit>();
 
-		culture = new System.Globalization.CultureInfo("zh-TW", true);
+			culture = new System.Globalization.CultureInfo("zh-TW", true);
 
-		UIEventListener.Get (Exit).onClick = Exit_d;
-		UIEventListener.Get (error_check).onClick = error_check_f;
+			UIEventListener.Get (Exit).onClick = Exit_d;
+			UIEventListener.Get (error_check).onClick = error_check_f;
 
-		if (script_sc.go == true) {
+			if (script_sc.go == true) {
+				string wc_f = PlayerPrefs.GetString("wc_from");
+				string wc_e = PlayerPrefs.GetString("wc_end");
+				string wc_c = PlayerPrefs.GetString("wc_ct");
 
+				if(wc_f.Length > 2 && wc_e.Length >2 && wc_c.Length > 1){
 
+					st1.Set_number(wc_f[0]-48);
+					st2.Set_number(wc_f[1]-48);
+					st3.Set_number(wc_f[2]-48);
+					st4.Set_number(wc_f[3]-48);
+					et1.Set_number(wc_e[0]-48);
+					et2.Set_number(wc_e[1]-48);
+					et3.Set_number(wc_e[2]-48);
+					et4.Set_number(wc_e[3]-48);
+					ct1.Set_number(wc_c[0]-48);
+					ct2.Set_number(wc_c[1]-48);
+				}
 
+				//next_time.text = Convert.ToInt32(Math.Ceiling( script_sc.clock.Subtract(now).TotalMinutes)).ToString();
+
+			}
+		}catch(Exception e){
+			LwError.Show("Setting.Start() : " + e);
 		}
 	
 	}
@@ -86,19 +107,17 @@ public class Water_alarm : MonoBehaviour {
 			next_time.text = "0";
 		}
 
-		next_time.text = Convert.ToInt32(Math.Ceiling( clock.Subtract(now).TotalMinutes)).ToString();
-
 
 	}
 
 	void Exit_d(GameObject obj){
 
 		//時間轉換成小時分鐘
-		st_h = st1.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString() + st2.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString();
-		st_m = st3.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString() + st4.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString();
-		et_h = et1.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString() + et2.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString();
-		et_m = et3.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString() + et4.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString();
-		ct = ct1.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString() + ct2.GetComponent<ChooseNumberNGUI>().chooseNumber.ToString();
+		st_h = st1.chooseNumber.ToString() + st2.chooseNumber.ToString();
+		st_m = st3.chooseNumber.ToString() + st4.chooseNumber.ToString();
+		et_h = et1.chooseNumber.ToString() + et2.chooseNumber.ToString();
+		et_m = et3.chooseNumber.ToString() + et4.chooseNumber.ToString();
+		ct = ct1.chooseNumber.ToString() + ct2.chooseNumber.ToString();
 
 
 		if (ct != "00") {
@@ -111,6 +130,11 @@ public class Water_alarm : MonoBehaviour {
 				st = DateTime.ParseExact(st_h + st_m , "HHmm", culture);
 				et = DateTime.ParseExact(et_h + et_m , "HHmm", culture);
 
+				PlayerPrefs.SetString(  "wc_from" ,st_h + st_m);
+				PlayerPrefs.Save();
+				PlayerPrefs.SetString(  "wc_end" ,et_h + et_m);
+				PlayerPrefs.Save();
+				PlayerPrefs.SetString( "wc_ct" , ct);
 
 				if(DateTime.Compare(now , et) >= 0 ){
 					

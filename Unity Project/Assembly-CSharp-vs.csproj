@@ -443,6 +443,7 @@
      <Compile Include="Assets\JsonDotNet\Source\WinRT\Utilities\RT_ThreadSafeStore.cs" />
      <Compile Include="Assets\JsonDotNet\Source\WinRT\Utilities\RT_TypeExtensions.cs" />
      <Compile Include="Assets\JsonDotNet\Source\WinRT\Utilities\RT_ValidationUtils.cs" />
+     <Compile Include="Assets\LwHeight.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\LanguageSelection.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\TypewriterEffect.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\UIButton.cs" />
@@ -552,6 +553,7 @@
      <Compile Include="Assets\Teacher04.cs" />
      <Compile Include="Assets\Water_alarm.cs" />
      <Compile Include="Assets\teacher01.cs" />
+     <Compile Include="Assets\test.cs" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_tooltip_bubble.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
