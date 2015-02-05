@@ -37,6 +37,7 @@ public class ToScene : MonoBehaviour {
 		SetWeight,
 		Sports,
 		Sports2,
+		Sports3,
 		User,
 		User2,
 		User3,
@@ -48,7 +49,8 @@ public class ToScene : MonoBehaviour {
 		Teacher01,
 		Teacher02,
 		Teacher03,
-		Teacher04
+		Teacher04,
+		Water3
 	};
 
 	public CommunityScene communityScene;

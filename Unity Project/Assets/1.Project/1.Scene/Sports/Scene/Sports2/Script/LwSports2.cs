@@ -14,7 +14,7 @@ public class LwSports2 : MonoBehaviour {
 	// Custom Methods ======================================================================================================================================
 
 	void ButtonOk(GameObject button){
-		Application.LoadLevel ("WeightMeasurements");
+		Application.LoadLevel ("Sports3");
 	}
 
 }

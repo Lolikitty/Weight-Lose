@@ -15,7 +15,7 @@ public class LwWaiter2 : MonoBehaviour {
 	// Unity Override Methods ==============================================================================================================================
 
 	void Awake () {
-		UIEventListener.Get(buttonOk).onClick = ButtonOk;
+
 	}
 
 	void Update () {
@@ -26,9 +26,6 @@ public class LwWaiter2 : MonoBehaviour {
 
 	// Custom Methods ======================================================================================================================================
 
-	void ButtonOk(GameObject button){
-		print ("ok : " + WaiterValue + " c.c.");
-		Application.LoadLevel ("Sports");
-	}
+
 
 }

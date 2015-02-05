@@ -22,7 +22,7 @@ public class LwWeight : MonoBehaviour {
 
 	// Custom Methods ======================================================================================================================================
 	
-	string weightNow;
+	string weightInit;
 	string weightTarget;
 	string weightTargetMonth;
 
@@ -30,7 +30,7 @@ public class LwWeight : MonoBehaviour {
 
 		LwMainMenu.UploadBirthdayAndWeight = true;
 
-		weightNow = "" + float.Parse ("" + NW1.chooseNumber + NW2.chooseNumber + NW3.chooseNumber + "." + NW4.chooseNumber);
+		weightInit = "" + float.Parse ("" + NW1.chooseNumber + NW2.chooseNumber + NW3.chooseNumber + "." + NW4.chooseNumber);
 		weightTarget = "" + float.Parse ("" + WW1.chooseNumber + WW2.chooseNumber + WW3.chooseNumber + "." + WW4.chooseNumber);
 		weightTargetMonth = "" + int.Parse("" + M1.chooseNumber + M2.chooseNumber);
 
@@ -47,13 +47,13 @@ public class LwWeight : MonoBehaviour {
 		object data = null;
 		if(File.Exists(JsonUserDataPath)){
 			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonUserDataPath));
-			obj["WeightNow"] = weightNow;
+			obj["WeightInit"] = weightInit;
 			obj["WeightTarget"] = weightTarget;
 			obj["WeightTargetMonth"] = weightTargetMonth;
 			data = obj;
 		}else{
 			data = new {
-				WeightNow = weightNow,
+				WeightInit = weightInit,
 				WeightTarget = weightTarget,
 				WeightTargetMonth = weightTargetMonth
 			};

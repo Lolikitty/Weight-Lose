@@ -24,17 +24,28 @@ public class LwUser3 : MonoBehaviour {
 	// Unity Override Methods ==============================================================================================================================
 
 	void Awake () {
-		if(PlayerPrefs.GetString ("name")==""){
-			PlayerPrefs.SetString ("name", "請輸入姓名");
-			PlayerPrefs.Save ();
+
+		uiName.text = "";
+
+		//try{
+		string JsonUserDataPath = Application.persistentDataPath + "/User.txt";
+		object data = null;
+		if(File.Exists(JsonUserDataPath)){
+			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonUserDataPath));
+			try{
+					uiName.text = obj["Name"].ToString();
+			}catch{
+			}
+
 		}
-
-
-		uiName.text = PlayerPrefs.GetString ("name");
+	
 
 		UIEventListener.Get(buttonChangeImage).onClick = ButtonChangeImage;
 		UIEventListener.Get(buttonChangeName).onClick = ButtonChangeName;
 		UIEventListener.Get(buttonOK).onClick = ButtonOK;
+		//}catch(Exception e){
+		//	LwError.Show("error:" + e.ToString());
+		//}
 	}
 
 	IEnumerator Start(){
@@ -69,6 +80,9 @@ public class LwUser3 : MonoBehaviour {
 				
 		WWW www = new WWW(LwInit.HttpServerPath+"/UserName", wwwF);
 		yield return www;
+
+
+
 	}
 
 	void ButtonOK(GameObject button){
@@ -104,10 +118,9 @@ public class LwUser3 : MonoBehaviour {
 
 
 
-
 		StartCoroutine (UploadData());
 
-		Application.LoadLevel ("SetBirthday");
+		//Application.LoadLevel ("SetBirthday");
 	}
 
 }
