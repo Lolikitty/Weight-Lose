@@ -37,7 +37,6 @@ public class Setting : MonoBehaviour {
 	public GameObject error_ok;
 
 
-	//整合好的起床跟睡眠時間
 	public string st;
 	public string gt;
 
@@ -47,13 +46,15 @@ public class Setting : MonoBehaviour {
 
 	void Awake(){
 
-		culture = new System.Globalization.CultureInfo("zh-TW", true);
+
 
 	}
 
 
 	void Start () {
 
+
+		culture = new System.Globalization.CultureInfo("zh-TW", true);
 
 		try{
 

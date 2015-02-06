@@ -153,35 +153,21 @@ public class User : MonoBehaviour {
 				isDown = true;
 			}
 		}
+
+		if(cam.transform.localPosition.y < -780){
+			red.SetActive (true); 
+			blue.SetActive (true); 		
+		}else{
+			red.SetActive (false); 
+			blue.SetActive (false); 
+		}
 		
-//		if(vc != null){
-			if(isDown){
-				cam.transform.localPosition = new Vector3(0,Mathf.Lerp(cam.transform.localPosition.y,-800,Time.deltaTime * 5));
-			}else{
-				cam.transform.localPosition = new Vector3(0,Mathf.Lerp(cam.transform.localPosition.y, 0, Time.deltaTime * 5));
-			}
-			
-			if(cam.transform.localPosition.y < -750){
-//				vc.GetComponent<Camera>().enabled = true;
-//				nbs.enabled = true;
 
-				if(once){
-					Invoke("Run",0.5f);
-					once = false;
-				}
-
-
-			}else if(cam.transform.localPosition.y > -1 || cam.transform.localPosition.y > -750){
-//				vc.GetComponent<Camera>().enabled = false;
-//				nbs.enabled = false;
-
-				if(!once){
-					Invoke("Stop",0);
-					once = true;
-				}
-
-			}
-//		}
+		if(isDown){
+			cam.transform.localPosition = new Vector3(0,Mathf.Lerp(cam.transform.localPosition.y,-800,Time.deltaTime * 5));	
+		}else{
+			cam.transform.localPosition = new Vector3(0,Mathf.Lerp(cam.transform.localPosition.y, 0, Time.deltaTime * 5));
+		}
 	}
 
 	void Run(){

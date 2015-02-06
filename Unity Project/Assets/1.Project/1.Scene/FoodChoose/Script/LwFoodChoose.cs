@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using Prime31;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwFoodChoose : MonoBehaviour {
 
@@ -39,50 +41,69 @@ public class LwFoodChoose : MonoBehaviour {
 	GameObject bg7;
 	GameObject bg8;
 
+	string imgDir;
+
 	void Awake () {
-		UIEventListener.Get(buttonFoodCamera).onClick = ButtonFoodCamera;
-		UIEventListener.Get(buttonOK).onClick = ButtonOK;
-		UIEventListener.Get(buttonCancel).onClick = ButtonCancel;
 
-		UIEventListener.Get(buttonFind).onClick = ButtonFind;
+		try{
 
-		UIEventListener.Get(buttonDIY_Add).onClick = ButtonDIY_Add;
+			string imgPath = "/Image/FoodMenu/" ;
+			string imgName = DateTime.Now.ToFileTimeUtc() + "";
+
+			imgDir = Application.persistentDataPath + imgPath;
+
+			if(!Directory.Exists(imgDir)) Directory.CreateDirectory(imgDir);
 
 
-		UIEventListener.Get(buttonFoodDIY).onClick = ButtonFoodDIY;
-		UIEventListener.Get(buttonFood1).onClick = ButtonFood1;
-		UIEventListener.Get(buttonFood2).onClick = ButtonFood2;
-		UIEventListener.Get(buttonFood3).onClick = ButtonFood3;
-		UIEventListener.Get(buttonFood4).onClick = ButtonFood4;
-		UIEventListener.Get(buttonFood5).onClick = ButtonFood5;
-		UIEventListener.Get(buttonFood6).onClick = ButtonFood6;
-		UIEventListener.Get(buttonFood7).onClick = ButtonFood7;
-		UIEventListener.Get(buttonFood8).onClick = ButtonFood8;
 
-		bgDIY = buttonFoodDIY.transform.GetChild(0).gameObject;
-		bg1 = buttonFood1.transform.GetChild(0).gameObject;
-		bg2 = buttonFood2.transform.GetChild(0).gameObject;
-		bg3 = buttonFood3.transform.GetChild(0).gameObject;
-		bg4 = buttonFood4.transform.GetChild(0).gameObject;
-		bg5 = buttonFood5.transform.GetChild(0).gameObject;
-		bg6 = buttonFood6.transform.GetChild(0).gameObject;
-		bg7 = buttonFood7.transform.GetChild(0).gameObject;
-		bg8 = buttonFood8.transform.GetChild(0).gameObject;
+			UIEventListener.Get(buttonFoodCamera).onClick = ButtonFoodCamera;
+			UIEventListener.Get(buttonOK).onClick = ButtonOK;
+			UIEventListener.Get(buttonCancel).onClick = ButtonCancel;
 
-		bgDIY.SetActive (false);
-		bg1.SetActive (false);
-		bg2.SetActive (false);
-		bg3.SetActive (false);
-		bg4.SetActive (false);
-		bg5.SetActive (false);
-		bg6.SetActive (false);
-		bg7.SetActive (false);
-		bg8.SetActive (false);
+			UIEventListener.Get(buttonFind).onClick = ButtonFind;
 
-		buttonDIY_Add.SetActive (true);
-		fsv.gameObject.SetActive (false);
+			UIEventListener.Get(buttonDIY_Add).onClick = ButtonDIY_Add;
 
-		EtceteraAndroid.initTTS();
+
+			UIEventListener.Get(buttonFoodDIY).onClick = ButtonFoodDIY;
+			UIEventListener.Get(buttonFood1).onClick = ButtonFood1;
+			UIEventListener.Get(buttonFood2).onClick = ButtonFood2;
+			UIEventListener.Get(buttonFood3).onClick = ButtonFood3;
+			UIEventListener.Get(buttonFood4).onClick = ButtonFood4;
+			UIEventListener.Get(buttonFood5).onClick = ButtonFood5;
+			UIEventListener.Get(buttonFood6).onClick = ButtonFood6;
+			UIEventListener.Get(buttonFood7).onClick = ButtonFood7;
+			UIEventListener.Get(buttonFood8).onClick = ButtonFood8;
+
+			bgDIY = buttonFoodDIY.transform.GetChild(0).gameObject;
+			bg1 = buttonFood1.transform.GetChild(0).gameObject;
+			bg2 = buttonFood2.transform.GetChild(0).gameObject;
+			bg3 = buttonFood3.transform.GetChild(0).gameObject;
+			bg4 = buttonFood4.transform.GetChild(0).gameObject;
+			bg5 = buttonFood5.transform.GetChild(0).gameObject;
+			bg6 = buttonFood6.transform.GetChild(0).gameObject;
+			bg7 = buttonFood7.transform.GetChild(0).gameObject;
+			bg8 = buttonFood8.transform.GetChild(0).gameObject;
+
+			bgDIY.SetActive (false);
+			bg1.SetActive (false);
+			bg2.SetActive (false);
+			bg3.SetActive (false);
+			bg4.SetActive (false);
+			bg5.SetActive (false);
+			bg6.SetActive (false);
+			bg7.SetActive (false);
+			bg8.SetActive (false);
+
+			buttonDIY_Add.SetActive (true);
+			fsv.gameObject.SetActive (false);
+
+			JsonFoodInit ();
+
+			EtceteraAndroid.initTTS();
+		}catch(Exception e){
+			LwError.Show(e.ToString());
+		}
 	}
 
 	public static string FoodName;
@@ -278,41 +299,85 @@ public class LwFoodChoose : MonoBehaviour {
 		}
 	}
 
-	void AddFood(string [] foodName){
-		for(int i = 0, y = 150; i < foodName.Length; i++ , y -= 70){
+	void AddFood(string foodName){
+
+		List<string> foods = new List<string> ();
+
+		int kal_now = FoodStatusCircle.kalNow;
+
+		string JsonFoodDataPath = imgDir + "/FoodMenu.txt";
+
+		JArray ja = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath)) ["Food"] as JArray;
+
+		for(int i = 0; i < ja.Count; i++){
+
+			if(foodName == (string)ja[i]["Name"]){
+			
+				JArray name = (JArray)ja[i]["Food2"];
+				JArray kal = (JArray)ja[i]["Kal"];
+
+				List<int> kalDown = new List<int>() ;
+
+				for(int a = 0 ; a < kal.Count ; a++){
+
+					string thisKal = (string)kal[a];
+					if(Convert.ToInt32(thisKal) <= kal_now){
+						kalDown.Add(a);
+
+					}
+				}
+				foreach(int down in kalDown){
+
+					foods.Add((string)name[down]);
+
+				}
+			}
+		}
+
+
+		for(int i = 0, y = 150; i < foods.Count; i++ , y -= 70){
 			GameObject food = Instantiate(chooseFood) as GameObject;
 			food.transform.parent = fsv.transform;
 			food.transform.localScale = Vector3.one;
 			food.transform.localPosition = new Vector3 (21, y);
-			food.GetComponent<LwChooseFood>().buttonName = foodName[i];
-			food.GetComponent<UILabel>().text = foodName[i];
+			food.GetComponent<LwChooseFood>().buttonName = foods[i];
+			food.GetComponent<UILabel>().text = foods[i];
 		}
 		fsv.OnScrollBar ();
 	}
 
 	string [] foodName1 = {"蔥油餅","油條","豆漿","蛋餅","飯糰","荷包蛋","包子","刈包","饅頭","燒餅","小籠包","燒賣"};
+	string [] foodKal1 = {"500","400","350","450","550","300","350","450","300","350","600","600"};
 
 	void ButtonFood1(GameObject button){
-		isDIY = false;
-		buttonDIY_Add.SetActive (false);
-		fsv.gameObject.SetActive (true);
-		DeleteFSV ();
+		try{
 
-		bgDIY.SetActive (false);
-		bg1.SetActive (true);
-		bg2.SetActive (false);
-		bg3.SetActive (false);
-		bg4.SetActive (false);
-		bg5.SetActive (false);
-		bg6.SetActive (false);
-		bg7.SetActive (false);
-		bg8.SetActive (false);
+			isDIY = false;
+			buttonDIY_Add.SetActive (false);
+			fsv.gameObject.SetActive (true);
+			DeleteFSV ();
+
+			bgDIY.SetActive (false);
+			bg1.SetActive (true);
+			bg2.SetActive (false);
+			bg3.SetActive (false);
+			bg4.SetActive (false);
+			bg5.SetActive (false);
+			bg6.SetActive (false);
+			bg7.SetActive (false);
+			bg8.SetActive (false);
 
 
-		AddFood (foodName1);
+			AddFood (foodKind[0]);
+		}catch(Exception e){
+
+			LwError.Show(e.ToString());
+
+		}
 	}
 
 	string [] foodName2 = {"鬆餅","牛奶","麥片","吐司"};
+	string [] foodKal2 = {"500","400","350","450"};
 
 	void ButtonFood2(GameObject button){
 		isDIY = false;
@@ -330,10 +395,11 @@ public class LwFoodChoose : MonoBehaviour {
 		bg8.SetActive (false);
 
 
-		AddFood (foodName2);
+		AddFood (foodKind[1]);
 	}
 
 	string [] foodName3 = {"牛肉麵"};
+	string [] foodKal3 = {"900"};
 
 	void ButtonFood3(GameObject button){
 		isDIY = false;
@@ -351,10 +417,11 @@ public class LwFoodChoose : MonoBehaviour {
 		bg8.SetActive (false);
 
 
-		AddFood (foodName3);
+		AddFood (foodKind[2]);
 	}
 
 	string [] foodName4 = {"麥當勞"};
+	string [] foodKal4 = {"900"};
 
 	void ButtonFood4(GameObject button){
 		isDIY = false;
@@ -372,10 +439,11 @@ public class LwFoodChoose : MonoBehaviour {
 		bg8.SetActive (false);
 
 
-		AddFood (foodName4);
+		AddFood (foodKind[3]);
 	}
 
 	string [] foodName5 = {"港式飲茶"};
+	string [] foodKal5 = {"700"};
 
 	void ButtonFood5(GameObject button){
 		isDIY = false;
@@ -393,10 +461,11 @@ public class LwFoodChoose : MonoBehaviour {
 		bg8.SetActive (false);
 
 
-		AddFood (foodName5);
+		AddFood (foodKind[4]);
 	}
 
 	string [] foodName6 = {"義大利麵"};
+	string [] foodKal6 = {"800"};
 
 	void ButtonFood6(GameObject button){
 		isDIY = false;
@@ -414,10 +483,11 @@ public class LwFoodChoose : MonoBehaviour {
 		bg8.SetActive (false);
 
 
-		AddFood (foodName6);
+		AddFood (foodKind[5]);
 	}
 
 	string [] foodName7 = {"麥芽糖"};
+	string [] foodKal7 = {"300"};
 
 	void ButtonFood7(GameObject button){
 		isDIY = false;
@@ -435,10 +505,11 @@ public class LwFoodChoose : MonoBehaviour {
 		bg8.SetActive (false);
 
 
-		AddFood (foodName7);
+		AddFood (foodKind[6]);
 	}
 
-	string [] foodName8 = {"巧克力","紅茶","咖啡","藍山","曼特寧","巴西","卡布奇諾","拿鐵","Java"};
+	string [] foodName8 = {"巧克力","紅茶","咖啡","藍山","曼特寧","巴西","卡布奇諾","拿鐵"};
+	string [] foodKal8 = {"600","300","350","300","400","450","350","500"};
 
 	void ButtonFood8(GameObject button){
 		isDIY = false;
@@ -456,7 +527,7 @@ public class LwFoodChoose : MonoBehaviour {
 		bg8.SetActive (true);
 
 
-		AddFood (foodName8);
+		AddFood (foodKind[7]);
 	}
 
 	void ButtonFoodCamera(GameObject button){
@@ -502,6 +573,83 @@ public class LwFoodChoose : MonoBehaviour {
 
 	void ButtonCancel(GameObject button){
 		Application.LoadLevel ("MainMenu");
+	}
+
+	void FoodGet(){
+
+		string JsonFoodDataPath = Application.persistentDataPath + "/FoodMenu.txt";
+		
+		if(!File.Exists(JsonFoodDataPath)){
+			return;
+		}
+		
+		//path = JsonFoodDataPath;
+		
+		int AllKal = 0;
+		
+		JArray ja = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath)) ["Food"] as JArray;
+		
+		for(int i = 0; i < ja.Count; i++){
+			DateTime dt = (DateTime) ja[i]["Name"];
+			if(dt.Date == DateTime.Today){
+				AllKal+=int.Parse(ja[i]["Kal"].ToString());
+
+			}
+		}
+
+
+	}
+
+	string [] foodKind = {"中式早餐","西式早餐","中式午餐","西式午餐","中式晚餐","西式晚餐","中式點心","西式點心"};
+	List<string[]> food_list = new List<string[]>();
+	List<string[]> kal_list = new List<string[]>();
+
+	void JsonFoodInit(){
+		string JsonFoodDataPath = imgDir + "/FoodMenu.txt";
+		List<object> Food = null;
+
+		if (!File.Exists (JsonFoodDataPath)) {
+			Food = new List<object> ();
+			File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
+
+			food_list.Add(foodName1);
+			food_list.Add(foodName2);
+			food_list.Add(foodName3);
+			food_list.Add(foodName4);
+			food_list.Add(foodName5);
+			food_list.Add(foodName6);
+			food_list.Add(foodName7);
+			food_list.Add(foodName8);
+
+			kal_list.Add(foodKal1);
+			kal_list.Add(foodKal2);
+			kal_list.Add(foodKal3);
+			kal_list.Add(foodKal4);
+			kal_list.Add(foodKal5);
+			kal_list.Add(foodKal6);
+			kal_list.Add(foodKal7);
+			kal_list.Add(foodKal8);
+
+			Food = (JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonFoodDataPath))["Food"] as JArray).ToObject<List<object>>();
+
+			for(int i = 0 ; i < 8 ; i++){
+				var food = new {
+					Name = foodKind[i],
+					Food2 = food_list[i],
+					Kal = kal_list[i],
+					JPGPath = "/" ,
+					PNGPath = "/" ,
+				};
+
+				Food.Add(food);
+			}
+
+			File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
+
+		}
+
+
+
 	}
 
 

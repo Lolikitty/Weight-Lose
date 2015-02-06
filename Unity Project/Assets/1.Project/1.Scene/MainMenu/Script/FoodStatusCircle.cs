@@ -15,6 +15,8 @@ public class FoodStatusCircle : MonoBehaviour {
 	public UITexture [] love;
 	public Texture2D blackLove;
 
+	public static int kalNow;
+
 	// Unity Override Methods ==============================================================================================================================
 
 	void Awake () {
@@ -88,6 +90,8 @@ public class FoodStatusCircle : MonoBehaviour {
 		float kalInit = 2000;
 		kal_num.text = "" + (kalInit-AllKal);
 		float loveN = 200;
+
+		kalNow = Convert.ToInt32(kalInit - AllKal);
 		
 		for(int i=0; i<love.Length; i++){
 			if((kalInit-AllKal) < loveN * -i){
