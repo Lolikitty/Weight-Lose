@@ -55,6 +55,17 @@ public class LwInit : MonoBehaviour {
 
 		try{
 
+			
+
+				
+		string imgPath = "/Image/FoodMenu/" ;
+		string imgName = DateTime.Now.ToFileTimeUtc() + "";
+				
+		imgDir = Application.persistentDataPath + imgPath;
+				
+		if(!Directory.Exists(imgDir)) Directory.CreateDirectory(imgDir);
+
+
 		string p_clock = PlayerPrefs.GetString ("go_clock");
 		string p_food = PlayerPrefs.GetString ("go_food");
 		string p_password = PlayerPrefs.GetString ("go_password");
@@ -82,7 +93,7 @@ public class LwInit : MonoBehaviour {
 //
 //		imgDir =  Application.persistentDataPath + imgPath;
 //
-//		JsonFoodInit ();
+		JsonFoodInit ();
 		
 
 		StartCoroutine (InitMix ());
@@ -213,6 +224,7 @@ public class LwInit : MonoBehaviour {
 	void JsonFoodInit(){
 		string JsonFoodDataPath = imgDir + "/FoodMenu.txt";
 		List<object> Food = null;
+		List<object> FoodCon = null;
 		
 		if (!File.Exists (JsonFoodDataPath)) {
 			Food = new List<object> ();
@@ -235,57 +247,60 @@ public class LwInit : MonoBehaviour {
 			kal_list.Add(foodKal6);
 			kal_list.Add(foodKal7);
 			kal_list.Add(foodKal8);
+
 			
-			Food = (JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonFoodDataPath))["Food"] as JArray).ToObject<List<object>>();
-			
-			for(int i = 0 ; i < 8 ; i++){
-				var food = new {
-					Name = foodKind[i],
-					Food2 = food_list[i],
-					Kal = kal_list[i],
-					JPGPath = "/" ,
-					PNGPath = "/" ,
-				};
+
 				
-				Food.Add(food);
+			Food = (JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonFoodDataPath))["Food"] as JArray).ToObject<List<object>>();
+				
+			for(int i = 0 ; i < 8 ; i++){
+					
+				FoodTime foodTime = new FoodTime();
+					
+				foodTime.name = foodKind[i];
+					
+				for(int j = 0; j<food_list[i].Length;j++){
+						
+					Foods foods = new Foods();
+						
+					foods.name = food_list[i][j];
+						
+					foods.kal = kal_list[i][j];
+						
+					foods.JPGPath = "/";
+						
+					foods.PNGPath = "/";
+						
+						
+					foodTime.foods.Add(foods);
+						
+				}
+				Food.Add(foodTime);
+					
+				File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
+					
+				Debug.Log(i);
 			}
-			
-			File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
-			
+				
+				
 		}
-		
-		
-		
+
 	}
 }
 
+public class FoodTime{
+	
+	public string name ;
+	public List<Foods> foods = new List<Foods>();
+	
+	
+	
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public class Foods{
+	public string name;
+	public string kal;
+	public string JPGPath;
+	public string PNGPath;
+	
+}

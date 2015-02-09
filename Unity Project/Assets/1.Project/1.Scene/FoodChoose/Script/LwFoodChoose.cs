@@ -48,7 +48,6 @@ public class LwFoodChoose : MonoBehaviour {
 		try{
 
 			string imgPath = "/Image/FoodMenu/" ;
-			string imgName = DateTime.Now.ToFileTimeUtc() + "";
 
 			imgDir = Application.persistentDataPath + imgPath;
 
@@ -98,7 +97,7 @@ public class LwFoodChoose : MonoBehaviour {
 			buttonDIY_Add.SetActive (true);
 			fsv.gameObject.SetActive (false);
 
-			JsonFoodInit ();
+			//JsonFoodInit ();
 
 			EtceteraAndroid.initTTS();
 		}catch(Exception e){
@@ -305,31 +304,25 @@ public class LwFoodChoose : MonoBehaviour {
 
 		int kal_now = FoodStatusCircle.kalNow;
 
-		string JsonFoodDataPath = imgDir + "/FoodMenu.txt";
+		string JsonFoodDataPath = imgDir + "FoodMenu.txt";
 
 		JArray ja = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath)) ["Food"] as JArray;
 
 		for(int i = 0; i < ja.Count; i++){
 
-			if(foodName == (string)ja[i]["Name"]){
+			if(foodName == (string)ja[i]["name"]){
 			
-				JArray name = (JArray)ja[i]["Food2"];
-				JArray kal = (JArray)ja[i]["Kal"];
+				JArray Foods = (JArray)ja[i]["foods"];
+				for(int j = 0; j < Foods.Count; j++){
 
-				List<int> kalDown = new List<int>() ;
+					string thisKal = (string)Foods[j]["kal"];
 
-				for(int a = 0 ; a < kal.Count ; a++){
 
-					string thisKal = (string)kal[a];
 					if(Convert.ToInt32(thisKal) <= kal_now){
-						kalDown.Add(a);
+
+						foods.Add((string)Foods[j]["name"]);
 
 					}
-				}
-				foreach(int down in kalDown){
-
-					foods.Add((string)name[down]);
-
 				}
 			}
 		}
@@ -604,53 +597,51 @@ public class LwFoodChoose : MonoBehaviour {
 	List<string[]> food_list = new List<string[]>();
 	List<string[]> kal_list = new List<string[]>();
 
-	void JsonFoodInit(){
-		string JsonFoodDataPath = imgDir + "/FoodMenu.txt";
-		List<object> Food = null;
-
-		if (!File.Exists (JsonFoodDataPath)) {
-			Food = new List<object> ();
-			File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
-
-			food_list.Add(foodName1);
-			food_list.Add(foodName2);
-			food_list.Add(foodName3);
-			food_list.Add(foodName4);
-			food_list.Add(foodName5);
-			food_list.Add(foodName6);
-			food_list.Add(foodName7);
-			food_list.Add(foodName8);
-
-			kal_list.Add(foodKal1);
-			kal_list.Add(foodKal2);
-			kal_list.Add(foodKal3);
-			kal_list.Add(foodKal4);
-			kal_list.Add(foodKal5);
-			kal_list.Add(foodKal6);
-			kal_list.Add(foodKal7);
-			kal_list.Add(foodKal8);
-
-			Food = (JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonFoodDataPath))["Food"] as JArray).ToObject<List<object>>();
-
-			for(int i = 0 ; i < 8 ; i++){
-				var food = new {
-					Name = foodKind[i],
-					Food2 = food_list[i],
-					Kal = kal_list[i],
-					JPGPath = "/" ,
-					PNGPath = "/" ,
-				};
-
-				Food.Add(food);
-			}
-
-			File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
-
-		}
+//	void JsonFoodInit(){
+//		string JsonFoodDataPath = imgDir + "/FoodMenu.txt";
+//		List<object> Food = null;
+//
+//		if (!File.Exists (JsonFoodDataPath)) {
+//			Food = new List<object> ();
+//			File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
+//
+//			food_list.Add(foodName1);
+//			food_list.Add(foodName2);
+//			food_list.Add(foodName3);
+//			food_list.Add(foodName4);
+//			food_list.Add(foodName5);
+//			food_list.Add(foodName6);
+//			food_list.Add(foodName7);
+//			food_list.Add(foodName8);
+//
+//			kal_list.Add(foodKal1);
+//			kal_list.Add(foodKal2);
+//			kal_list.Add(foodKal3);
+//			kal_list.Add(foodKal4);
+//			kal_list.Add(foodKal5);
+//			kal_list.Add(foodKal6);
+//			kal_list.Add(foodKal7);
+//			kal_list.Add(foodKal8);
+//
+//			Food = (JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonFoodDataPath))["Food"] as JArray).ToObject<List<object>>();
+//
+//			for(int i = 0 ; i < 8 ; i++){
+//				var food = new {
+//					Name = foodKind[i],
+//					Food2 = food_list[i],
+//					Kal = kal_list[i],
+//					JPGPath = "/" ,
+//					PNGPath = "/" ,
+//				};
+//
+//				Food.Add(food);
+//			}
+//
+//			File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
+//
+//		}
 
 
 
 	}
 
-
-}

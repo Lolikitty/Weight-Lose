@@ -1,30 +1,217 @@
 {
   "Food": [
     {
-      "Name": "ew",
-      "Food2": [
-        "egg",
-        "pig",
-        "cake",
-        "coke"
+      "name": "中式早餐",
+      "foods": [
+        {
+          "name": "蔥油餅",
+          "kal": "500",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "油條",
+          "kal": "400",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "豆漿",
+          "kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "蛋餅",
+          "kal": "450",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "飯糰",
+          "kal": "550",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "荷包蛋",
+          "kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "包子",
+          "kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "刈包",
+          "kal": "450",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "饅頭",
+          "kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "燒餅",
+          "kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "小籠包",
+          "kal": "600",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "燒賣",
+          "kal": "600",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
       ]
     },
     {
-      "Name": "ew",
-      "Food2": [
-        "egg",
-        "pig",
-        "cake",
-        "coke"
+      "name": "西式早餐",
+      "foods": [
+        {
+          "name": "鬆餅",
+          "kal": "500",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "牛奶",
+          "kal": "400",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "麥片",
+          "kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "吐司",
+          "kal": "450",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
       ]
     },
     {
-      "Name": "ew",
-      "Food2": [
-        "egg",
-        "pig",
-        "cake",
-        "coke"
+      "name": "中式午餐",
+      "foods": [
+        {
+          "name": "牛肉麵",
+          "kal": "900",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "name": "西式午餐",
+      "foods": [
+        {
+          "name": "麥當勞",
+          "kal": "900",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "name": "中式晚餐",
+      "foods": [
+        {
+          "name": "港式飲茶",
+          "kal": "700",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "name": "西式晚餐",
+      "foods": [
+        {
+          "name": "義大利麵",
+          "kal": "800",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "name": "中式點心",
+      "foods": [
+        {
+          "name": "麥芽糖",
+          "kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "name": "西式點心",
+      "foods": [
+        {
+          "name": "巧克力",
+          "kal": "600",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "紅茶",
+          "kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "咖啡",
+          "kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "藍山",
+          "kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "曼特寧",
+          "kal": "400",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "巴西",
+          "kal": "450",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "卡布奇諾",
+          "kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "name": "拿鐵",
+          "kal": "500",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
       ]
     }
   ]
