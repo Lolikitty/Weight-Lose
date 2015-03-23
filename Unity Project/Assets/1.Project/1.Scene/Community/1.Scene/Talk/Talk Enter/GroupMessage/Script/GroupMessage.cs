@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class GroupMessage : MonoBehaviour {
 
@@ -81,11 +83,11 @@ public class GroupMessage : MonoBehaviour {
 
 	void VarInit(){
 		title.text = "Group";
-		id = PlayerPrefs.GetString ("ID");
+		id = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString();
 	}
 
 	void TcpInit(){
-		tcp = new TcpClient(LwInit.ServerIP, LwInit.TalkServerPort);
+		tcp = new TcpClient(LwInit.ServerIP, LwInit.TalkGroupServerPort);
 		stream = new NetworkStream(tcp.Client);
 		sr = new StreamReader (stream);
 		sw = new StreamWriter(stream);
@@ -197,7 +199,7 @@ public class GroupMessage : MonoBehaviour {
 	}
 	
 	void ButtonBack(GameObject button){
-		Application.LoadLevel ("Friend");
+		Application.LoadLevel ("Talk");
 	}
 	
 	void ButtonExit(GameObject button){

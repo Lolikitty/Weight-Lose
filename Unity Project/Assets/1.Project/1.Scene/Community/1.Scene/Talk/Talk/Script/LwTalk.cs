@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwTalk : MonoBehaviour {
 		
@@ -32,12 +34,7 @@ public class LwTalk : MonoBehaviour {
 
 	IEnumerator GetGroup(){
 		WWWForm f = new WWWForm ();
-#if UNITY_EDITOR
-		f.AddField ("id", "9");
-#else
-		f.AddField ("id", PlayerPrefs.GetString ("ID"));
-#endif
-
+		f.AddField ("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
 		WWW w = new WWW (LwInit.HttpServerPath + "/GetGroup", f);
 		yield return w;
 
@@ -92,7 +89,7 @@ public class LwTalk : MonoBehaviour {
 
 	void AddBGExit(GameObject obj){
 		isDoNotViewAddBG = true;
-		LwFriend_User.ChooseIDs.Clear ();
+		LwTalk_User.ChooseIDs.Clear ();
 	}
 
 	void ButtonAddBgOk(GameObject obj){
@@ -101,29 +98,24 @@ public class LwTalk : MonoBehaviour {
 
 	IEnumerator CreateGroup(){
 		string msg = "";
-		foreach(string id in LwFriend_User.ChooseIDs){
+		foreach(string id in LwTalk_User.ChooseIDs){
 			msg += id + ",";
 		}
 
 
 		WWWForm f = new WWWForm ();
-		f.AddField ("id", PlayerPrefs.GetString ("ID"));
+		f.AddField ("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
 		f.AddField ("ids", msg);
 		WWW w = new WWW (LwInit.HttpServerPath+"/CreateGroup", f);
 		yield return w;
 
 		isDoNotViewAddBG = true;
-		LwFriend_User.ChooseIDs.Clear ();
+		LwTalk_User.ChooseIDs.Clear ();
 	}
 	
 	IEnumerator Start (){
 		WWWForm wwwF = new WWWForm();
-		#if UNITY_EDITOR
-		wwwF.AddField("id", "9");
-		#else
-		wwwF.AddField("id", PlayerPrefs.GetString ("ID"));
-		#endif
-
+		wwwF.AddField("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
 		
 		WWW www = new WWW(LwInit.HttpServerPath+"/GetFriend", wwwF);
 		yield return www;
@@ -136,7 +128,7 @@ public class LwTalk : MonoBehaviour {
 			f.transform.parent = sv.transform;
 			f.transform.localScale = Vector3.one;
 			f.transform.localPosition = new Vector3(0, 170 - i * 100, 0);
-			LwFriend_User fu = f.GetComponent<LwFriend_User>();
+			LwTalk_User fu = f.GetComponent<LwTalk_User>();
 			fu.friendID = id;
 			fu.name.text = name;
 			

@@ -64,6 +64,4 @@ public class FBInit : MonoBehaviour {
 			FB.Login ("public_profile,user_birthday,email,user_friends",Login); // 登入，並設定要取得的資料
 		}
 	}
-
-
 }

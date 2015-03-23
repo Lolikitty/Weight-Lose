@@ -43,7 +43,12 @@ public class MainMenu_SceneButton : MonoBehaviour {
 	}
 	
 	void ButtonTask(GameObject button){
-		Application.LoadLevel ("Waiter");
+		int fw = PlayerPrefs.GetInt ("FirstWater");
+		if(fw == 1){
+			Application.LoadLevel ("Water2");
+		}else{
+			Application.LoadLevel ("Water");
+		}
 	}
 	
 	void ButtonAchievements(GameObject button){

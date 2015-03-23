@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +169,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_check.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_blue.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar.xml" />
+     <None Include="Assets\Plugins\EtceteraAndroid\Manifest.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_activity_circle_row.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
@@ -215,6 +216,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_checkbox.xml" />
      <None Include="Assets\1.Project\7.Shader\Mask.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_loginbutton_silver.xml" />
+     <None Include="Assets\JsonDotNet\ReadMe.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
      <None Include="Assets\Plugins\Android\facebook\bin\proguard.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\values-ldpi\dimens.xml" />
@@ -223,28 +225,39 @@
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_search_box.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_list_row.xml" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/Editor/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.2/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Prime31MenuItem">
+ <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Editor/Prime31/Prime31MenuItem.dll</HintPath>
  </Reference>
  <Reference Include="IFacebook">
- <HintPath>C:/Users/user/Desktop/github/Weight-Lose/Unity Project/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
  </Reference>
  <Reference Include="HOTween">
- <HintPath>C:/Users/user/Desktop/github/Weight-Lose/Unity Project/Assets/Graph_Maker/HOTween/Plugins/HOTween.dll</HintPath>
+ <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Graph_Maker/HOTween/Plugins/HOTween.dll</HintPath>
  </Reference>
  <Reference Include="HOTweenV1_Editor">
- <HintPath>C:/Users/user/Desktop/github/Weight-Lose/Unity Project/Assets/Graph_Maker/HOTween/Plugins/Editor/HOTweenV1_Editor.dll</HintPath>
+ <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Graph_Maker/HOTween/Plugins/Editor/HOTweenV1_Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="SampleClassLibrary">
+ <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/JsonDotNet/Examples/Tests/TestModels/SampleClassLibrary.dll</HintPath>
+ </Reference>
+ <Reference Include="P31RestKit">
+ <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>
  </Reference>
  <Reference Include="Vectrosity">
- <HintPath>C:/Users/user/Desktop/github/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
+ <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{C65DF7E6-5082-3454-2A7F-EDDBED1731B5}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{BDBCE7D3-139D-3EDB-816D-FB1D73476D25}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>

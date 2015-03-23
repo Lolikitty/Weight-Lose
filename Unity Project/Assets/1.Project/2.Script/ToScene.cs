@@ -46,10 +46,12 @@ public class ToScene : MonoBehaviour {
 		Water2,
 		WeightMeasurements,
 		WeightMeasurements2,
-		Step,
-		Step2,
-		Step3,
-		Step4
+		Teacher01,
+		Teacher02,
+		Teacher03,
+		Teacher04,
+		Water3,
+		Tip
 	};
 
 	public CommunityScene communityScene;
@@ -71,6 +73,8 @@ public class ToScene : MonoBehaviour {
 	}
 
 	void OnClick () {
+
+//		Debug.Log ("test");
 		if(useClick){
 			StatusControl();
 		}
@@ -109,7 +113,43 @@ public class ToScene : MonoBehaviour {
 		string password = passwordScene.ToString();
 		string other = otherScene.ToString();
 		string nul = "Null";
+
+		string nowSence = Application.loadedLevelName; 
+
+	
+//		Debug.Log ("PlayerPrefs.GetInt ('FirstSports') = " + PlayerPrefs.GetInt ("FirstSports"));
+
+//		if (other == "Teacher03") {
+//
+//		}
+
+
+		if(other == "Water"){
+			int fw = PlayerPrefs.GetInt ("FirstWater");
+			if(fw == 1)
+				other = "Water2";
+			else{
+
+			}
+
+			if(name == "ButtonBackToWater"){ //判斷是否為特殊進入
+				other = "Water";
+			}
+		}
+		if(other == "Sports"){
+			int fs = PlayerPrefs.GetInt ("FirstSports");
+			if(fs == 1)
+				other = "Sports2";
+			else{
+
+			}
+
+			if(name == "SportsItemAdd"){ //判斷是否為特殊進入
+				other = "Sports";
+			}
+		}
 		
+
 		if(community != nul){
 			Application.LoadLevel(community);
 		}else if(password != nul){
@@ -117,6 +157,7 @@ public class ToScene : MonoBehaviour {
 		}else if(other != nul){
 			Application.LoadLevel(other);
 		}
+
 	}
 
 	public void SetClick(){

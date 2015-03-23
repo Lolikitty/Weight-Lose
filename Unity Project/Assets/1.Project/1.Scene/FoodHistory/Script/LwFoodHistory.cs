@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwFoodHistory : MonoBehaviour {
 
@@ -24,8 +26,8 @@ public class LwFoodHistory : MonoBehaviour {
 		month.text = monthTw[chooseMonth-1];
 	}
 
-	IEnumerator Start(){
-		yield return StartCoroutine(Run());
+	void Start(){
+		StartCoroutine(Run());
 	}
 
 	IEnumerator Run(){
@@ -39,30 +41,60 @@ public class LwFoodHistory : MonoBehaviour {
 		int y = 0;
 		int y2 = 0;
 		int layerCount = 1;
-		
-		string path = null;
-		
-		foreach(string [] yyyyMMdd in GetYyyyMMdd ()){
 
+		string JsonFoodDataPath = Application.persistentDataPath + "/Food.txt";
 
+		JArray ja = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath)) ["Food"] as JArray;
+		JArray ja2 = ja;
 
-			#if UNITY_EDITOR
-			path = Application.persistentDataPath + "/" + yyyyMMdd [0] + "-" + yyyyMMdd [1] + "-" + yyyyMMdd [2];
-			#elif UNITY_ANDROID || UNITY_IPHONE
-			path = yyyyMMdd [0] + "-" + yyyyMMdd [1] + "-" + yyyyMMdd [2];
-			#endif
-			//				msg2 = path;
-			
-			if((path.IndexOf(chooseYear+"-"+(chooseMonth<10?"0":"")+chooseMonth)==-1)){
-				continue;
+		HashSet <string[]> yyyyMMdds = new HashSet <string[]>();
+
+		HashSet <DateTime> dts = new HashSet<DateTime>();
+
+		for(int i = 0; i < ja.Count; i++){
+			DateTime dt = (DateTime) ja[i]["Date"];
+			if(dt.Year == chooseYear && dt.Month == chooseMonth){
+				dts.Add(DateTime.Parse(dt.Year+"-"+dt.Month+"-"+dt.Day));
 			}
-			
-			string [] files = Directory.GetFiles (path, "*.png");
-			string [] filesJPG = Directory.GetFiles (path, "*.jpg");
-			string [] filesInfo = Directory.GetFiles (path, "*.info");
-			
-			int countY = 0;			
-			int fl = files.Length;			
+		}
+
+		List<DateTime> dtOrder = new List<DateTime> ();
+
+		foreach (DateTime dt in dts) {
+			dtOrder.Add(dt);
+		}
+
+		dtOrder.Sort ();
+
+		for (int i = 0; i < dtOrder.Count; i++) {
+			DateTime dt = dtOrder[i];
+			yyyyMMdds.Add(new string[]{dt.Year.ToString(), dt.Month.ToString(), dt.Day.ToString()});
+		}
+
+		foreach(string [] yyyyMMdd in yyyyMMdds){
+
+			string date = yyyyMMdd[0]+"-"+yyyyMMdd[1]+"-"+yyyyMMdd[2];
+
+			List <string> files = new List <string>();
+			List <string> filesJPG = new List <string>();
+			List <string> filesName = new List <string>();
+			List <string> filesKal = new List <string>();
+
+			for(int i = 0; i < ja.Count; i++){
+				DateTime dt = (DateTime) ja[i]["Date"];
+				string date2 = dt.Year+"-"+dt.Month+"-"+dt.Day;
+				if(date == date2){
+					if(dt.Year == chooseYear && dt.Month == chooseMonth){
+						files.Add(Application.persistentDataPath + ja[i]["PNGPath"].ToString());
+						filesJPG.Add(Application.persistentDataPath + ja[i]["JPGPath"].ToString());
+						filesName.Add(ja[i]["Name"].ToString());
+						filesKal.Add(ja[i]["Kal"].ToString());
+					}
+				}
+			}
+
+			int countY = 0;
+			int fl = files.Count;
 			while(fl > 0){
 				fl -= 3;
 				countY++;
@@ -70,27 +102,24 @@ public class LwFoodHistory : MonoBehaviour {
 			labelY += countY * layerDistance + dateDistance;
 			
 			y = labelY+dateAndFoodDistance;
-			
+
 			UILabel label = Instantiate (labelDate) as UILabel;
 			label.transform.parent = sv.transform;
 			label.transform.localPosition = new Vector3(-100, labelY);
 			label.transform.localScale = Vector3.one;
 			label.text = yyyyMMdd[1]+"/"+yyyyMMdd[2];
-			
-			
-			
-			for(int i=0; i<files.Length; i++){
-				string [] fileInformation = filesInfo[i].Split('_');
+
+			for(int i=0; i<files.Count; i++){
 				
 				UITexture t = Instantiate(food) as UITexture;
 				t.transform.parent = sv.transform;
 				t.transform.localScale = Vector3.one;
 				t.GetComponent<LwFoodHistory_Food>().pathJPG = filesJPG[i];
 				t.GetComponent<LwFoodHistory_Food>().pathPNG = files[i];
-				t.GetComponent<LwFoodHistory_Food>().pathInfo = filesInfo[i];
-				t.GetComponent<LwFoodHistory_Food>().fileInformation = fileInformation;
-				t.GetComponentInChildren<UILabel>().text = fileInformation[2];
-				
+				t.GetComponent<LwFoodHistory_Food>().pathInfo = filesKal[i]+"_"+filesName[i];
+				t.GetComponent<LwFoodHistory_Food>().fileInformation = new string[]{"", filesKal[i], filesName[i]};
+				t.GetComponentInChildren<UILabel>().text = filesName[i];
+
 				if(i%3 == 0){
 					x = -FoodDistance;
 					y -= layerDistance;
@@ -109,14 +138,14 @@ public class LwFoodHistory : MonoBehaviour {
 				
 			}
 		}
-		sv.OnScrollBar ();	
+		sv.OnScrollBar ();
 	}
 
-	string msg2 = "No";
-	public GUIStyle gs;
-	void OnGUI(){
+//	string msg2 = "";
+//	public GUIStyle gs;
+//	void OnGUI(){
 //		GUILayout.Label (msg2, gs);
-	}
+//	}
 	
 	void ButtonExit(GameObject button){		
 		Application.LoadLevel ("User");

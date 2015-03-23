@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwAddFriendInformation : MonoBehaviour {
 
@@ -40,7 +42,7 @@ public class LwAddFriendInformation : MonoBehaviour {
 
 	IEnumerator UploadData(string agree){
 		WWWForm wwwF = new WWWForm();
-		wwwF.AddField("id", PlayerPrefs.GetString ("ID"));
+		wwwF.AddField("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
 		wwwF.AddField("friend_id", friendID);
 		wwwF.AddField("agree", agree);
 

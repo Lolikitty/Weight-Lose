@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwMessage : MonoBehaviour {
 
@@ -28,122 +30,151 @@ public class LwMessage : MonoBehaviour {
 	public static string FID = "";
 	public static string FNAME = "";
 
-	string myName = "";
 	Texture2D myHead;
 	Texture2D friendHead;
 
 	string[] message = {"該減肥囉!","我想想!","我還要吃!","好吃!","瘦了多少?","快喝個水!","有效嗎?","OTZ","政還要吃!","別亂!","瘦了多少?","快喝個水!"};
 
 
+	public Texture2D defaultUserTexture;
+	
+	ArrayList fo = new ArrayList ();
+
 	TcpClient tcp;
 	NetworkStream stream;
 	StreamReader sr;
 	StreamWriter sw;
+
+	string myName = "";
 	string id = "";
+	string friendMessage = "";	
+	string hId, fhId;
+	string myMsg = "";
+	string ERROR = "No";
 
-	public Texture2D defaultUserTexture;
+	int y = 180;
+	int offset = 0, offset2 = 0;
+//	int count = 0;	
+	int y2= 180;
+	int up = -280;
+	int down = -775;
 
-	
+	bool isUp = false;
+	bool isQuit = false;
 	
 	// Use this for initialization
 	void Awake () {
-
-		UIEventListener.Get(buttonBack).onClick = ButtonBack;
-		UIEventListener.Get(buttonExit).onClick = ButtonExit;
-		UIEventListener.Get(buttonMsgs).onClick = ButtonMsgs;
-		for(int i = 0; i<buttonMsg.Length; i++){
-			UIEventListener.Get(buttonMsg[i]).onClick = ButtonMsg;
-		}
-		title.text = FNAME;
-		myName = PlayerPrefs.GetString ("name");
-		id = PlayerPrefs.GetString ("ID");
-
-		//-----------------------
-
-		tcp = new TcpClient(LwInit.ServerIP, LwInit.TalkServerPort);
-		stream = new NetworkStream(tcp.Client);
-		sr = new StreamReader (stream);
-		sw = new StreamWriter(stream);
-		sw.AutoFlush = true;
-		sw.WriteLine(id + ","+ FID+ ","); // Login
-
-		new Thread (FriendMessage).Start ();
-
-		InvokeRepeating ("Run", 0, 0.001f);
-	}
-
-	void Run(){
-		if(friendMessage != ""){
-			FriendMessage2();
-		}
-
-		if(myMsg != ""){
-			MyHistoryMsg();
-		}
-	}
-
-	bool isQuit = false;
-
-	string friendMessage = "";
-
-	string hId, fhId;
-
-
-	void FriendMessage(){
-		while(!isQuit){
-
-
-			string msg = sr.ReadLine ();
-			print ("Msg : " + msg);
-
-			// MyID_FriendID_Msg
-			string [] msg2 = msg.Split('_');
-
-			for(int i = 0; i<msg2.Length-1; i++){
-				print ("ID : " + msg2[i]);
+		try{
+			UIEventListener.Get(buttonBack).onClick = ButtonBack;
+			UIEventListener.Get(buttonExit).onClick = ButtonExit;
+			UIEventListener.Get(buttonMsgs).onClick = ButtonMsgs;
+			for(int i = 0; i<buttonMsg.Length; i++){
+				UIEventListener.Get(buttonMsg[i]).onClick = ButtonMsg;
 			}
 
-			print ("Msg 2 : " + msg2[msg2.Length-1]);
+			id = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString();
 
-			if(msg2[0]==id){
-				hId = msg2[0];
-				fhId = msg2[1];
-				myMsg = msg2[msg2.Length-1];
+			title.text = FNAME;
+
+			JObject jobj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"));
+
+			if(jobj["Name"] != null){
+				myName = jobj["Name"].ToString();
 			}else{
-				hId = msg2[1];
-				fhId = msg2[0];
-				friendMessage = msg2[msg2.Length-1];
+				myName = id;
 			}
+
+
+			
+			//-----------------------
+			
+			tcp = new TcpClient(LwInit.ServerIP, LwInit.TalkServerPort);
+			stream = new NetworkStream(tcp.Client);
+			sr = new StreamReader (stream);
+			sw = new StreamWriter(stream);
+			sw.AutoFlush = true;
+			sw.WriteLine(id + ","+ FID); // Login
+			
+			new Thread (FriendMessage).Start ();
+
+		}catch(Exception e){
+			LwError.Show("LwMessage.Awake() : " + e);
 		}
-		print ("QQ"); // ??????????????????????????????????????????????????????????????????
 	}
 
-	string myMsg = "";
-
-	void MyHistoryMsg(){
-		GameObject m = Instantiate(Msg_My) as GameObject;
-		m.transform.parent = buttonMainMsgsRoot;
-		m.transform.localPosition = new Vector3(0, y);
-		m.transform.localScale = Vector3.one;
-		LwMessage_Unit mu = m.GetComponent<LwMessage_Unit>();
-		mu.name.text = myName;
-		mu.message.text = message[int.Parse(myMsg)];
-		mu.userImg.mainTexture = myHead;
+	IEnumerator Start(){
 		
-		y -= 120;
-
-		myMsg = "";
+		string myHeadPath = Application.persistentDataPath + "/User.png";
+		string friendHeadPath = Application.persistentDataPath+"/Friend/"+FID+".png";
+		
+		if(File.Exists(myHeadPath)){
+			WWW www = new WWW ("file://" + myHeadPath);
+			yield return www;
+			myHead = www.texture;
+		}else{
+			myHead = defaultUserTexture;
+		}
+		
+		if(File.Exists(friendHeadPath)){
+			WWW www2 = new WWW ("file://" + friendHeadPath);
+			yield return www2;
+			friendHead = www2.texture;
+		}else{
+			friendHead = defaultUserTexture;
+		}
+		
 	}
 	
-	int offset = 0, offset2 = 0;
+	void ButtonMsg(GameObject button){
+		try{
+			for(int i = 0; i<buttonMsg.Length; i++){
+				if("ButtonMsg"+i == button.name){
+					GameObject m = Instantiate(Msg_My) as GameObject;
+					m.transform.parent = buttonMainMsgsRoot;
+					m.transform.localPosition = new Vector3(0, y);
+					m.transform.localScale = Vector3.one;
+					LwMessage_Unit mu = m.GetComponent<LwMessage_Unit>();
+					mu.NAME = myName;
+					mu.message.text = message[i];
+					mu.userImg.mainTexture = myHead;
+					
+					sw.WriteLine(i);
+					
+					y -= 120;
+				}
+			}
+			isUp = false;
+		}catch(Exception e){
+			LwError.Show("LwMessage.Update() : " + e);
+		}
+	}
 
-	ArrayList fo = new ArrayList ();
+	void MyHistoryMsg(){
+		try{
+			GameObject m = Instantiate(Msg_My) as GameObject;
+			m.transform.parent = buttonMainMsgsRoot;
+			m.transform.localPosition = new Vector3(0, y);
+			m.transform.localScale = Vector3.one;
+			LwMessage_Unit mu = m.GetComponent<LwMessage_Unit>();
+			mu.name.text = myName;
+			mu.message.text = message[int.Parse(myMsg)];
+			mu.userImg.mainTexture = myHead;
+			
+			y -= 120;
 
-	int count = 0;
+			myMsg = "";
+		}catch(Exception e){
+			LwError.Show("LwMessage.MyHistoryMsg() : " + e);
+		}
+	}	
+	
+	void FriendMessage(){
+		while(!isQuit){
+			friendMessage = sr.ReadLine ();
+		}
+	}
 
-	int y2= 180;
-
-	void FriendMessage2(){
+	void FriendMessage2(string msg){
 		try{
 			GameObject f = Instantiate(Msg_Other) as GameObject;
 			fo.Add(f);
@@ -152,166 +183,79 @@ public class LwMessage : MonoBehaviour {
 			f.transform.localScale = Vector3.one;
 			LwMessage_Unit fmu = f.GetComponent<LwMessage_Unit>();
 			fmu.userImg.mainTexture = friendHead;
-			fmu.name.text = FNAME;
-			// MyID_FriendID_Msg
-
-			fmu.message.text = message[int.Parse(friendMessage)];
+			fmu.NAME = FNAME;
+			fmu.message.text = message[int.Parse(msg)];
 			y -= 120;
-
-
-			if(count > 3){
-				y2 = (120* (count-1));// offset
-				for(int i = 0; i < fo.Count; i++, y2-=120){
-//					((GameObject)fo[i]).transform.localPosition = new Vector3(0, y2);
-				}
-			}
-			count++;
 		}catch(Exception e){
-			print (e.ToString());
+			ERROR = e.Message;
 		}
-		friendMessage = "";
 	}
-	
-	
-	IEnumerator Start(){
-
-		string myHeadPath = Application.persistentDataPath + "/User.png";
-		string friendHeadPath = Application.persistentDataPath+"/Friend/"+FID+".png";
-
-		if(File.Exists(myHeadPath)){
-			WWW www = new WWW ("file://" + myHeadPath);
-			yield return www;
-			myHead = www.texture;
-		}else{
-			myHead = defaultUserTexture;
-		}
-
-		if(File.Exists(friendHeadPath)){
-			WWW www2 = new WWW ("file://" + friendHeadPath);
-			yield return www2;
-			friendHead = www2.texture;
-		}else{
-			friendHead = defaultUserTexture;
-		}
-
-
-//
-//
-//
-
-//		
-//		while(true){
-//			string msg = sr.ReadLine();
-//			if(msg == "end"){
-//				break;
-//			}
-//			string [] msg2 = msg.Split('_');
-//			string _id =  msg2[0];
-//			string _fid =  msg2[1];
-//			string _msg =  msg2[2];
-//			
-//			
-//			if(_id == id){ // if = my id
-//				GameObject m = Instantiate(Msg_My) as GameObject;
-//				m.transform.parent = buttonMainMsgsRoot;
-//				m.transform.localPosition = new Vector3(0, y);
-//				m.transform.localScale = Vector3.one;
-//				LwMessage_Unit mu = m.GetComponent<LwMessage_Unit>();
-//				mu.name.text = myName;
-//				mu.message.text = message[int.Parse(_msg)];
-//				mu.userImg.mainTexture = myHead;
-//			}else{
-//				GameObject f = Instantiate(Msg_Other) as GameObject;
-//				f.transform.parent = buttonMainMsgsRoot;
-//				f.transform.localPosition = new Vector3(0, y);
-//				f.transform.localScale = Vector3.one;
-//				LwMessage_Unit fmu = f.GetComponent<LwMessage_Unit>();
-//				fmu.name.text = FNAME;
-//				fmu.message.text = message[int.Parse(_msg)];
-//				fmu.userImg.mainTexture = friendHead;
-//			}
-//			y -= 120;
-//		}
-//		
-//		
-//		
-//		sr.Close();
-//		sw.Close ();
-//		stream.Close ();
-//		tcp.Close ();
-//		sr = null;
-//		sw = null;
-//		stream = null;
-//		tcp = null;
-//		
-//		//-----------------------
-//		
-//		tcp = new TcpClient(LwInit.ServerIP, LwInit.ServerPort);
-//		stream = new NetworkStream(tcp.Client);
-//		sr = new StreamReader (stream);
-//		sw = new StreamWriter(stream);
-//		sw.AutoFlush = true;
-//		
-//		sw.WriteLine ("UploadMessage/" + id + "/" + FID + "/ ");
-	}
-
-	int up = -280;
-	int down = -775;
 
 	void Update () {
-		if(isUp){
-			if(buttonMsgsRoot.localPosition.y < up){
-				buttonMsgsRoot.Translate(0, 5 * Time.deltaTime, 0);
-				if(buttonMsgsRoot.localPosition.y > up){
-					buttonMsgsRoot.localPosition = new Vector3(0, up);
+		try{
+			if(isUp){
+				if(buttonMsgsRoot.localPosition.y < up){
+					buttonMsgsRoot.Translate(0, 5 * Time.deltaTime, 0);
+					if(buttonMsgsRoot.localPosition.y > up){
+						buttonMsgsRoot.localPosition = new Vector3(0, up);
+					}
 				}
-			}
 
-		}else{
-			if(buttonMsgsRoot.localPosition.y > down){
-				buttonMsgsRoot.Translate(0, -5 * Time.deltaTime, 0);
-				if(buttonMsgsRoot.localPosition.y < down){
-					buttonMsgsRoot.localPosition = new Vector3(0, down);
+			}else{
+				if(buttonMsgsRoot.localPosition.y > down){
+					buttonMsgsRoot.Translate(0, -5 * Time.deltaTime, 0);
+					if(buttonMsgsRoot.localPosition.y < down){
+						buttonMsgsRoot.localPosition = new Vector3(0, down);
+					}
 				}
 			}
+		}catch(Exception e){
+			LwError.Show("LwMessage.Update() : " + e);
 		}
 
+		if(friendMessage != ""){
+			FriendMessage2(friendMessage);
+			friendMessage = "";
+		}
 
 	}
 
-	bool isUp = false;
+	void OnGUI(){
+		GUILayout.Label ("myName : " + myName);
+//		GUILayout.Label ("FNAME : " + FNAME);
+//		GUILayout.Label ("ERROR : " + ERROR);
+	}
 
 	void ButtonMsgs(GameObject button){
 		isUp = true;
 	}
 
 	void ButtonBack(GameObject button){
-		Close ();
 		Application.LoadLevel ("Friend");
 	}
 
 	void ButtonExit(GameObject button){
-		Close ();
 		Application.LoadLevel ("MainMenu");
 	}
 
-	void OnApplicationQuit(){
-		print ("Quit");
+	void OnDisable() {
 		Close ();
 	}
 
 	void Close(){
 		isQuit = true;
-		sw.WriteLine ("exit");
 		if(sw != null){
+			sw.Dispose();
 			sw.Close ();
 			sw=null;
 		}
 		if(sr != null){
+			sr.Dispose();
 			sr.Close ();
 			sr=null;
 		}
 		if(stream != null){
+			stream.Dispose();
 			stream.Close ();
 			stream=null;
 		}
@@ -320,37 +264,4 @@ public class LwMessage : MonoBehaviour {
 			tcp=null;
 		}
 	}
-
-	int y = 180;
-
-	void ButtonMsg(GameObject button){
-		for(int i = 0; i<buttonMsg.Length; i++){
-			if("ButtonMsg"+i == button.name){
-				GameObject m = Instantiate(Msg_My) as GameObject;
-				m.transform.parent = buttonMainMsgsRoot;
-				m.transform.localPosition = new Vector3(0, y);
-				m.transform.localScale = Vector3.one;
-				LwMessage_Unit mu = m.GetComponent<LwMessage_Unit>();
-				mu.name.text = myName;
-				mu.message.text = message[i];
-				mu.userImg.mainTexture = myHead;
-
-				sw.WriteLine(i + ",");
-
-				y -= 120;
-
-//				GameObject f = Instantiate(Msg_Other) as GameObject;
-//				f.transform.parent = buttonMainMsgsRoot;
-//				f.transform.localPosition = new Vector3(0, y);
-//				f.transform.localScale = Vector3.one;
-//				LwMessage_Unit fmu = f.GetComponent<LwMessage_Unit>();
-//				fmu.name.text = FNAME;
-//				fmu.message.text = "Hi";
-//
-//				y -= 120;
-			}
-		}
-		isUp = false;
-	}
-
 }

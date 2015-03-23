@@ -1,37 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class TopButton : MonoBehaviour {
 
-	public GameObject exit;
-	public GameObject friend;
-	public GameObject talk;
-	public GameObject addFriend;
+	public GameObject countFriendTalk;
+	public UILabel countFriendTalkNumber;
+
+	public GameObject countGroupTalk;
+	public UILabel countGroupTalkNumber;
+
+	public GameObject countAddFriend;
+	public UILabel countAddFriendNumber;
 
 	// Unity Override Methods ==============================================================================================================================
 
 	void Awake () {
-		UIEventListener.Get(exit).onClick = Exit;
-		UIEventListener.Get(friend).onClick = Friend;
-		UIEventListener.Get(talk).onClick = Talk;
-		UIEventListener.Get(addFriend).onClick = AddFriend;
+		countFriendTalk.SetActive (false);
+		countGroupTalk.SetActive (false);
+		countAddFriend.SetActive (false);
+	}
+
+	IEnumerator Start(){
+		WWWForm wwwF = new WWWForm();
+		wwwF.AddField("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
+		WWW www = new WWW(LwInit.HttpServerPath+"/GetWaitFriend", wwwF);
+		yield return www;
+		if(www.text != ""){
+			countAddFriend.SetActive (true);
+			string [] unit = www.text.Split(';');
+			countAddFriendNumber.text = (unit.Length-1).ToString();			
+		}
+		www.Dispose ();
+		//--------------------------------------------
+
 	}
 
 	// Custom Methods ======================================================================================================================================
 
-	void Exit(GameObject button){
-		Application.LoadLevel ("MainMenu");
-	}
 
-	void Friend(GameObject button){
-		Application.LoadLevel ("Friend");
-	}
-
-	void Talk(GameObject button){
-		Application.LoadLevel ("Talk");
-	}
-
-	void AddFriend(GameObject button){
-		Application.LoadLevel ("AddFriend");
-	}
 }

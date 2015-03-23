@@ -8,18 +8,22 @@ public class ChooseNumberNGUI : MonoBehaviour {
 	bool sw, sw2;
 	float y1, y2;
 	float move1, move2, move3, move3f;
-	float offset = 0, offset2;
+	float offset = 0 , offset2;
 	float chooseNumberBuffer;
 
 	public float chooseNumber; // 當前數字
 
 	// Unity Override Methods ==============================================================================================================================
-
+	
 //	void OnClick(){
 //		sw = true;
 //		y2 = Input.mousePosition.y;
 //
 //	}
+
+	void Start(){
+
+	}
 
 	void Update () {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -82,14 +86,34 @@ public class ChooseNumberNGUI : MonoBehaviour {
 			offset += move3/1000;
 			GetComponent<UITexture>().uvRect = new Rect(0, offset, 1, 0.1f);
 		}
-		chooseNumberBuffer = ((float.Parse((offset % 1).ToString ("0.0"))) * 10);
-		if(offset < 0){
+		chooseNumberBuffer = ((float.Parse(offset.ToString ("0.0"))) * 10);
+		while(chooseNumberBuffer < 0){
 			chooseNumberBuffer += 10;
 		}
-		if(chooseNumberBuffer == 10){
-			chooseNumberBuffer = 0;
+		while(chooseNumberBuffer >= 10){
+			chooseNumberBuffer -= 10;
 		}
 		chooseNumber = chooseNumberBuffer;
+	}
+
+	public void Set_number(int set){
+
+		offset = set * 0.1f;
+
+//		Debug.Log (set);
+
+		GetComponent<UITexture>().uvRect = new Rect(0, offset , 1, 0.1f);
+
+		chooseNumberBuffer = ((float.Parse((offset % 1).ToString ("0.0"))) * 10);
+
+		while(chooseNumberBuffer < 0){
+			chooseNumberBuffer += 10;
+		}
+		while(chooseNumberBuffer >= 10){
+			chooseNumberBuffer -= 10;
+		}
+		chooseNumber = chooseNumberBuffer;
+
 	}
 
 	// Custom Methods ======================================================================================================================================
