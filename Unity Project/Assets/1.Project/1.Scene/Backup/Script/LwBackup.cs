@@ -20,11 +20,17 @@ public class LwBackup : MonoBehaviour {
 
 	// Unity Override Methods ==============================================================================================================================
 
+
 	void Awake () {
 		UIEventListener.Get (buttonExit).onClick = ButtonExit;
 
 		imgObj.mainTexture = FBInit.FB_USER_IMAGE;
 		userName.text = FBInit.FB_USER_NAME;
+
+
+		foreach(string filePath in Directory.GetFiles(Application.persistentDataPath)) {
+			hs.Add(filePath);
+		}
 
 		GetFile (Application.persistentDataPath);
 		StartCoroutine (UploadFile ());
@@ -55,7 +61,7 @@ public class LwBackup : MonoBehaviour {
 				b = new byte[fs.Length];
 				fs.Read(b, 0, b.Length);
 			}catch(Exception e){
-				err = e.ToString() +"    "+ string.IsNullOrEmpty(path);
+				err = " A : " + e.ToString() +"    "+ string.IsNullOrEmpty(path);
 			}
 			fs.Close();
 			WWWForm wf = new WWWForm();
@@ -66,7 +72,7 @@ public class LwBackup : MonoBehaviour {
 			wf.AddBinaryData("file", b, WWW.EscapeURL(path));
 			WWW w = new WWW(LwInit.HttpServerPath+"/Backup", wf);
 			yield return w;
-			err = w.error;
+			err = " B : " + w.error;
 			w.Dispose();
 			count++;
 			status.text = "備份中..." + (((float)count / (float)hs.Count)*100).ToString("0.0") + "%" ;
@@ -79,13 +85,16 @@ public class LwBackup : MonoBehaviour {
 	HashSet<string> hs = new HashSet<string>();
 
 	void GetFile(string path){
-		foreach(string dirPath in Directory.GetDirectories(path)) {		
-			foreach(string filePath in Directory.GetFiles(dirPath)) {
-				hs.Add(filePath);
+		try{
+			foreach(string dirPath in Directory.GetDirectories(path)) {		
+				foreach(string filePath in Directory.GetFiles(dirPath)) {
+					hs.Add(filePath);
+				}
+				GetFile(dirPath);
 			}
-			GetFile(dirPath);
+		}catch(Exception e){
+			LwError.Show("LwBackup.GetFile() : " + e);
 		}
 	}
-
 
 }

@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwFriend : MonoBehaviour {
 
@@ -23,6 +25,9 @@ public class LwFriend : MonoBehaviour {
 
 	public Texture2D defaultUserTextture;
 
+	public GameObject userInfo;
+	public GameObject userInfoExit;
+	public Transform userInfoFoodRoot;
 
 	void Awake () {
 		AddFriend.SetActive (false);
@@ -32,13 +37,13 @@ public class LwFriend : MonoBehaviour {
 		UIEventListener.Get(buttonExitAddFriend).onClick = ButtonExitAddFriend;
 		UIEventListener.Get(buttonAddFriendOK).onClick = ButtonAddFriendOK;
 		UIEventListener.Get(id_Number).onClick = ID_Number;
-
-
+		UIEventListener.Get(userInfoExit).onClick = UserInfoExit;
 	}
 
 	IEnumerator Start (){
+
 		WWWForm wwwF = new WWWForm();
-		wwwF.AddField("id", PlayerPrefs.GetString ("ID"));
+		wwwF.AddField("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
 		
 		WWW www = new WWW(LwInit.HttpServerPath+"/GetFriend", wwwF);
 		yield return www;
@@ -52,6 +57,8 @@ public class LwFriend : MonoBehaviour {
 			f.transform.localScale = Vector3.one;
 			f.transform.localPosition = new Vector3(0, 170 - i * 110, 0);
 			LwFriend_User fu = f.GetComponent<LwFriend_User>();
+			fu.userInfo = userInfo;
+			fu.userInfoFoodRoot = userInfoFoodRoot;
 			fu.friendID = id;
 			fu.name.text = name;
 			fu.rankDay.text = 10-i + " Day";
@@ -71,7 +78,12 @@ public class LwFriend : MonoBehaviour {
 		sv.OnScrollBar ();
 	}
 
-
+	void UserInfoExit(GameObject obj){
+		for(int i = 0; i < userInfoFoodRoot.childCount; i++){
+			Destroy(userInfoFoodRoot.GetChild(i).gameObject);
+		}
+		userInfo.SetActive (false);
+	}
 
 //	IEnumerator
 ////	void 
@@ -181,7 +193,7 @@ public class LwFriend : MonoBehaviour {
 
 	IEnumerator UploadData(){		
 		WWWForm wwwF = new WWWForm();
-		wwwF.AddField("id", PlayerPrefs.GetString ("ID"));
+		wwwF.AddField("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
 		wwwF.AddField("friend_id", tsk.text); // 
 		
 		WWW www = new WWW(LwInit.HttpServerPath+"/AddFriend", wwwF);

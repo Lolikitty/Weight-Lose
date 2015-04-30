@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwUser3 : MonoBehaviour {
 
@@ -22,17 +24,26 @@ public class LwUser3 : MonoBehaviour {
 	// Unity Override Methods ==============================================================================================================================
 
 	void Awake () {
-		if(PlayerPrefs.GetString ("name")==""){
-			PlayerPrefs.SetString ("name", "請輸入姓名");
-			PlayerPrefs.Save ();
-		}
 
+		uiName.text = "";
 
-		uiName.text = PlayerPrefs.GetString ("name");
+		//try{
+		string JsonUserDataPath = Application.persistentDataPath + "/User.txt";
+		object data = null;
+		if(File.Exists(JsonUserDataPath)){
+			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonUserDataPath));
+			try{
+					uiName.text = obj["Name"].ToString();
+			}catch{
+			}
+		}	
 
 		UIEventListener.Get(buttonChangeImage).onClick = ButtonChangeImage;
 		UIEventListener.Get(buttonChangeName).onClick = ButtonChangeName;
 		UIEventListener.Get(buttonOK).onClick = ButtonOK;
+		//}catch(Exception e){
+		//	LwError.Show("error:" + e.ToString());
+		//}
 	}
 
 	IEnumerator Start(){
@@ -62,11 +73,14 @@ public class LwUser3 : MonoBehaviour {
 	IEnumerator UploadData(){
 
 		WWWForm wwwF = new WWWForm();
-		wwwF.AddField("id", PlayerPrefs.GetString ("ID"));
-		wwwF.AddField("name", uiName.text);
+		wwwF.AddField("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
+		wwwF.AddField("name", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["Name"].ToString());
 				
 		WWW www = new WWW(LwInit.HttpServerPath+"/UserName", wwwF);
 		yield return www;
+
+
+
 	}
 
 	void ButtonOK(GameObject button){
@@ -84,12 +98,24 @@ public class LwUser3 : MonoBehaviour {
 		if(uiName.text.IndexOf("'") != -1) return;
 		if(uiName.text.IndexOf("|") != -1) return;
 
-		PlayerPrefs.SetString ("name", uiName.text);
-		PlayerPrefs.Save ();
+		string JsonUserDataPath = Application.persistentDataPath + "/User.txt";
+		object data = null;
+		if(File.Exists(JsonUserDataPath)){
+			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonUserDataPath));
+			obj["Name"] = uiName.text;
+			data = obj;
+		}else{
+			data = new {
+				Name = uiName.text
+			};
+		}
+		File.WriteAllText(JsonUserDataPath, JsonConvert.SerializeObject(data,Formatting.Indented));
+
+
 
 		StartCoroutine (UploadData());
 
-		Application.LoadLevel ("SetBirthday");
+		//Application.LoadLevel ("SetBirthday");
 	}
 
 }

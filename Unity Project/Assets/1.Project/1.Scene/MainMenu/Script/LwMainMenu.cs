@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.IO;
 using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Collections.Generic;
 
 public class LwMainMenu : MonoBehaviour {
 
@@ -11,6 +14,7 @@ public class LwMainMenu : MonoBehaviour {
 	public UILabel AddFoodFinish_Title;
 	public UILabel AddFoodFinish_Kal;
 	public UILabel WeightLoss;
+	public UISlider WeightLossSlider;
 
 	public UITexture AddFoodFinish_Food;
 	public Texture2D defaultFood;
@@ -28,7 +32,28 @@ public class LwMainMenu : MonoBehaviour {
 		UIEventListener.Get(buttonAddFoodFinishExit).onClick = ButtonAddFoodFinishExit;
 
 
-		WeightLoss.text = (float.Parse (PlayerPrefs.GetString ("WeightFirst")) - float.Parse (PlayerPrefs.GetString ("WeightTarget"))).ToString ("0.0");
+		string firstW = "0";
+		string goalW = "0";
+		string nowW = "0";
+		string JsonUserDataPath = Application.persistentDataPath + "/User.txt"; //
+		if (File.Exists (JsonUserDataPath)) {
+			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonUserDataPath));
+			
+			firstW = obj ["WeightInit"].ToString ();
+			goalW = obj ["WeightTarget"].ToString ();
+			SaveWeight ss = new SaveWeight();
+			nowW = ss.GetLastDayWeight(DateTime.Now).ToString();
+		}
+
+
+		float nowKG = float.Parse (nowW);
+		float WeightFirst = float.Parse (firstW);
+		float WeightTarget = float.Parse (goalW);
+
+
+		WeightLoss.text = (nowKG-WeightTarget).ToString ("0.0");
+
+		WeightLossSlider.value = 1 - ((nowKG - WeightTarget) / (WeightFirst - WeightTarget));
 	}
 
 	IEnumerator Start () {
@@ -47,7 +72,6 @@ public class LwMainMenu : MonoBehaviour {
 
 			WWW www = new WWW(LwInit.HttpServerPath+"/SetBirthdayAndWeight", wwwF);
 			yield return www;
-
 		}
 
 		

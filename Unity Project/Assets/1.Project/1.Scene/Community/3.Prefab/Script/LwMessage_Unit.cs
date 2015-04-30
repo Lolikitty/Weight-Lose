@@ -7,4 +7,16 @@ public class LwMessage_Unit : MonoBehaviour {
 	public UITexture userImg;
 	public UILabel message;
 
+
+
+	public string NAME = "";
+
+	void OnGUI(){
+//		GUILayout.Label (name.text);
+	}
+
+	void Start(){
+		name.text = NAME;
+	}
+
 }

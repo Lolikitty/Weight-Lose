@@ -14,7 +14,7 @@ public class ReadBackup : MonoBehaviour {
 	string [] data = null;
 
 	// Unity Override Methods ==============================================================================================================================
-
+#if !UNITY_EDITOR
 	void Awake () {
 		UIEventListener.Get (buttonExit).onClick = ButtonExit;
 		imgObj.mainTexture = FBInit.FB_USER_IMAGE;
@@ -79,5 +79,5 @@ public class ReadBackup : MonoBehaviour {
 	void ButtonExit(GameObject obj){
 		Application.LoadLevel ("MainMenu");
 	}
-
+#endif
 }

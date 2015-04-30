@@ -11,33 +11,17 @@ public class ChooseNumber : MonoBehaviour {
 	float offset = 0, offset2;
 	float chooseNumberBuffer;
 
-	//*修改後*
-	private ChooseNumber chScript;
-	private GameObject ChooseNumberXX;
-	//*-*
-
 	public float chooseNumber; // 當前數字
 
 	// Unity Override Methods ==============================================================================================================================
 
-	/*
-	//*修改後*
-	void Awake(){
-		f ();
+	public void SetNumber(int number){
+		chooseNumber = number;
+		offset = (float)number / 10.0f;
+		renderer.material.mainTextureOffset = new Vector2(0, offset);
 	}
 
-	void Update(){
-		f ();
-	}
-
-	void f() {
-	//*-*
-	*/
-
-	//*原本*
-	void Update(){
-	//-*-
-
+	void Update () {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		
 		if(Physics.Raycast(ray,out hit)){
@@ -106,66 +90,6 @@ public class ChooseNumber : MonoBehaviour {
 			chooseNumberBuffer = 0;
 		}
 		chooseNumber = chooseNumberBuffer;
-
-
-		//*修改後*
-		//判斷YYYY MM DD 日期是否合法
-		/*
-		switch(this.gameObject.name){
-		case "ChooseNumberY1":
-			if(chooseNumber > 2.0f)chooseNumber = 2.0f;
-			else if(chooseNumber < 1.0f)chooseNumber = 1.0f;
-			//處理捲動的數字
-			//...
-			break;
-		case "ChooseNumberY2":
-			ChooseNumberXX = Instantiate (ChooseNumberY1, new Vector3 (6.2f, 5.35f, -0.1f), Quaternion.identity) as GameObject;
-			chScript = ChooseNumberXX.transform.GetComponent<ChooseNumber> ();
-
-			if(ch.GetComponent<ChooseNumber>(ChooseNumberY1).chooseNumber == 2.0f )//當為西元2xxx，強制Y2為0
-				chooseNumber = 0;
-
-			//處理捲動的數字
-			//...
-			break;
-			
-		case "ChooseNumberY3":
-			if(GameObject.GetComponent<ChooseNumber>(ChooseNumberY1).chooseNumber == 2.0f 
-			   && chooseNumber > 1.0f)//當為西元20xx，Y3 > 1，強制Y3為 1
-				chooseNumber = 1.0f;
-			//處理捲動的數字
-			//...
-			break;
-		case "ChooseNumberY4":
-			if(GameObject.GetComponent<ChooseNumber>(ChooseNumberY1).chooseNumber == 2.0f 
-			   && GameObject.GetComponent<ChooseNumber>(ChooseNumberY3).chooseNumber == 1.0f
-			   && chooseNumber > 4.0f)//當為西元201x，Y4 > 4，強制Y4為 4
-				chooseNumber = 4.0f;
-			//處理捲動的數字
-			//...
-			break;
-		case "ChooseNumberM1":
-			//處理捲動的數字
-			//...
-			break;
-		case "ChooseNumberM2":
-			//處理捲動的數字
-			//...
-			break;
-		case "ChooseNumberD1":
-			//處理捲動的數字
-			//...
-			break;
-		case "ChooseNumberD2":
-			//處理捲動的數字
-			//...
-			break;
-		default:
-			print ("ChooseNumber is error");
-
-		}
-		//*-*
-		*/
 	}
 
 	// Custom Methods ======================================================================================================================================
