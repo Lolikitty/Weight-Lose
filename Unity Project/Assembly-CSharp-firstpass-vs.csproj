@@ -130,19 +130,19 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="IFacebook">
- <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
  </Reference>
  <Reference Include="HOTween">
- <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Graph_Maker/HOTween/Plugins/HOTween.dll</HintPath>
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Graph_Maker/HOTween/Plugins/HOTween.dll</HintPath>
  </Reference>
  <Reference Include="SampleClassLibrary">
- <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/JsonDotNet/Examples/Tests/TestModels/SampleClassLibrary.dll</HintPath>
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/JsonDotNet/Examples/Tests/TestModels/SampleClassLibrary.dll</HintPath>
  </Reference>
  <Reference Include="P31RestKit">
- <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>
  </Reference>
  <Reference Include="Vectrosity">
- <HintPath>/Users/Loli/Desktop/iOS/Weight-Lose-NN/Weight-Lose-NN/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

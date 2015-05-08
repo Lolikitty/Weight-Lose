@@ -14,6 +14,11 @@ public class FBInit : MonoBehaviour {
 	// Unity Override Methods ==============================================================================================================================
 
 	void Awake(){
+
+		#if UNITY_EDITOR
+			return;
+		#endif
+
 		UIEventListener.Get (buttonBackup).onClick = FBLogInButton;
 		UIEventListener.Get (buttonReadBackup).onClick = FBLogInButton;
 

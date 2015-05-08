@@ -21,18 +21,25 @@ public class ChooseFood : MonoBehaviour {
 
 	void OnClick () {
 
-		ChooseFood2.bgs.Clear ();
+		LwFoodChoose.isDIY = false;
+
+//		
+//		ChooseFood2.bgs.Clear ();
 
 		ShowBG ();
 		ShowFood ();
 
 		diyAdd.SetActive (false);
 		fsv2.gameObject.SetActive (true);
+
+
 	}
 
 	void ShowBG(){
 		foreach(GameObject g in bgs){
-			g.SetActive(false);
+			if(g!=null){
+				g.SetActive(false);
+			}
 		}
 		bg.SetActive (true);
 	}
@@ -48,6 +55,7 @@ public class ChooseFood : MonoBehaviour {
 			g.transform.localScale = Vector3.one;
 			g.transform.localPosition = new Vector3(22, y);
 			g.GetComponent<UILabel>().text = foods[i]["Name"].ToString();
+			g.GetComponent<ChooseFood2>().kal = int.Parse(foods[i]["Kal"].ToString());
 		}
 
 		fsv2.OnScrollBar ();

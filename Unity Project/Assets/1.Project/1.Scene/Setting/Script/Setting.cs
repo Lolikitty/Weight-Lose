@@ -54,6 +54,7 @@ public class Setting : MonoBehaviour {
 
 	void Start () {
 
+//		NativePlugin.RegisterForNotifications();
 
 		try{
 
@@ -75,14 +76,8 @@ public class Setting : MonoBehaviour {
 		}
 
 		script = GameObject.Find ("Script");
-		
-		//modify by DemonicKrace at 2015/4/3 14:10
-		//start
-		script_sc = new LwInit();
-		//end
-
 		script_sc = script.GetComponent<LwInit>();
-		
+
 
 		if (script_sc.go_clock == true) {
 			Bg_alarm.spriteName = "open";

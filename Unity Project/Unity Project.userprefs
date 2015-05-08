@@ -1,8 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../Downloads/CMCar/CMCar/Assets/Sign/SignIn.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Project/1.Scene/Init/Script/ConnectedCheck.cs">
     <Files>
-      <File FileName="../../../../../Downloads/CMCar/CMCar/Assets/Sign/SignIn.cs" Line="36" Column="7" />
+      <File FileName="Assets/1.Project/1.Scene/FoodChoose/Script/LwFoodChoose.cs" Line="288" Column="39" />
+      <File FileName="Assets/1.Project/1.Scene/Setting/Script/Setting.cs" Line="120" Column="4" />
+      <File FileName="Assets/1.Project/1.Scene/FoodChoose/Script/ChooseFood.cs" Line="1" Column="1" />
+      <File FileName="Assets/1.Project/1.Scene/FoodCamera2/FoodCamera2/LwFoodCamera2.cs" Line="170" Column="28" />
+      <File FileName="Assets/1.Project/1.Scene/MainMenu/Script/LwMainMenu.cs" Line="123" Column="22" />
+      <File FileName="Assets/1.Project/1.Scene/Setting/Script/FBInit.cs" Line="19" Column="3" />
+      <File FileName="Assets/1.Project/1.Scene/Init/Script/LwInit.cs" Line="224" Column="21" />
+      <File FileName="Assets/1.Project/2.Script/CheckConect.cs" Line="20" Column="1" />
+      <File FileName="Assets/1.Project/1.Scene/Init/Script/ConnectedCheck.cs" Line="56" Column="69" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

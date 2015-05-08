@@ -23,12 +23,14 @@ public class LwFoodChoose : MonoBehaviour {
 	public UILabel findText;
 	public UIInput input;
 
-	List<string> find = new List<string>();	
-	bool buttonLuck = false;	
+	List<string> find = new List<string>();
+	bool buttonLuck = false;
 	GameObject bgDIY;
 	string findTemp = "";
-	bool isDIY = false;
+	public static bool isDIY = true;
 	JArray ja;
+
+	public static int TODAY_SURPLUS_KAL = 0;
 
 	void Awake () {
 		UIEventListener.Get(buttonFoodCamera).onClick = ButtonFoodCamera;
@@ -37,11 +39,14 @@ public class LwFoodChoose : MonoBehaviour {
 		UIEventListener.Get(buttonDIY_Add).onClick = ButtonDIY_Add;
 		UIEventListener.Get(buttonFoodDIY).onClick = ButtonFoodDIY;
 		bgDIY = buttonFoodDIY.transform.GetChild(0).gameObject;
-		bgDIY.SetActive (false);
+		bgDIY.SetActive (true);
 		buttonDIY_Add.SetActive (true);
-		#if UNITY_ANDROID
 		EtceteraAndroid.initTTS();
-		#endif
+		ReadMyFoodMenu ();
+
+		isDIY = true;
+
+		TODAY_SURPLUS_KAL = GetTodaySurplusKal ();
 	}
 
 	void Start(){
@@ -89,8 +94,58 @@ public class LwFoodChoose : MonoBehaviour {
 			}
 		}else{
 			root.SetActive(true);
+
+			for(int i = 0;i<findSV.transform.childCount;i++){
+				Destroy(findSV.transform.GetChild(i).gameObject);
+			}
 		}
+
 		findTemp = input.value;
+	}
+
+	int GetTodaySurplusKal(){
+		string JsonFoodDataPath = Application.persistentDataPath + "/Food.txt";
+		if(!File.Exists(JsonFoodDataPath)){
+			return 2000;
+		}
+
+		JArray ja = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath)) ["Food"] as JArray;
+
+		int AllKal = 0;
+
+		for(int i = 0; i < ja.Count; i++){
+			DateTime dt = (DateTime) ja[i]["Date"];
+			if(dt.Date == DateTime.Today){
+				AllKal+=int.Parse(ja[i]["Kal"].ToString());		
+			}
+		}
+		return 2000 - AllKal;
+	}
+
+	void ReadMyFoodMenu(){
+
+		string MyFoodMenuPath = Application.persistentDataPath + "/MyFoodMenu.txt";
+
+		if(!File.Exists(MyFoodMenuPath)){
+			return;
+		}
+
+		string json = File.ReadAllText (MyFoodMenuPath);
+		JArray ja = JsonConvert.DeserializeObject<JObject> (json) ["Food"] as JArray;
+		for(int i = 0, y = 40; i < ja.Count; i++, y -= 70){
+			string name = ja[i]["Name"].ToString();
+			string kal = ja[i]["Kal"].ToString();
+			string jpgPath = ja[i]["JPGPath"].ToString();
+//			string pngPath = ja[i]["PNGPath"].ToString();
+
+			GameObject g = Instantiate(food2) as GameObject;
+			g.transform.parent = diysv.transform;
+			g.transform.localPosition = new Vector3(21.5f, y);
+			g.transform.localScale = Vector3.one;
+			g.GetComponent<UILabel>().text = name;
+			g.GetComponent<ChooseFood2>().jpgPath = jpgPath;
+			g.GetComponent<ChooseFood2>().kal = int.Parse(kal);
+		}
 	}
 
 	void ButtonDIY_Add(GameObject button){
@@ -99,19 +154,32 @@ public class LwFoodChoose : MonoBehaviour {
 		Application.LoadLevel ("FoodCamera");
 	}
 
-	void Button_Search(GameObject button){
-		#if UNITY_ANDROID
-		EtceteraAndroid.promptForPictureFromAlbum("a");
-		#endif
-	}
+//	void Button_Search(GameObject button){
+//		EtceteraAndroid.promptForPictureFromAlbum("a");
+//	}
 
 	void ButtonFoodDIY(GameObject button){
+
+		foreach(GameObject g in ChooseFood.bgs){
+			if(g != null){
+				g.SetActive(false);
+			}
+		}
+
+		foreach(GameObject g in ChooseFood2.bgs){
+			if(g != null){
+				g.SetActive(false);
+			}
+		}
+
+
+		isDIY = true;
 		buttonDIY_Add.SetActive (true);
 		fsv2.gameObject.SetActive (false);
-		foreach(GameObject g in ChooseFood.bgs){
-			g.SetActive(false);
-		}
+
 		bgDIY.SetActive (true);
+
+
 
 //		string [] files = Directory.GetFiles(Application.persistentDataPath+"/Food","*.info");
 //		string [] filesJPG = Directory.GetFiles(Application.persistentDataPath+"/Food","*.jpg");
@@ -180,7 +248,49 @@ public class LwFoodChoose : MonoBehaviour {
 //			LwMainMenu.IsChooseFoodFinish_Default = true;
 //		}
 //		Application.LoadLevel ("MainMenu");
+
+		print (ChooseFood2.CHOOSE_FOOD);
+
+		LwFoodCamera2.FoodName = ChooseFood2.CHOOSE_FOOD;
+
+
+//		LwFoodCamera2.IS_FAST_CHOOSE_FOOD = true;
+
+		if(isDIY){
+			LwMainMenu.IsChooseFoodFinish_DIY = true;
+		}else{
+			LwMainMenu.IsChooseFoodFinish_Default = true;
+		}
+
+		StartCoroutine (ReadImage());
+
+		print (isDIY);
+
+
+
+
 	}
+
+	IEnumerator ReadImage(){
+
+		string path = "";
+
+		if(isDIY){
+			path = "file://"+Application.persistentDataPath + ChooseFood2.JPG_PATH;
+		}else{
+			path = "file://"+Application.persistentDataPath + "/Image/FoodMenu/defaultFood.jpg";
+		}
+
+		print (path);
+
+		WWW w = new WWW (path);
+		yield return w;
+		LwFoodCamera2.FOOD_IMAGE = w.texture;
+		LwMainMenu.defaultFood = w.texture;
+		w.Dispose ();
+		Application.LoadLevel ("FoodCamera2");
+	}
+
 
 	void ButtonFoodCamera(GameObject button){
 		Application.LoadLevel ("FoodCamera");
@@ -188,6 +298,10 @@ public class LwFoodChoose : MonoBehaviour {
 
 	void ButtonCancel(GameObject button){
 		Application.LoadLevel ("MainMenu");
+	}
+
+	void OnGUI(){
+		GUILayout.Label ("Kal : "+TODAY_SURPLUS_KAL);
 	}
 
 

@@ -22,8 +22,9 @@ public class LwFoodCamera2 : MonoBehaviour {
 		UIEventListener.Get(buttonDone).onClick = ButtonDone;
 		UIEventListener.Get(buttonCancel).onClick = ButtonCancel;
 
-		if(LwFoodCamera.isSDImage){
-			ImageOgject.transform.localEulerAngles = Vector3.zero;
+		if(LwMainMenu.IsChooseFoodFinish_DIY || LwMainMenu.IsChooseFoodFinish_Default){
+			name.text = FoodName;
+			ImageOgject.renderer.material.mainTexture = FOOD_IMAGE;
 		}
 	}
 
@@ -32,6 +33,10 @@ public class LwFoodCamera2 : MonoBehaviour {
 	TouchScreenKeyboard tsk;
 	public static string FoodName;
 	public static string FoodKal;
+
+	public static Texture2D FOOD_IMAGE;
+
+//	public static bool IS_FAST_CHOOSE_FOOD = false;
 
 	void Update(){
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -67,14 +72,34 @@ public class LwFoodCamera2 : MonoBehaviour {
 		if(name.text.IndexOf("\"") != -1)return;
 		if(name.text.IndexOf("'") != -1)return;
 
-		StartCoroutine (ButtonDone2());
+
+		string kal = "" + number1.chooseNumber + number2.chooseNumber + number3.chooseNumber + number4.chooseNumber;
+		kal = int.Parse (kal).ToString ();
+		FoodKal = kal;
+
+		if(LwMainMenu.IsAddFood){
+			SaveImage(LwFoodCamera.texture, "/Image/MyFoodMenu/");
+			JsonMyFoodMenuSave(name.text, FoodKal, jpgPath, pngPath);
+		}else if(LwMainMenu.IsChooseFoodFinish_DIY || LwMainMenu.IsChooseFoodFinish_Default){
+//			LwMainMenu.IsAddFood = true;
+			SaveImage(LwMainMenu.defaultFood, "/Image/Food/");
+			JsonFoodSave (DateTime.Now, name.text, FoodKal, jpgPath, pngPath);
+		}else{
+			SaveImage(LwFoodCamera.texture, "/Image/Food/");
+			JsonFoodSave (DateTime.Now, name.text, FoodKal, jpgPath, pngPath);
+//			StartCoroutine (ButtonDone2()); // Send To Web
+		}
+		Application.LoadLevel("MainMenu");
 	}
 
-	IEnumerator ButtonDone2(){
+	byte[] bJPG;
+	byte[] bPNG;
+	byte[] bFood;
+	string imgName;
+	string jpgPath;
+	string pngPath;
 
-		LwMainMenu.IsAddFood = true;
-		
-		Texture2D texture = LwFoodCamera.texture;
+	void SaveImage(Texture2D texture, string imgPath){
 		
 		int wh = Mathf.Min (texture.width, texture.height);
 		
@@ -96,7 +121,6 @@ public class LwFoodCamera2 : MonoBehaviour {
 		}
 		newTexture.Apply ();
 		
-		
 		Texture2D newTexture2 = new Texture2D (wh, wh);
 		
 		for(int x = 0; x < wh; x++){
@@ -113,91 +137,55 @@ public class LwFoodCamera2 : MonoBehaviour {
 		
 		newTexture2.Apply ();
 		
-		//		string nowDate = DateTime.Now.ToString ("yyyy-MM-dd");
-		//		string nowPath = Application.persistentDataPath + "/" + nowDate;
-		//		
-		//		if(!Directory.Exists(nowPath)){
-		//			Directory.CreateDirectory(nowPath);
-		//		}
-		
-		//		int i = 1;
-		//		
-		//		while(File.Exists(nowPath + "/" + i + ".png")){
-		//			i++;
-		//		}
-		
 		TextureScale.Bilinear (newTexture2, 128, 128);
 		
-		string kal = "" + number1.chooseNumber + number2.chooseNumber + number3.chooseNumber + number4.chooseNumber;
-		kal = int.Parse (kal).ToString ();
-		
-		print (kal);
-		
-		
-		
+		//		string kal = "" + number1.chooseNumber + number2.chooseNumber + number3.chooseNumber + number4.chooseNumber;
+		//		kal = int.Parse (kal).ToString ();
+		//		
+		//		print (kal);	
 		
 		FoodName = name.text;
-		FoodKal = kal;
-		
-		//		#if UNITY_EDITOR
-		//		System.IO.File.WriteAllBytes("image1.png", texture.EncodeToPNG());
-		//		System.IO.File.WriteAllBytes("image2.png", newTexture.EncodeToPNG());
-		//		System.IO.File.WriteAllBytes("image3.png", newTexture2.EncodeToPNG());
-		//		System.IO.File.WriteAllBytes("image4.png", MarkTexture.EncodeToPNG());
-		//		#endif
-		
-		string imgPath = "/Image/Food/" ;
-		string imgName = DateTime.Now.ToFileTimeUtc() + "";
+		//		FoodKal = kal;
+
+		imgName = DateTime.Now.ToFileTimeUtc() + "";
 		
 		string imgDir = Application.persistentDataPath + imgPath;
 		
 		if(!Directory.Exists(imgDir)) Directory.CreateDirectory(imgDir);
 		
-		//		if(LwMainMenu.IsChooseAddFood){
-		//			i = 1;
-		//			
-		//			while(File.Exists(Application.persistentDataPath+"/Food" + "/" + i + ".png")){
-		//				i++;
-		//			}
-		//
-		////			System.IO.File.WriteAllBytes(Application.persistentDataPath+"/Food" + "/" + i + ".png", newTexture2.EncodeToPNG());
-		////			System.IO.File.WriteAllBytes(Application.persistentDataPath+"/Food" + "/" + i + ".jpg", texture.EncodeToJPG());
-		////			System.IO.File.Create (Application.persistentDataPath+"/Food" + "/" + i + "._" + kal + "_" + name.text + "_.info");
-		//		}else{
-		////			System.IO.File.WriteAllBytes(nowPath + "/" + i + ".png", newTexture2.EncodeToPNG());
-		////			System.IO.File.WriteAllBytes(nowPath + "/" + i + ".jpg", texture.EncodeToJPG());
-		////			
-		////			System.IO.File.Create (nowPath + "/" + i + "._" + kal + "_" + name.text + "_.info");
-		//		}
+		jpgPath = imgPath + imgName + ".jpg";
+		pngPath = imgPath + imgName + ".png";
 		
-		string jpgPath = imgPath + imgName + ".jpg";
-		string pngPath = imgPath + imgName + ".png";
-
-		byte [] bJPG = texture.EncodeToJPG ();
-		byte [] bPNG = newTexture2.EncodeToPNG();
-
+		bJPG = texture.EncodeToJPG ();
+		bPNG = newTexture2.EncodeToPNG();
+		
 		System.IO.File.WriteAllBytes(Application.persistentDataPath + jpgPath, bJPG);
 		System.IO.File.WriteAllBytes(Application.persistentDataPath + pngPath, bPNG);
 		
-		JsonFoodSave (DateTime.Now, name.text, kal, jpgPath, pngPath);
+
+		
+
+	}
+
+	IEnumerator ButtonDone2(){
 
 		FileStream fs = new FileStream (Application.persistentDataPath + "/Food.txt", FileMode.Open);
-		byte [] bFood = new byte[fs.Length];
+		bFood = new byte[fs.Length];
 		fs.Read (bFood, 0, bFood.Length);
 
 		WWWForm f = new WWWForm ();
 		f.AddField ("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
 		f.AddBinaryData ("jpg", bJPG, imgName + ".jpg");
 		f.AddBinaryData ("png", bPNG, imgName + ".png");
-		f.AddBinaryData ("txt", bFood, "Food.jsp");
+		f.AddBinaryData ("txt", bFood, "Food.txt");
 		WWW w = new WWW (LwInit.HttpServerPath + "/UploadFood", f);
 		yield return w;
 
-		ToMainMenu ();
+		Application.LoadLevel("MainMenu");
 	}
 
 	void ToMainMenu(){
-		Application.LoadLevel("Init");
+
 	}
 
 	void ButtonCancel(GameObject button){
@@ -226,6 +214,33 @@ public class LwFoodCamera2 : MonoBehaviour {
 		File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
 	}
 
+	void JsonMyFoodMenuSave(string name, string kal, string jpgPath, string pngPath){
+		string JsonFoodDataPath = Application.persistentDataPath + "/MyFoodMenu.txt";
+		
+		var food = new {
+			Name = name,
+			Kal = kal,
+			JPGPath = jpgPath,
+			PNGPath = pngPath
+		};
+		
+		List<object> Food = null;
+		
+		if(File.Exists(JsonFoodDataPath)){
+			Food = (JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonFoodDataPath))["Food"] as JArray).ToObject<List<object>>();
+			Food.Add(food);
+		}else{
+			Food = new List<object> (){food};
+		}
+		File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
+	}
+
+
+
+//	void OnGUI () {
+//		GUILayout.Label ("IsChooseFoodFinish_DIY : " + LwMainMenu.IsChooseFoodFinish_DIY);
+//		GUILayout.Label ("IsChooseFoodFinish_Default : " + LwMainMenu.IsChooseFoodFinish_Default);
+//	}
 
 
 }
