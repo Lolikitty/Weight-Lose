@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,14 +55,14 @@ public class Backup extends HttpServlet {
             return null;
         }
 
-        System.out.println(path);
         int i = path.lastIndexOf("/");
         String[] s = path.substring(0, i).split("/files/");
-        if (s.length > 0) {
+        if (s.length == 1) {
+            return "";
+        } else if (s.length == 2) {
             return s[1];
-        } else {
-            return null;
         }
+        return null;
     }
 
     private String extractFileName(Part part) {

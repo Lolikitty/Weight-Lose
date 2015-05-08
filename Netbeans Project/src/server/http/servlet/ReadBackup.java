@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
+import server.config.Config;
 import static server.config.Config.DIR_SERVER_DATA;
 import static server.config.Config.SERVER_PATH;
 
@@ -53,7 +54,9 @@ public class ReadBackup extends HttpServlet {
                         a.add(data);
                     }
                 } else {
-                  a.add(sp.split("Netbeans Project")[1].replaceAll("\\\\", "/"));             
+                    String [] s = Config.SERVER_PATH.replaceAll("\\\\", "/").split("/");
+                    
+                  a.add(sp.split(s[s.length-1])[1].replaceAll("\\\\", "/"));             
                 }
             }
             return a;

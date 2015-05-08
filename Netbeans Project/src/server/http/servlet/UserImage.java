@@ -22,8 +22,15 @@ public class UserImage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+        
+        if(id.equals("") || id == null){
+            System.out.println("Error : ID = null or \"\"");
+            return ;
+        }
+        
         Part p = request.getPart("file");
         p.write(DIR_SERVER_DATA + "/" + id + "/User.png");
+        System.out.println("ID : " + id);
     }
 
 }

@@ -12,11 +12,13 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import server.config.Config;
+import server.thread.GroupTalkServer;
 import server.thread.TalkServer;
 
 /**
@@ -93,6 +95,7 @@ public class Frame implements Runnable {
                             HttpServer.SERVER.start();
                             labelServerStatus.setText("伺服器狀態：已啟動");
                             Config.SERVER_IS_RUN = true;
+                            new Thread(new GroupTalkServer()).start();
                             new Thread(new TalkServer()).start();
                             HttpServer.SERVER.join();
                         } catch (Exception ex) {
@@ -149,8 +152,10 @@ public class Frame implements Runnable {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 try {
-                    Desktop.getDesktop().browse(new URL("file://" + Config.SERVER_PATH).toURI());
+                    String oPath = Config.SERVER_PATH;
+                    Desktop.getDesktop().browse(new URL("file://" + oPath).toURI());
                 } catch (URISyntaxException | IOException ex) {
+                    System.out.println(ex);
                 }
             }
         });

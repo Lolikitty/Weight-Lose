@@ -64,3 +64,14 @@ CREATE TABLE group_msg (
 	time			timestamp
 );
 
+CREATE TABLE teacher (
+	id                      text,
+        phone                      text,
+        line                     text,
+        skype                     text,
+        smallsin                  text,
+	time			timestamp
+);
+
+
+

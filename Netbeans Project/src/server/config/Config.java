@@ -16,7 +16,8 @@ public final class Config {
 
     public static String HTTP_SERVER_IP;
     public static final int HTTP_SERVER_PORT = 4040;
-    public static final int TCP_SERVER_PORT = 4041;
+    public static final int TCP_GROUP_TALK_SERVER_PORT = 4041;
+    public static final int TCP_TALK_SERVER_PORT = 4042;
     public static final String SERVER_PATH = System.getProperty("user.dir");
     public static final String DB_DRIVER = "org.postgresql.Driver";
     public static final String DB_URL = "jdbc:postgresql://localhost:5432/weight_loss_db";

@@ -1,0 +1,218 @@
+{
+  "Food": [
+    {
+      "Name": "中式早餐",
+      "Foods": [
+        {
+          "Name": "蘿莉",
+          "Kal": "500",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "油條",
+          "Kal": "400",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "豆漿",
+          "Kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "蛋餅",
+          "Kal": "450",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "飯糰",
+          "Kal": "550",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "荷包蛋",
+          "Kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "包子",
+          "Kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "刈包",
+          "Kal": "450",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "饅頭",
+          "Kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "燒餅",
+          "Kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "小籠包",
+          "Kal": "600",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "燒賣",
+          "Kal": "600",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "Name": "西式早餐",
+      "Foods": [
+        {
+          "Name": "鬆餅",
+          "Kal": "500",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "牛奶",
+          "Kal": "400",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "麥片",
+          "Kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "吐司",
+          "Kal": "450",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "Name": "中式午餐",
+      "Foods": [
+        {
+          "Name": "牛肉麵",
+          "Kal": "900",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "Name": "西式午餐",
+      "Foods": [
+        {
+          "Name": "麥當勞",
+          "Kal": "900",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "Name": "中式晚餐",
+      "Foods": [
+        {
+          "Name": "港式飲茶",
+          "Kal": "700",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "Name": "西式晚餐",
+      "Foods": [
+        {
+          "Name": "義大利麵",
+          "Kal": "800",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "Name": "中式點心",
+      "Foods": [
+        {
+          "Name": "麥芽糖",
+          "Kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    },
+    {
+      "Name": "西式點心",
+      "Foods": [
+        {
+          "Name": "巧克力",
+          "Kal": "600",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "紅茶",
+          "Kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "咖啡",
+          "Kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "藍山",
+          "Kal": "300",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "曼特寧",
+          "Kal": "400",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "巴西",
+          "Kal": "450",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "卡布奇諾",
+          "Kal": "350",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        },
+        {
+          "Name": "拿鐵",
+          "Kal": "500",
+          "JPGPath": "/",
+          "PNGPath": "/"
+        }
+      ]
+    }
+  ]
+}
