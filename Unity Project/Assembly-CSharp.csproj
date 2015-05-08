@@ -74,6 +74,8 @@
      <Compile Include="Assets\1.Project\1.Scene\FoodHistory\Script\LwFoodHistory.cs" />
      <Compile Include="Assets\1.Project\1.Scene\FoodInformation\Script\LwFoodInformation.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Init\Script\ConnectedCheck.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Init\Script\DownloadFoodMenu.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\Init\Script\Init.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Init\Script\InitToScene.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Init\Script\LwInit.cs" />
      <Compile Include="Assets\1.Project\1.Scene\MainMenu\Prefab\Script\Food.cs" />
