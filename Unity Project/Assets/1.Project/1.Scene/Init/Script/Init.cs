@@ -38,6 +38,12 @@ public class Init : MonoBehaviour {
 
 	IEnumerator InitMix () {
 
+		using (WWW w = new WWW (LwInit.HttpServerPath + "/FoodMenu.txt")) {
+			yield return w;
+			string JsonFoodDataPath = Application.persistentDataPath + "/FoodMenu.txt";
+			File.WriteAllBytes(JsonFoodDataPath, w.bytes);
+		}
+
 		string headPath = Application.persistentDataPath + "/User.png";
 
 		if (File.Exists (headPath)) {
