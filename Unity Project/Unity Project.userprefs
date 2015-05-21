@@ -1,10 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Project/1.Scene/Init/Script/Init.cs">
     <Files>
-      <File FileName="Assets/1.Project/1.Scene/Init/Script/DownloadFoodMenu.cs" Line="20" Column="4" />
+      <File FileName="Assets/1.Project/1.Scene/Setting/Script/FBInit.cs" Line="45" Column="30" />
+      <File FileName="Assets/1.Project/1.Scene/Init/Script/DownloadFoodMenu.cs" Line="1" Column="1" />
       <File FileName="Assets/1.Project/1.Scene/Init/Script/LwInit.cs" Line="37" Column="47" />
-      <File FileName="Assets/1.Project/1.Scene/Init/Script/Init.cs" Line="65" Column="36" />
+      <File FileName="Assets/1.Project/1.Scene/Init/Script/Init.cs" Line="77" Column="6" />
+      <File FileName="Assets/1.Project/1.Scene/Setting/Script/Setting.cs" Line="81" Column="34" />
+      <File FileName="Assets/1.Project/1.Scene/Init/Script/InitToScene.cs" Line="21" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

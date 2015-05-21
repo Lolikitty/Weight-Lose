@@ -58,65 +58,63 @@ public class Setting : MonoBehaviour {
 
 		try{
 
-		
-
-		st = PlayerPrefs.GetString ("st");
-		gt = PlayerPrefs.GetString ("gt");
+			st = PlayerPrefs.GetString ("st");
+			gt = PlayerPrefs.GetString ("gt");
 
 
-		if(st.Length>2 && gt.Length>2){
-			st1.Set_number(st[0] -48);
-			st2.Set_number(st[1] -48);
-			st3.Set_number(st[2] -48);
-			st4.Set_number(st[3]-48);
-			gt1.Set_number(gt[0]-48);
-			gt2.Set_number(gt[1]-48);
-			gt3.Set_number(gt[2]-48);
-			gt4.Set_number(gt[3]-48);
-		}
+			if(st.Length>2 && gt.Length>2){
+				st1.Set_number(st[0] -48);
+				st2.Set_number(st[1] -48);
+				st3.Set_number(st[2] -48);
+				st4.Set_number(st[3]-48);
+				gt1.Set_number(gt[0]-48);
+				gt2.Set_number(gt[1]-48);
+				gt3.Set_number(gt[2]-48);
+				gt4.Set_number(gt[3]-48);
+			}
 
-		script = GameObject.Find ("Script");
-		script_sc = script.GetComponent<LwInit>();
-
-
-		if (script_sc.go_clock == true) {
-			Bg_alarm.spriteName = "open";
-
-			Vector3 now = Sw_alarm.transform.localPosition;
-
-			Sw_alarm.transform.localPosition = new Vector3(105 , now.y, now.z);
-		}
-
-		if (script_sc.go_food == true) {
-			Bg_food.spriteName = "open";
-			
-			Vector3 now = Sw_food.transform.localPosition;
-			
-			Sw_food.transform.localPosition = new Vector3(105 , now.y, now.z);
-		}
-
-		if (script_sc.go_password == true) {
-			Bg_password.spriteName = "open";
-			
-			Vector3 now = Sw_password.transform.localPosition;
-			
-			Sw_password.transform.localPosition = new Vector3(105 , now.y, now.z);
-		}
+			script = GameObject.Find ("Script");
+			script_sc = script.GetComponent<LwInit>();
 
 
-		UIEventListener.Get (clock).onClick = Clock_click;
-		UIEventListener.Get (password).onClick = Password_click;
-		UIEventListener.Get (exit).onClick = exit_click;
-		UIEventListener.Get (cs).onClick = Cs_click;
-		UIEventListener.Get (cs_ok).onClick = Cs_mail_click;
-		UIEventListener.Get (error_ok).onClick = Time_click;
+			if (script_sc.go_clock == true) {
+				Bg_alarm.spriteName = "open";
 
-		UIEventListener.Get (Sw_alarm).onDrag = Sw_drag;
-		UIEventListener.Get (Sw_food).onDrag = Sw_drag;
-		UIEventListener.Get (Sw_password).onDrag = Sw_drag;
-		UIEventListener.Get (Sw_alarm).onDragEnd = Sw_dragend;
-		UIEventListener.Get (Sw_food).onDragEnd = Sw_dragend;
-		UIEventListener.Get (Sw_password).onDragEnd = Sw_dragend;
+				Vector3 now = Sw_alarm.transform.localPosition;
+
+				Sw_alarm.transform.localPosition = new Vector3(105 , now.y, now.z);
+			}
+
+			if (script_sc.go_food == true) {
+				Bg_food.spriteName = "open";
+				
+				Vector3 now = Sw_food.transform.localPosition;
+				
+				Sw_food.transform.localPosition = new Vector3(105 , now.y, now.z);
+			}
+
+			if (script_sc.go_password == true) {
+				Bg_password.spriteName = "open";
+				
+				Vector3 now = Sw_password.transform.localPosition;
+				
+				Sw_password.transform.localPosition = new Vector3(105 , now.y, now.z);
+			}
+
+
+			UIEventListener.Get (clock).onClick = Clock_click;
+			UIEventListener.Get (password).onClick = Password_click;
+			UIEventListener.Get (exit).onClick = exit_click;
+			UIEventListener.Get (cs).onClick = Cs_click;
+			UIEventListener.Get (cs_ok).onClick = Cs_mail_click;
+			UIEventListener.Get (error_ok).onClick = Time_click;
+
+			UIEventListener.Get (Sw_alarm).onDrag = Sw_drag;
+			UIEventListener.Get (Sw_food).onDrag = Sw_drag;
+			UIEventListener.Get (Sw_password).onDrag = Sw_drag;
+			UIEventListener.Get (Sw_alarm).onDragEnd = Sw_dragend;
+			UIEventListener.Get (Sw_food).onDragEnd = Sw_dragend;
+			UIEventListener.Get (Sw_password).onDragEnd = Sw_dragend;
 
 		}catch(Exception e){
 			LwError.Show("Setting.Start() : " + e);
