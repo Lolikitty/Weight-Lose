@@ -75,6 +75,7 @@ public class LwFoodHistory : MonoBehaviour {
 
 			string date = yyyyMMdd[0]+"-"+yyyyMMdd[1]+"-"+yyyyMMdd[2];
 
+			List <DateTime> filesDate = new List <DateTime>();
 			List <string> files = new List <string>();
 			List <string> filesJPG = new List <string>();
 			List <string> filesName = new List <string>();
@@ -85,6 +86,7 @@ public class LwFoodHistory : MonoBehaviour {
 				string date2 = dt.Year+"-"+dt.Month+"-"+dt.Day;
 				if(date == date2){
 					if(dt.Year == chooseYear && dt.Month == chooseMonth){
+						filesDate.Add(dt);
 						files.Add(Application.persistentDataPath + ja[i]["PNGPath"].ToString());
 						filesJPG.Add(Application.persistentDataPath + ja[i]["JPGPath"].ToString());
 						filesName.Add(ja[i]["Name"].ToString());
@@ -114,10 +116,9 @@ public class LwFoodHistory : MonoBehaviour {
 				UITexture t = Instantiate(food) as UITexture;
 				t.transform.parent = sv.transform;
 				t.transform.localScale = Vector3.one;
+				t.GetComponent<LwFoodHistory_Food>().pathDate = filesDate[i];
 				t.GetComponent<LwFoodHistory_Food>().pathJPG = filesJPG[i];
 				t.GetComponent<LwFoodHistory_Food>().pathPNG = files[i];
-				t.GetComponent<LwFoodHistory_Food>().pathInfo = filesKal[i]+"_"+filesName[i];
-				t.GetComponent<LwFoodHistory_Food>().fileInformation = new string[]{"", filesKal[i], filesName[i]};
 				t.GetComponentInChildren<UILabel>().text = filesName[i];
 
 				if(i%3 == 0){

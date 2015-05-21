@@ -17,6 +17,7 @@ public class ConnectedCheck : MonoBehaviour {
 //		Debug.Log ("connected = " +  connected);
 //		StartCoroutine (check());
 		InvokeRepeating ("Check", 0, 1);
+		DontDestroyOnLoad(gameObject);
 	}
 	
 	// Update is called once per frame

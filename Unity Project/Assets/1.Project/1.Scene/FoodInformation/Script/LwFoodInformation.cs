@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class LwFoodInformation : MonoBehaviour {
 
+	public static DateTime pathDate;
 	public static string pathJPG = null;
 	public static string pathPNG = null;
-	public static string pathInfo = null;
 
 	public GameObject buttonExit;
 	public GameObject buttonDelete;
@@ -20,8 +24,6 @@ public class LwFoodInformation : MonoBehaviour {
 	public UITexture DeleteScreen_Food;
 
 	public GameObject DeleteScreen;
-
-	public static string [] fileInformation;
 
 
 	void Awake () {
@@ -42,10 +44,30 @@ public class LwFoodInformation : MonoBehaviour {
 		DeleteScreen.SetActive (true);
 	}
 
-	void ButtonDelete_Ok(GameObject button){		
-		File.Delete (pathJPG);
-		File.Delete (pathPNG);
-		File.Delete (pathInfo);
+	void ButtonDelete_Ok(GameObject button){
+		try{
+			File.Delete (pathJPG);
+			File.Delete (pathPNG);
+		}catch{
+		}
+		try{
+			string JsonFoodDataPath = Application.persistentDataPath + "/Food.txt";
+
+
+
+			JArray Food = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath))["Food"] as JArray;
+
+			for(int i = 0; i < Food.Count; i++){
+				DateTime date = (DateTime) Food[i]["Date"];
+				if(date == pathDate){
+					Food.RemoveAt(i);
+					File.WriteAllText(JsonFoodDataPath, JsonConvert.SerializeObject(new{Food},Formatting.Indented));
+					break;
+				}
+			}
+
+		}catch (Exception e){
+		}
 		Application.LoadLevel ("FoodHistory");
 	}
 
@@ -57,8 +79,6 @@ public class LwFoodInformation : MonoBehaviour {
 
 	IEnumerator Start () {
 		if(pathJPG != null){
-			FoodKalNumber.text = fileInformation[1];
-			FoodName.text = fileInformation[2];
 			WWW www = new WWW ("file://" + pathJPG);
 			yield return www;
 			t.mainTexture = www.texture;
