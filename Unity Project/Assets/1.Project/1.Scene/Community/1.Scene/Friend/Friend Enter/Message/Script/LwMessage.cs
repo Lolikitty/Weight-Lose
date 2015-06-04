@@ -27,6 +27,8 @@ public class LwMessage : MonoBehaviour {
 
 	public UILabel title;
 
+	public GameObject buttonBG;
+
 	public static string FID = "";
 	public static string FNAME = "";
 
@@ -68,6 +70,8 @@ public class LwMessage : MonoBehaviour {
 			UIEventListener.Get(buttonBack).onClick = ButtonBack;
 			UIEventListener.Get(buttonExit).onClick = ButtonExit;
 			UIEventListener.Get(buttonMsgs).onClick = ButtonMsgs;
+			UIEventListener.Get(buttonBG).onClick = ButtonBG;
+
 			for(int i = 0; i<buttonMsg.Length; i++){
 				UIEventListener.Get(buttonMsg[i]).onClick = ButtonMsg;
 			}
@@ -198,6 +202,7 @@ public class LwMessage : MonoBehaviour {
 					buttonMsgsRoot.Translate(0, 5 * Time.deltaTime, 0);
 					if(buttonMsgsRoot.localPosition.y > up){
 						buttonMsgsRoot.localPosition = new Vector3(0, up);
+
 					}
 				}
 
@@ -217,13 +222,17 @@ public class LwMessage : MonoBehaviour {
 			FriendMessage2(friendMessage);
 			friendMessage = "";
 		}
-
+		sv.OnScrollBar();
 	}
 
 	void OnGUI(){
-		GUILayout.Label ("myName : " + myName);
+//		GUILayout.Label ("myName : " + myName);
 //		GUILayout.Label ("FNAME : " + FNAME);
 //		GUILayout.Label ("ERROR : " + ERROR);
+	}
+
+	void ButtonBG(GameObject button){
+		isUp = false;
 	}
 
 	void ButtonMsgs(GameObject button){

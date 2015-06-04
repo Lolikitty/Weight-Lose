@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../iRecki-Video-Split/Unity Project/App/Assets/1.iRecki/2.Script/ChooseImagePage.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Project/1.Scene/Community/1.Scene/Talk/Talk Enter/GroupMessage/Script/GroupMessage.cs">
     <Files>
-      <File FileName="../../iRecki-Video-Split/Unity Project/App/Assets/1.iRecki/2.Script/ChooseImagePage.cs" Line="26" Column="21" />
+      <File FileName="Assets/1.Project/1.Scene/Community/1.Scene/Friend/Friend Enter/Message/Script/LwMessage.cs" Line="225" Column="20" />
+      <File FileName="Assets/1.Project/1.Scene/Community/1.Scene/Talk/Talk Enter/GroupMessage/Script/GroupMessage.cs" Line="81" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

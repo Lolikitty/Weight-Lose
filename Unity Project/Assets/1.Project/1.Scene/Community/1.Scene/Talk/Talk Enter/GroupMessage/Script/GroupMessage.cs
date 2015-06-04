@@ -16,6 +16,7 @@ public class GroupMessage : MonoBehaviour {
 	public Transform buttonMainMsgsRoot;
 	public UILabel title;
 	public Texture2D defaultUserTexture;
+	public GameObject buttonBG;
 	public GameObject buttonBack;
 	public GameObject buttonExit;
 	public GameObject Msg_My;
@@ -58,6 +59,7 @@ public class GroupMessage : MonoBehaviour {
 	void Update () {
 		KeyboardControl ();
 		MessageEventListener ();
+		sv.OnScrollBar();
 	}
 
 	void OnDisable(){
@@ -171,6 +173,7 @@ public class GroupMessage : MonoBehaviour {
 		UIEventListener.Get(buttonBack).onClick = ButtonBack;
 		UIEventListener.Get(buttonExit).onClick = ButtonExit;
 		UIEventListener.Get(buttonMsgs).onClick = ButtonMsgs;
+		UIEventListener.Get(buttonBG).onClick = ButtonBG;
 		for(int i = 0; i<buttonMsg.Length; i++){
 			UIEventListener.Get(buttonMsg[i]).onClick = ButtonMsg;
 		}
@@ -196,6 +199,10 @@ public class GroupMessage : MonoBehaviour {
 
 	void ButtonMsgs(GameObject button){
 		isUp = true;
+	}
+
+	void ButtonBG(GameObject button){
+		isUp = false;
 	}
 	
 	void ButtonBack(GameObject button){
