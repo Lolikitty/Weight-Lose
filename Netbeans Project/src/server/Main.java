@@ -11,6 +11,7 @@ import server.database.SQL;
 import server.frame.Frame;
 import server.http.HttpServer;
 import server.thread.TalkClient;
+import java.util.Random;
 
 /**
  * Last modification time : 2014/11/10
@@ -20,6 +21,17 @@ import server.thread.TalkClient;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        
+        Random r = new Random();
+        
+        
+        
+        for (int i = 0; i < 10; i++) {
+            int id = (int)(r.nextFloat()*100);
+            System.out.println(id);
+        }
+        
+        
         new Config();
         new Thread(new Frame()).start();
         new Thread(new HttpServer()).start();

@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import server.database.SQL;
 import java.io.PrintWriter;
+import java.util.Random;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import static server.config.Config.DIR_SERVER_DATA;
@@ -34,13 +35,21 @@ public class SignID extends HttpServlet {
             String sql = "SELECT * FROM user_id_count;";
             ResultSet rs = new SQL().getData(sql);
             if (rs.next()) {
-                int id = rs.getInt("count") + 1;
+                
+                Random r = new Random();
+                
+                int id1 =  rs.getInt("count") + 1;
+                
+                int id2 = (int)(r.nextFloat() * 100);
+                
+                int id = Integer.parseInt(""+id1+id2);
+                
                 rs.close();
 
                 createDir(id);
 
                 sql
-                        = "UPDATE user_id_count SET count = " + id + ";"
+                        = "UPDATE user_id_count SET count = " + id1 + ";"
                         + "INSERT INTO user_information (id, name) VALUES (" + id + ", " + id + ");";
                 new SQL().setData(sql);
 
