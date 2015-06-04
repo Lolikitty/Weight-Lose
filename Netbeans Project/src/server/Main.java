@@ -20,17 +20,7 @@ import java.util.Random;
  */
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        
-        Random r = new Random();
-        
-        
-        
-        for (int i = 0; i < 10; i++) {
-            int id = (int)(r.nextFloat()*100);
-            System.out.println(id);
-        }
-        
+    public static void main(String[] args) throws Exception {      
         
         new Config();
         new Thread(new Frame()).start();
