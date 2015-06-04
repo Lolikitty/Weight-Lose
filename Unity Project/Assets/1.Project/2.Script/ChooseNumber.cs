@@ -21,6 +21,10 @@ public class ChooseNumber : MonoBehaviour {
 		renderer.material.mainTextureOffset = new Vector2(0, offset);
 	}
 
+	public void Stop(){
+		sw2 = false;
+	}
+
 	void Update () {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		

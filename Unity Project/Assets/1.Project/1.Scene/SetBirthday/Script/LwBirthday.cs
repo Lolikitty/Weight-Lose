@@ -67,6 +67,71 @@ public class LwBirthday : MonoBehaviour {
 		D2.SetNumber (d2);
 	}
 
+	void Update(){
+		if(Y1.chooseNumber < 1){
+			Y1.SetNumber (1);
+			Y1.Stop();
+		}else if(Y1.chooseNumber > 2){
+			Y1.SetNumber (2);
+			Y1.Stop();
+		}
+
+		if (Y1.chooseNumber == 1) {
+			if(Y2.chooseNumber != 9){
+				Y2.SetNumber (9);
+				Y2.Stop();
+			}
+		}
+
+		if (Y1.chooseNumber == 2) {
+			if(Y2.chooseNumber != 0){
+				Y2.SetNumber (0);
+				Y2.Stop();
+			}
+		}
+
+		//-------------------------------- Set Month Max And Min Value
+
+		if(M1.chooseNumber == 0 && M2.chooseNumber == 0){
+			M1.SetNumber(1);
+			M2.SetNumber(2);
+		}
+
+		if(M1.chooseNumber == 1 && M2.chooseNumber > 2 && M2.chooseNumber != 9){
+			M1.SetNumber(0);
+			M2.SetNumber(1);
+		}
+
+		if(M1.chooseNumber == 1 && M2.chooseNumber > 2 && M2.chooseNumber == 9){
+			M1.SetNumber(0);
+			M1.Stop();
+			M2.SetNumber(9);
+		}
+
+		//-------------------------------- Set Date Max And Min Value
+
+		int year = int.Parse("" + Y1.chooseNumber + Y2.chooseNumber + Y3.chooseNumber + Y4.chooseNumber);
+		int month = int.Parse("" + M1.chooseNumber + M2.chooseNumber);
+		DateTime dt = new DateTime(year, month, 1);
+		dt = dt.AddDays(-1);
+		char [] c = dt.Day.ToString().ToCharArray();
+		int maxD1 = int.Parse(c[0].ToString());
+		int maxD2 = int.Parse(c[1].ToString());
+
+		//-----------
+		
+		if(int.Parse(D1.chooseNumber +""+ D2.chooseNumber) > dt.Day){
+			D1.SetNumber(0);
+			D2.SetNumber(1);
+		}
+
+		if(D1.chooseNumber == 0 && D2.chooseNumber == 0){
+			D1.SetNumber(0);
+			D2.SetNumber(1);
+		}
+
+	}
+
 	// Custom Methods ======================================================================================================================================
 
 	void ButtonBoy(GameObject button){
