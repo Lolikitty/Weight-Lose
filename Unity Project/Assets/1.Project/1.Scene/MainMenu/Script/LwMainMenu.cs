@@ -37,7 +37,8 @@ public class LwMainMenu : MonoBehaviour {
 			float WeightTarget = float.Parse(obj["WeightTarget"].ToString());
 			float nowKG = PlayerPrefs.GetFloat("Weight9");
 
-			WeightLoss.text = (nowKG-WeightTarget).ToString ("0.0");
+//			WeightLoss.text = (nowKG-WeightTarget).ToString ("0.0");
+			WeightLoss.text = (WeightInit-WeightTarget).ToString ("0.0");
 			WeightLossSlider.value = 1 - ((nowKG - WeightTarget) / (WeightInit - WeightTarget));
 		}
 
