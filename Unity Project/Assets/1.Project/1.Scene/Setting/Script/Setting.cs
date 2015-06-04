@@ -170,7 +170,7 @@ public class Setting : MonoBehaviour {
 		try{
 			note_time ();
 
-			Application.LoadLevel ("InputPassword");
+			Application.LoadLevel ("SetPassword");
 		}catch(Exception e){
 			
 			
