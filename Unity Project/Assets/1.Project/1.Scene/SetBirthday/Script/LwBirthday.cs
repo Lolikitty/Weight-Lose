@@ -44,6 +44,8 @@ public class LwBirthday : MonoBehaviour {
 
 		if (File.Exists (JsonUserDataPath)) {
 			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonUserDataPath));
+
+			// Birthday
 			DateTime bir = (DateTime) obj["Birthday"];
 			int year = bir.Year;
 			int month = bir.Month;
@@ -56,15 +58,25 @@ public class LwBirthday : MonoBehaviour {
 			m2 = month - m1 * 10;
 			d1 = day / 10;
 			d2 = day - d1 *10;
+
+			Y1.SetNumber (y1);
+			Y2.SetNumber (y2);
+			Y3.SetNumber (y3);
+			Y4.SetNumber (y4);
+			M1.SetNumber (m1);
+			M2.SetNumber (m2);
+			D1.SetNumber (d1);
+			D2.SetNumber (d2);
+
+			// Sex
+
+			if(obj["Sex"].ToString() == "Boy"){
+				SetBoy();
+			}else{
+				SetGirl();
+			}
 		}
-		Y1.SetNumber (y1);
-		Y2.SetNumber (y2);
-		Y3.SetNumber (y3);
-		Y4.SetNumber (y4);
-		M1.SetNumber (m1);
-		M2.SetNumber (m2);
-		D1.SetNumber (d1);
-		D2.SetNumber (d2);
+
 	}
 
 	void Update(){
@@ -134,16 +146,24 @@ public class LwBirthday : MonoBehaviour {
 
 	// Custom Methods ======================================================================================================================================
 
-	void ButtonBoy(GameObject button){
+	void SetBoy(){
 		buttonBoy.GetComponent<UIButton> ().defaultColor = Color.white;
 		buttonGirl.GetComponent<UIButton> ().defaultColor = Color.gray;
 		sex = "Boy";
 	}
 
-	void ButtonGirl(GameObject button){
+	void SetGirl(){
 		buttonBoy.GetComponent<UIButton> ().defaultColor = Color.gray;
 		buttonGirl.GetComponent<UIButton> ().defaultColor = Color.white;
 		sex = "Girl";
+	}
+
+	void ButtonBoy(GameObject button){
+		SetBoy ();
+	}
+
+	void ButtonGirl(GameObject button){
+		SetGirl ();
 	}
 
 	void ButtonOk(GameObject button){
