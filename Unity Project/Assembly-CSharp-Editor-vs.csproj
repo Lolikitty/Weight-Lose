@@ -101,6 +101,7 @@
      <Compile Include="Assets\NGUI\Scripts\Editor\TweenTransformEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\TweenVolumeEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\TweenWidthEditor.cs" />
+     <Compile Include="Assets\NGUI\Scripts\Editor\TypewriterEffectEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UI2DSpriteEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIAnchorEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIAtlasInspector.cs" />
@@ -112,6 +113,7 @@
      <Compile Include="Assets\NGUI\Scripts\Editor\UIButtonMessageEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UICameraEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UICameraTool.cs" />
+     <Compile Include="Assets\NGUI\Scripts\Editor\UIColorPickerEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UICreateNewUIWizard.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UICreateWidgetWizard.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIDragObjectEditor.cs" />
@@ -152,7 +154,7 @@
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWidgetInspector.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWrapContentEditor.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
-     <None Include="Assets\NGUI\ReadMe - 3.8.2.txt" />
+     <None Include="Assets\NGUI\ReadMe - 3.9.0.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_tooltip_bubble.xml" />

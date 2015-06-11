@@ -58,8 +58,15 @@ public class LwFoodCamera2 : MonoBehaviour {
 	}
 
 	public Texture2D MarkTexture;
+	public GameObject warningObj;
 
 	void ButtonDone(GameObject button){
+
+		if (name.text == "請輸入食物名稱") {
+			warningObj.SetActive (true);
+			return;
+		}
+
 		if(name.text.IndexOf("_") != -1)return;
 		if(name.text.IndexOf("/") != -1)return;
 		if(name.text.IndexOf("\\") != -1)return;

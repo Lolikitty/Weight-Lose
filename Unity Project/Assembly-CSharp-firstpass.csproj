@@ -52,7 +52,7 @@
      <Compile Include="Assets\Plugins\EtceteraAndroid\demo\EtceteraUIManager.cs" />
      <Compile Include="Assets\Plugins\EtceteraAndroid\demo\EtceteraUIManagerTwo.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
-     <None Include="Assets\NGUI\ReadMe - 3.8.2.txt" />
+     <None Include="Assets\NGUI\ReadMe - 3.9.0.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_tooltip_bubble.xml" />

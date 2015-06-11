@@ -67,12 +67,15 @@
      <Compile Include="Assets\1.Project\1.Scene\Community\3.Prefab\Script\LwTalk_User.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Error\Script\LwError.cs" />
      <Compile Include="Assets\1.Project\1.Scene\FoodCamera\Script\LwFoodCamera.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\FoodCamera2\FoodCamera2\FoodCamera2Warning.cs" />
      <Compile Include="Assets\1.Project\1.Scene\FoodCamera2\FoodCamera2\LwFoodCamera2.cs" />
      <Compile Include="Assets\1.Project\1.Scene\FoodChoose\Script\ChooseFood.cs" />
      <Compile Include="Assets\1.Project\1.Scene\FoodChoose\Script\ChooseFood2.cs" />
      <Compile Include="Assets\1.Project\1.Scene\FoodChoose\Script\LwFoodChoose.cs" />
      <Compile Include="Assets\1.Project\1.Scene\FoodHistory\Script\LwFoodHistory.cs" />
      <Compile Include="Assets\1.Project\1.Scene\FoodInformation\Script\LwFoodInformation.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\FoodSDLoading\FoodLoadAnimation.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\FoodSDLoading\FoodSDLoading.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Init\Script\ConnectedCheck.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Init\Script\DownloadFoodMenu.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Init\Script\Init.cs" />
@@ -109,6 +112,8 @@
      <Compile Include="Assets\1.Project\1.Scene\User\Script\User.cs" />
      <Compile Include="Assets\1.Project\1.Scene\User3\Script\LwUser3.cs" />
      <Compile Include="Assets\1.Project\1.Scene\UserCamera\Script\LwUserCamera.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\UserSDLoading\UserLoadAnimation.cs" />
+     <Compile Include="Assets\1.Project\1.Scene\UserSDLoading\UserSDLoading.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Water\Water\Script\ChangeCup.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Water\Water\Script\FirstSelectCup.cs" />
      <Compile Include="Assets\1.Project\1.Scene\Water\Water\Script\LwWaiter.cs" />
@@ -548,7 +553,7 @@
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\OpenURLOnClick.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\PanWithMouse.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\PlayIdleAnimations.cs" />
-     <Compile Include="Assets\NGUI\Examples\Scripts\Other\SetColorOnSelection.cs" />
+     <Compile Include="Assets\NGUI\Examples\Scripts\Other\SetColorPickerColor.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\Spin.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\SpinWithMouse.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\Tutorial5.cs" />
@@ -589,6 +594,7 @@
      <Compile Include="Assets\NGUI\Scripts\Interaction\UISavedOption.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\UIScrollBar.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\UIScrollView.cs" />
+     <Compile Include="Assets\NGUI\Scripts\Interaction\UIShowControlScheme.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\UISlider.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\UISoundVolume.cs" />
      <Compile Include="Assets\NGUI\Scripts\Interaction\UITable.cs" />
@@ -642,6 +648,7 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UIAnchor.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIAtlas.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UICamera.cs" />
+     <Compile Include="Assets\NGUI\Scripts\UI\UIColorPicker.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIFont.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIInput.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIInputOnGUI.cs" />
@@ -659,7 +666,7 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
-     <None Include="Assets\NGUI\ReadMe - 3.8.2.txt" />
+     <None Include="Assets\NGUI\ReadMe - 3.9.0.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_tooltip_bubble.xml" />

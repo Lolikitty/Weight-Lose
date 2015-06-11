@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Prime31;
 
 
 public class LwFoodCamera : MonoBehaviour {
@@ -24,11 +23,6 @@ public class LwFoodCamera : MonoBehaviour {
 		UIEventListener.Get(buttonShutter).onClick = ButtonShutter;
 		UIEventListener.Get(photo).onClick = Photo;
 		UIEventListener.Get(cancel).onClick = Cancel;
-
-		EtceteraAndroid.initTTS();
-
-
-//		print (Application.persistentDataPath);
 	}
 
 	void Start () {
@@ -50,7 +44,6 @@ public class LwFoodCamera : MonoBehaviour {
 	}
 		
 	void ButtonChooseFood(GameObject button){
-
 		if (WebCamTexture.devices.Length != 0){
 			c.Stop ();
 		}
@@ -65,45 +58,19 @@ public class LwFoodCamera : MonoBehaviour {
 			texture.Apply();
 			c.Stop ();
 		}
-
-
-//		LwFoodCamera2.IS_FAST_CHOOSE_FOOD = false;
-
 		Application.LoadLevel ("FoodCamera2");
 	}
-
-	void OnEnable(){
-		// Listen to the texture loaded methods so we can load up the image on our plane
-		EtceteraAndroidManager.albumChooserSucceededEvent += imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent += imageLoaded;
-	}
-	
 	
 	void OnDisable(){
-		EtceteraAndroidManager.albumChooserSucceededEvent -= imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent -= imageLoaded;
+		c.Stop ();
 	}
 
-	public void imageLoaded(string imagePath){
-		// 後面的 1f 代表解析度的意思，1 為最大
-		EtceteraAndroid.scaleImageAtPath( imagePath, 1f );
-		search.mainTexture = EtceteraAndroid.textureFromFileAtPath( imagePath );
-	}
-
-//	Texture2D TextureScale(Texture2D, int width, int height){
-//		Texture2D nt = new Texture2D(width, height);
-//
-//		return nt;
-//	} 
 
 	void Photo(GameObject obj){
-		#if UNITY_ANDROID
-			EtceteraAndroid.promptForPictureFromAlbum( "a" );
-		#endif
+		Application.LoadLevel ("FoodSDLoading");
 	}
 
 	void Cancel(GameObject obj){
-
 		Application.LoadLevel ("MainMenu");
 
 	}

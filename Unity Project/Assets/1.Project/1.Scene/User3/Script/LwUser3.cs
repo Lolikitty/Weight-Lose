@@ -79,7 +79,7 @@ public class LwUser3 : MonoBehaviour {
 		WWW www = new WWW(LwInit.HttpServerPath+"/UserName", wwwF);
 		yield return www;
 
-
+		Application.LoadLevel ("SetBirthday");
 
 	}
 
@@ -109,13 +109,11 @@ public class LwUser3 : MonoBehaviour {
 				Name = uiName.text
 			};
 		}
+
 		File.WriteAllText(JsonUserDataPath, JsonConvert.SerializeObject(data,Formatting.Indented));
-
-
 
 		StartCoroutine (UploadData());
 
-		//Application.LoadLevel ("SetBirthday");
 	}
 
 }
