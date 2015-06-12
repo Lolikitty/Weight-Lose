@@ -18,7 +18,59 @@ public class LwWeight : MonoBehaviour {
 
 	void Awake () {
 		UIEventListener.Get(buttonOk).onClick = ButtonOk;
+
+		string JsonUserDataPath = Application.persistentDataPath + "/User.txt";
+
+		if(File.Exists(JsonUserDataPath)){
+			JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonUserDataPath));
+
+			// Set WeightInit ----------------------------------------------------------------------------
+
+			string WeightInit =  float.Parse(obj["WeightInit"].ToString()).ToString("000.0");
+
+			char [] WeightInitChar = WeightInit.ToCharArray();
+
+			int WeightInit0 = int.Parse(WeightInitChar[0].ToString());
+			int WeightInit1 = int.Parse(WeightInitChar[1].ToString());
+			int WeightInit2 = int.Parse(WeightInitChar[2].ToString());
+			int WeightInit3 = int.Parse(WeightInitChar[4].ToString());
+
+			NW1.SetNumber (WeightInit0);
+			NW2.SetNumber (WeightInit1);
+			NW3.SetNumber (WeightInit2);
+			NW4.SetNumber (WeightInit3);
+
+			// Set WeightTarget ----------------------------------------------------------------------------
+
+			string WeightTarget =  float.Parse(obj["WeightTarget"].ToString()).ToString("000.0");
+			
+			char [] WeightTargetChar = WeightTarget.ToCharArray();
+			
+			int WeightTarget0 = int.Parse(WeightTargetChar[0].ToString());
+			int WeightTarget1 = int.Parse(WeightTargetChar[1].ToString());
+			int WeightTarget2 = int.Parse(WeightTargetChar[2].ToString());
+			int WeightTarget3 = int.Parse(WeightTargetChar[4].ToString());
+			
+			WW1.SetNumber (WeightTarget0);
+			WW2.SetNumber (WeightTarget1);
+			WW3.SetNumber (WeightTarget2);
+			WW4.SetNumber (WeightTarget3);
+
+			// Set WeightTargetMonth ----------------------------------------------------------------------------
+
+			string WeightTargetMonth =  float.Parse(obj["WeightTargetMonth"].ToString()).ToString("00");
+			
+			char [] WeightTargetMonthChar = WeightTargetMonth.ToCharArray();
+			
+			int WeightTargetMonth0 = int.Parse(WeightTargetMonthChar[0].ToString());
+			int WeightTargetMonth1 = int.Parse(WeightTargetMonthChar[1].ToString());
+			
+			M1.SetNumber (WeightTargetMonth0);
+			M2.SetNumber (WeightTargetMonth1);
+		}
+		
 	}
+
 
 	// Custom Methods ======================================================================================================================================
 	
