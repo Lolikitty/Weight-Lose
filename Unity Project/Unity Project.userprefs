@@ -1,9 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Project/1.Scene/SetWeight/Script/LwWeight.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Project/1.Scene/FoodInformation/Script/LwFoodInformation.cs">
     <Files>
-      <File FileName="Assets/1.Project/1.Scene/SetWeight/Script/LwWeight.cs" Line="63" Column="53" />
-      <File FileName="Assets/1.Project/1.Scene/SetBirthday/Script/LwBirthday.cs" Line="62" Column="22" />
+      <File FileName="Assets/1.Project/1.Scene/FoodInformation/Script/LwFoodInformation.cs" Line="59" Column="52" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

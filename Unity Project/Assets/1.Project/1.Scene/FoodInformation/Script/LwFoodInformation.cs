@@ -25,6 +25,7 @@ public class LwFoodInformation : MonoBehaviour {
 
 	public GameObject DeleteScreen;
 
+	public UITexture t;
 
 	void Awake () {
 		DeleteScreen.SetActive (false);
@@ -33,6 +34,32 @@ public class LwFoodInformation : MonoBehaviour {
 		UIEventListener.Get(buttonDelete).onClick = ButtonDelete;
 		UIEventListener.Get(buttonDelete_Ok).onClick = ButtonDelete_Ok;
 		UIEventListener.Get(buttonDelete_Cancel).onClick = ButtonDelete_Cancel;
+	}
+	
+	IEnumerator Start () {
+		if(pathJPG != null){
+			WWW www = new WWW ("file://" + pathJPG);
+			yield return www;
+			t.mainTexture = www.texture;
+			t.transform.localScale = new Vector3((float)www.texture.width/www.texture.height, 1);
+		}
+		if(pathPNG != null){
+			WWW www = new WWW ("file://" + pathPNG);
+			yield return www;
+			DeleteScreen_Food.mainTexture = www.texture;
+		}
+
+		string JsonFoodDataPath = Application.persistentDataPath + "/Food.txt";
+		JArray Food = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath))["Food"] as JArray;
+
+		for(int i = 0; i < Food.Count; i++){
+			DateTime date = (DateTime) Food[i]["Date"];
+			if(date == pathDate){
+				FoodName.text = Food[i]["Name"].ToString();
+				FoodKalNumber.text = Food[i]["Kal"].ToString();
+				break;
+			}
+		}
 	}
 
 	void ButtonExit(GameObject button){		
@@ -52,9 +79,6 @@ public class LwFoodInformation : MonoBehaviour {
 		}
 		try{
 			string JsonFoodDataPath = Application.persistentDataPath + "/Food.txt";
-
-
-
 			JArray Food = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (JsonFoodDataPath))["Food"] as JArray;
 
 			for(int i = 0; i < Food.Count; i++){
@@ -75,20 +99,6 @@ public class LwFoodInformation : MonoBehaviour {
 		DeleteScreen.SetActive (false);
 	}
 
-	public UITexture t;
 
-	IEnumerator Start () {
-		if(pathJPG != null){
-			WWW www = new WWW ("file://" + pathJPG);
-			yield return www;
-			t.mainTexture = www.texture;
-			t.transform.localScale = new Vector3((float)www.texture.width/www.texture.height, 1);
-		}
-		if(pathPNG != null){
-			WWW www = new WWW ("file://" + pathPNG);
-			yield return www;
-			DeleteScreen_Food.mainTexture = www.texture;
-		}
-	}
 
 }
