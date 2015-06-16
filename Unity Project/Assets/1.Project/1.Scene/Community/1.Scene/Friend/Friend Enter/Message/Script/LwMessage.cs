@@ -130,6 +130,9 @@ public class LwMessage : MonoBehaviour {
 	}
 	
 	void ButtonMsg(GameObject button){
+
+		msg = button.name;
+
 		try{
 			for(int i = 0; i<buttonMsg.Length; i++){
 				if("ButtonMsg"+i == button.name){
@@ -180,16 +183,28 @@ public class LwMessage : MonoBehaviour {
 
 	void FriendMessage2(string msg){
 		try{
-			GameObject f = Instantiate(Msg_Other) as GameObject;
-			fo.Add(f);
-			f.transform.parent = buttonMainMsgsRoot;
-			f.transform.localPosition = new Vector3(0, y);
-			f.transform.localScale = Vector3.one;
-			LwMessage_Unit fmu = f.GetComponent<LwMessage_Unit>();
-			fmu.userImg.mainTexture = friendHead;
-			fmu.NAME = FNAME;
-			fmu.message.text = message[int.Parse(msg)];
-			y -= 120;
+			if(id == msg.Split('_')[0]){
+				GameObject m = Instantiate(Msg_My) as GameObject;
+				m.transform.parent = buttonMainMsgsRoot;
+				m.transform.localPosition = new Vector3(0, y);
+				m.transform.localScale = Vector3.one;
+				LwMessage_Unit mu = m.GetComponent<LwMessage_Unit>();
+				mu.NAME = myName;
+				mu.message.text = message[int.Parse(msg.Split('_')[2])];
+				mu.userImg.mainTexture = myHead;
+				y -= 120;
+			}else{
+				GameObject f = Instantiate(Msg_Other) as GameObject;
+				fo.Add(f);
+				f.transform.parent = buttonMainMsgsRoot;
+				f.transform.localPosition = new Vector3(0, y);
+				f.transform.localScale = Vector3.one;
+				LwMessage_Unit fmu = f.GetComponent<LwMessage_Unit>();
+				fmu.userImg.mainTexture = friendHead;
+				fmu.NAME = FNAME;
+				fmu.message.text = message[int.Parse(msg.Split('_')[2])];
+				y -= 120;
+			}
 		}catch(Exception e){
 			ERROR = e.Message;
 		}
@@ -222,13 +237,16 @@ public class LwMessage : MonoBehaviour {
 			FriendMessage2(friendMessage);
 			friendMessage = "";
 		}
-		sv.OnScrollBar();
+//		sv.OnScrollBar();
 	}
+
+	string msg = "No";
 
 	void OnGUI(){
 //		GUILayout.Label ("myName : " + myName);
 //		GUILayout.Label ("FNAME : " + FNAME);
 //		GUILayout.Label ("ERROR : " + ERROR);
+		GUILayout.Label ("Msg : " + msg);
 	}
 
 	void ButtonBG(GameObject button){

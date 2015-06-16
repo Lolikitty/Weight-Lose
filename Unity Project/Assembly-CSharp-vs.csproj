@@ -665,6 +665,13 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
+     <Compile Include="Assets\Opencoding\Console\Demo\CommandSecurity\CommandSecurityPopup.cs" />
+     <Compile Include="Assets\Opencoding\Console\Demo\CommandSecurity\ConsoleCommandSecurity.cs" />
+     <Compile Include="Assets\Opencoding\Console\Demo\CommandSecurity\ExampleCommands.cs" />
+     <Compile Include="Assets\Opencoding\Console\Demo\CommandSecurity\SecureCommandHandlerAttribute.cs" />
+     <Compile Include="Assets\Opencoding\Console\Demo\ConsoleOutputTest.cs" />
+     <Compile Include="Assets\Opencoding\Console\Demo\DemoController.cs" />
+     <Compile Include="Assets\Opencoding\Console\NativeMethods.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.9.0.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
@@ -695,6 +702,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_blue.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar.xml" />
      <None Include="Assets\Plugins\EtceteraAndroid\Manifest.xml" />
+     <None Include="Assets\Opencoding\Console\EmailTemplates\LogEmailHeader.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_activity_circle_row.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
@@ -704,6 +712,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_top_background.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment_list_row.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\values-mdpi\dimens.xml" />
+     <None Include="Assets\Opencoding\Console\link.xml" />
      <None Include="Assets\Vectrosity\Documentation\Vectrosity changelog.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 3.shader" />
      <None Include="Assets\Plugins\Android\facebook\bin\R.txt" />
@@ -746,6 +755,7 @@
      <None Include="Assets\1.Project\7.Shader\Mask.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_loginbutton_silver.xml" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
+     <None Include="Assets\Opencoding\Console\EmailTemplates\LogEmailFooter.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked.shader" />
      <None Include="Assets\JsonDotNet\ReadMe.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
@@ -756,6 +766,7 @@
      <None Include="Assets\Plugins\Android\facebook\bin\proguard.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\values-ldpi\dimens.xml" />
      <None Include="Assets\Plugins\Android\facebook\AndroidManifest.xml" />
+     <None Include="Assets\Opencoding\Console\readme.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\values\colors.xml" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
@@ -778,6 +789,18 @@
  </Reference>
  <Reference Include="Vectrosity">
  <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.Console">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Console.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.LogHistory">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.LogHistory.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.CommandHandlers">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.CommandHandlers.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.Shared">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Shared.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

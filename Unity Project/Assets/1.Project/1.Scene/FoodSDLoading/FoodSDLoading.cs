@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -38,11 +39,34 @@ public class FoodSDLoading : MonoBehaviour {
 		
 		WWW w = new WWW ("file://"+imagePath);
 		yield return w;
-		
+
+
+		// To Square ------------------------------------------
+
+//		int wh = Mathf.Min (w.texture.width, w.texture.height);
+//		
+//		Texture2D newTexture = new Texture2D (wh, wh);
+//		
+//
+//		for(int y = 0 ; y < 10 ; y++){
+//			for(int x = 0 ; x < 10 ; x++){
+//				newTexture.SetPixel(x, y, w.texture.GetPixel(x, y));
+//			}
+//		}
+//		
+//		
+//		newTexture.Apply ();
+
+//		LwFoodCamera.texture = newTexture;
+
+//		LwFoodCamera.texture = RotateSquare(newTexture, 90);
+
 		LwFoodCamera.texture = RotateSquare(w.texture, 90);
+		
 		
 		Application.LoadLevel ("FoodCamera2");
 	}
+
 
 	Texture2D RotateSquare(Texture2D texture, float eulerAngles){
 		int x;
@@ -71,7 +95,9 @@ public class FoodSDLoading : MonoBehaviour {
 				}
 			}
 		}
-		
+
+		int max = Mathf.Max (W, H);
+
 		Texture2D newImg = new Texture2D (W, H);
 		newImg.SetPixels32 (arr2);
 		newImg.Apply();

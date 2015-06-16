@@ -1,0 +1,64 @@
+<html><head><script src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+
+<style>
+body
+{
+	font-family: courier, fixed-width;
+}
+.stacktrace
+{
+	padding: 5px;
+	padding-left: 20px;
+	overflow: auto;
+	width: auto;
+	white-space: nowrap;
+}
+.header
+{
+    background: #EEEEEE;
+	cursor: pointer;
+	border-bottom: 1px solid #999999;
+	padding: 3px;
+}
+.header-text
+{
+	white-space: nowrap;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+}
+.header-error
+{
+    background: #e39494;
+}
+.header-warning
+{
+    background: #d9e174;
+}
+.time
+{
+    padding-right: 5px;
+    float: right;
+}
+.topNote
+{
+    border: 1px solid #DDDDD;
+    background: #E2E2E2;
+}
+.header-expanded
+{
+    white-space: pre-wrap;
+	text-overflow: clip;
+}
+</style>
+<script>
+$(document).ready(function() {
+	$(".stacktrace").toggle();
+
+	$(".header").click(function() {
+	    $(this).children(".header-text").toggleClass("header-expanded");
+		$(this).next().toggle();
+	});
+});
+</script>
+
+</head><body>

@@ -8,7 +8,8 @@ using Newtonsoft.Json.Linq;
 
 public class LwFoodCamera2 : MonoBehaviour {
 
-	public GameObject ImageOgject;
+	public UITexture imageOgject;
+
 	public GameObject buttonDone;
 	public GameObject buttonCancel;
 
@@ -18,17 +19,23 @@ public class LwFoodCamera2 : MonoBehaviour {
 	public ChooseNumber number4;
 
 	void Awake () {
-		ImageOgject.renderer.material.mainTexture = LwFoodCamera.texture;
+
+		imageOgject.mainTexture = LwFoodCamera.texture;
+
 		UIEventListener.Get(buttonDone).onClick = ButtonDone;
 		UIEventListener.Get(buttonCancel).onClick = ButtonCancel;
 
 		if(LwMainMenu.IsChooseFoodFinish_DIY || LwMainMenu.IsChooseFoodFinish_Default){
 			name.text = FoodName;
-			ImageOgject.renderer.material.mainTexture = FOOD_IMAGE;
+			imageOgject.mainTexture = FOOD_IMAGE;
 		}
+
+		float w = (float)imageOgject.mainTexture.width / imageOgject.mainTexture.height;
+
+		imageOgject.width = (int)(imageOgject.width * w);
 	}
 
-	public TextMesh name;
+	public UILabel name;
 	string temp = "";
 	TouchScreenKeyboard tsk;
 	public static string FoodName;
@@ -191,10 +198,6 @@ public class LwFoodCamera2 : MonoBehaviour {
 		Application.LoadLevel("MainMenu");
 	}
 
-	void ToMainMenu(){
-
-	}
-
 	void ButtonCancel(GameObject button){
 		Application.LoadLevel ("FoodCamera");
 	}
@@ -244,10 +247,15 @@ public class LwFoodCamera2 : MonoBehaviour {
 
 
 
-//	void OnGUI () {
+	void OnGUI () {
 //		GUILayout.Label ("IsChooseFoodFinish_DIY : " + LwMainMenu.IsChooseFoodFinish_DIY);
 //		GUILayout.Label ("IsChooseFoodFinish_Default : " + LwMainMenu.IsChooseFoodFinish_Default);
-//	}
+//		GUILayout.Label ("Width : "+imageOgject.width);
+//		GUILayout.Label ("Height : "+imageOgject.height);
+//		GUILayout.Label ("Scale : "+imageOgject.transform.localScale);
+
+		GUI.DrawTexture (new Rect (0, 0, imageOgject.width, imageOgject.height), imageOgject.mainTexture);
+	}
 
 
 }

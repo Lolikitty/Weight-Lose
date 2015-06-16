@@ -1,8 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Project/1.Scene/FoodInformation/Script/LwFoodInformation.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1.Project/1.Scene/Community/1.Scene/Friend/Friend Enter/Message/Script/LwMessage.cs">
     <Files>
-      <File FileName="Assets/1.Project/1.Scene/FoodInformation/Script/LwFoodInformation.cs" Line="59" Column="52" />
+      <File FileName="Assets/1.Project/1.Scene/FoodCamera2/FoodCamera2/LwFoodCamera2.cs" Line="35" Column="23" />
+      <File FileName="Assets/1.Project/1.Scene/FoodSDLoading/FoodSDLoading.cs" Line="101" Column="42" />
+      <File FileName="Assets/1.Project/1.Scene/FoodCamera/Script/LwFoodCamera.cs" Line="8" Column="41" />
+      <File FileName="Assets/1.Project/1.Scene/Community/1.Scene/Friend/Friend Enter/Message/Script/LwMessage.cs" Line="186" Column="9" />
+      <File FileName="Assets/1.Project/1.Scene/Init/Script/LwInit.cs" Line="55" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

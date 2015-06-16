@@ -153,6 +153,25 @@
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWidgetContainerEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWidgetInspector.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWrapContentEditor.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXBuildFile.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXBuildPhase.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXDictionary.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXFileReference.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXGroup.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXList.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXObject.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXParser.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\PBXProject.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\XCBuildConfiguration.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\XCConfigurationList.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\XCFileOperationQueue.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\XCMod.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\XCProject.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\XCSourceFile.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\XCTarget.cs" />
+     <Compile Include="Assets\Opencoding\3rdParty\XCodeEditor-for-Unity\Editor\XMiniJSON.cs" />
+     <Compile Include="Assets\Opencoding\Console\Editor\BuildPostProcessor.cs" />
+     <Compile Include="Assets\Opencoding\Console\Editor\DetectUpgrade.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.9.0.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
@@ -183,6 +202,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_button_blue.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar.xml" />
      <None Include="Assets\Plugins\EtceteraAndroid\Manifest.xml" />
+     <None Include="Assets\Opencoding\Console\EmailTemplates\LogEmailHeader.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_activity_circle_row.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
@@ -192,6 +212,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_top_background.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment_list_row.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\values-mdpi\dimens.xml" />
+     <None Include="Assets\Opencoding\Console\link.xml" />
      <None Include="Assets\Vectrosity\Documentation\Vectrosity changelog.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 3.shader" />
      <None Include="Assets\Plugins\Android\facebook\bin\R.txt" />
@@ -234,6 +255,7 @@
      <None Include="Assets\1.Project\7.Shader\Mask.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_loginbutton_silver.xml" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
+     <None Include="Assets\Opencoding\Console\EmailTemplates\LogEmailFooter.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked.shader" />
      <None Include="Assets\JsonDotNet\ReadMe.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
@@ -244,6 +266,7 @@
      <None Include="Assets\Plugins\Android\facebook\bin\proguard.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\values-ldpi\dimens.xml" />
      <None Include="Assets\Plugins\Android\facebook\AndroidManifest.xml" />
+     <None Include="Assets\Opencoding\Console\readme.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\values\colors.xml" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
@@ -278,6 +301,18 @@
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.Console">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Console.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.LogHistory">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.LogHistory.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.CommandHandlers">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.CommandHandlers.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.Shared">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Shared.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
