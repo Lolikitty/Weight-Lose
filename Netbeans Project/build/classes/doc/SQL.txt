@@ -29,17 +29,11 @@ CREATE TABLE user_friend (
 	is_friend		boolean
 );
 
+
+
 CREATE TABLE message (
 	id			int,
 	friend_id		int,
-	msg			text,
-	time			timestamp
-);
-
-CREATE TABLE message3 (
-	id1			int,
-	id2			int,
-	id3			int,
 	msg			text,
 	time			timestamp
 );
