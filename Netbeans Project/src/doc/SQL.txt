@@ -29,13 +29,17 @@ CREATE TABLE user_friend (
 	is_friend		boolean
 );
 
-
-
 CREATE TABLE message (
 	id			int,
 	friend_id		int,
 	msg			text,
 	time			timestamp
+);
+
+CREATE TABLE message_read (
+	id			int,
+	friend_id		int,
+	read                    boolean
 );
 
 CREATE SEQUENCE group_id_sequence;

@@ -21,6 +21,7 @@ import server.http.servlet.DeleteFriend;
 import server.http.servlet.ReadBackup;
 import server.http.servlet.GetFriend;
 import server.http.servlet.GetGroup;
+import server.http.servlet.GetReadMessage;
 import server.http.servlet.GetWaitFriend;
 import server.http.servlet.Init;
 import server.http.servlet.SetBirthdayAndWeight;
@@ -70,6 +71,7 @@ public class HttpServer implements Runnable {
         context.addServlet(new ServletHolder(new GetGroup()), "/GetGroup");
         context.addServlet(new ServletHolder(new DeleteFriend()), "/DeleteFriend");
         context.addServlet(new ServletHolder(new ApplyCoach()), "/ApplyCoach");
+        context.addServlet(new ServletHolder(new GetReadMessage()), "/GetReadMessage");
 
 //        Handler[] h = {context};
 //        HandlerList hl = new HandlerList();

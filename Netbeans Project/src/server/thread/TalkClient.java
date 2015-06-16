@@ -38,7 +38,7 @@ public class TalkClient extends Thread {
             try (PrintWriter w = new PrintWriter(new OutputStreamWriter(s.getOutputStream()))) {
 
                 //===================================================================================
-                // Init
+                // Init Value
                 //===================================================================================
                 String[] data = r.readLine().split(",");
                 myID = data[0];
@@ -52,13 +52,24 @@ public class TalkClient extends Thread {
                 }
 
                 //===================================================================================
+                // Init Database
+                //===================================================================================
+                try (ResultSet rs = new SQL().getData("SELECT id FROM message_read WHERE id = " + friendID + " AND friend_id = " + myID + ";")) {
+                    if (!rs.next()) {
+                        new SQL().setData("INSERT INTO message_read VALUES (" + friendID + ", " + myID + ", true);");
+                    }
+                }
+                
+                new SQL().setData("UPDATE message_read SET read = true" + " WHERE id = " + myID + " AND friend_id = " + friendID + ";");
+
+                //===================================================================================
                 // History
                 //===================================================================================
                 String sql = "select id, friend_id, msg from message Where id = " + myID + " AND friend_id = " + friendID + " OR id=" + friendID + " AND friend_id=" + myID + " ORDER BY time ASC;";
 
-                try (ResultSet rs = new SQL().getData(sql)) {                    
+                try (ResultSet rs = new SQL().getData(sql)) {
                     while (rs.next()) {
-                        w.println(rs.getString("id") + "_" +rs.getString("friend_id") + "_" + rs.getString("msg"));                        
+                        w.println(rs.getString("id") + "_" + rs.getString("friend_id") + "_" + rs.getString("msg"));
                         w.flush();
                         try {
                             Thread.sleep(200);
@@ -82,20 +93,23 @@ public class TalkClient extends Thread {
                         break;
                     }
 
+                    boolean read = false;
+
                     // Realtime Message To Friend
                     PrintWriter pw = TALK_ROOM.get(friendID);
                     if (pw != null) {
                         pw.println(myID + "_" + friendID + "_" + msg2);
                         pw.flush();
-                        System.out.println(myID + "_" + friendID + "_" + msg2);
+                        read = true;
                     }
 
-                    // Save Message Into Database 
+                    // Save Message Into Database
                     try {
-                        new SQL().setData("INSERT INTO message VALUES (" + myID + ", " + friendID + ", '" + msg2 + "', now());");
+                        new SQL().setData("INSERT INTO message VALUES (" + myID + ", " + friendID + ", '" + msg2 + "' , now());");
                     } catch (Exception e) {
                         System.err.println("TalkClient.java -> Set DataBase Error : " + e);
                     }
+                    new SQL().setData("UPDATE message_read SET read = " + read + " WHERE id = " + friendID + " AND friend_id = " + myID + ";");
                 }
             }
         } catch (NullPointerException ex) {
