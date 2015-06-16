@@ -293,6 +293,18 @@
  <Reference Include="SampleClassLibrary">
  <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/JsonDotNet/Examples/Tests/TestModels/SampleClassLibrary.dll</HintPath>
  </Reference>
+ <Reference Include="Opencoding.CommandHandlers">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.CommandHandlers.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.Console">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Console.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.LogHistory">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.LogHistory.dll</HintPath>
+ </Reference>
+ <Reference Include="Opencoding.Shared">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Shared.dll</HintPath>
+ </Reference>
  <Reference Include="P31RestKit">
  <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>
  </Reference>
@@ -301,18 +313,6 @@
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
- </Reference>
- <Reference Include="Opencoding.Console">
- <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Console.dll</HintPath>
- </Reference>
- <Reference Include="Opencoding.LogHistory">
- <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.LogHistory.dll</HintPath>
- </Reference>
- <Reference Include="Opencoding.CommandHandlers">
- <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.CommandHandlers.dll</HintPath>
- </Reference>
- <Reference Include="Opencoding.Shared">
- <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Shared.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

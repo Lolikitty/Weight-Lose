@@ -23,6 +23,7 @@ public class LwFriend_User : MonoBehaviour {
 	public GameObject userInfo;
 	public Transform userInfoFoodRoot;
 	public GameObject userInfoFood;
+	public GameObject readObj;
 
 	// Update is called once per frame
 	void Awake () {
@@ -32,6 +33,7 @@ public class LwFriend_User : MonoBehaviour {
 		UIEventListener.Get(buttonDelete).onClick = ButtonDelete;
 
 		buttonDelete.SetActive (false);
+		readObj.SetActive(false);
 	}
 
 	bool isChoose = false;
@@ -131,6 +133,18 @@ public class LwFriend_User : MonoBehaviour {
 			foodRoot.GetComponent<UIScrollView> ().OnScrollBar ();
 		}
 		w.Dispose ();
+
+
+		WWWForm f2 = new WWWForm ();
+		f2.AddField ("id", LwFriend.ID);
+		f2.AddField ("friend_id", friendID);
+		
+		using (WWW ww = new WWW (LwInit.HttpServerPath+"/GetReadMessage", f2)) {
+			yield return ww;
+			if(!bool.Parse(ww.text)){
+				readObj.SetActive(true);
+			}
+		}
 	}
 
 	void Update(){

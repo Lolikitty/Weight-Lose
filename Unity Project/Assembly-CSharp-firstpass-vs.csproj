@@ -163,11 +163,8 @@
  <Reference Include="SampleClassLibrary">
  <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/JsonDotNet/Examples/Tests/TestModels/SampleClassLibrary.dll</HintPath>
  </Reference>
- <Reference Include="P31RestKit">
- <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>
- </Reference>
- <Reference Include="Vectrosity">
- <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
+ <Reference Include="Opencoding.CommandHandlers">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.CommandHandlers.dll</HintPath>
  </Reference>
  <Reference Include="Opencoding.Console">
  <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Console.dll</HintPath>
@@ -175,11 +172,14 @@
  <Reference Include="Opencoding.LogHistory">
  <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.LogHistory.dll</HintPath>
  </Reference>
- <Reference Include="Opencoding.CommandHandlers">
- <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.CommandHandlers.dll</HintPath>
- </Reference>
  <Reference Include="Opencoding.Shared">
  <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Opencoding/DLLs/Opencoding.Shared.dll</HintPath>
+ </Reference>
+ <Reference Include="P31RestKit">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Plugins/P31RestKit.dll</HintPath>
+ </Reference>
+ <Reference Include="Vectrosity">
+ <HintPath>/Users/Loli/Documents/Git/Weight-Lose/Unity Project/Assets/Vectrosity/Vectrosity.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

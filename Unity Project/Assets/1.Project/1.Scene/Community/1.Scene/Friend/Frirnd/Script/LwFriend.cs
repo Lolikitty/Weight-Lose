@@ -29,6 +29,8 @@ public class LwFriend : MonoBehaviour {
 	public GameObject userInfoExit;
 	public Transform userInfoFoodRoot;
 
+	public static string ID;
+
 	void Awake () {
 		AddFriend.SetActive (false);
 		textureCanNotFindID.SetActive (false);
@@ -42,8 +44,10 @@ public class LwFriend : MonoBehaviour {
 
 	IEnumerator Start (){
 
+		ID = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (Application.persistentDataPath + "/User.txt")) ["ID"].ToString ();
+
 		WWWForm wwwF = new WWWForm();
-		wwwF.AddField("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
+		wwwF.AddField("id", ID);
 		
 		WWW www = new WWW(LwInit.HttpServerPath+"/GetFriend", wwwF);
 		yield return www;
