@@ -54,7 +54,7 @@ public class Water_alarm : MonoBehaviour {
 
 
 	void Start () {
-
+		NativePlugin.RegisterForNotifications();
 
 		try{
 			script = GameObject.Find("Script");
@@ -168,12 +168,14 @@ public class Water_alarm : MonoBehaviour {
 				
 				if(DateTime.Compare(clock , now) >= 0){
 
-
 					script_sc.clock_start(st , et , clock , ct);
+
+					NativePlugin.instance.ShowNotification("喝水提醒", 60 * int.Parse(ct), "減肥同學會", "10");
 
 					Application.LoadLevel("Setting");
 				}
-			}catch{
+			}catch(Exception e){
+				Debug.LogError(e.Message);
 
 				error.transform.localPosition = new Vector3(0,0,0);
 

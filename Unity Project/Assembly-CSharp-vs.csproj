@@ -666,6 +666,8 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
+     <Compile Include="Assets\NativePlugin\Example\Example.cs" />
+     <Compile Include="Assets\NativePlugin\Plugin\NativePlugin.cs" />
      <Compile Include="Assets\Opencoding\Console\Demo\CommandSecurity\CommandSecurityPopup.cs" />
      <Compile Include="Assets\Opencoding\Console\Demo\CommandSecurity\ConsoleCommandSecurity.cs" />
      <Compile Include="Assets\Opencoding\Console\Demo\CommandSecurity\ExampleCommands.cs" />

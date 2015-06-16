@@ -25,6 +25,10 @@ public class ChooseNumberNGUI : MonoBehaviour {
 
 	}
 
+	public void Stop(){
+		sw2 = false;
+	}
+
 	void Update () {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		

@@ -118,51 +118,53 @@ public class Setting : MonoBehaviour {
 
 		}catch(Exception e){
 			LwError.Show("Setting.Start() : " + e);
-			
+		}
+	}
+
+	void Update(){
+		if(float.Parse(st1.chooseNumber + "" + st2.chooseNumber) > 23){
+			st1.Set_number(0);
+			st2.Set_number(0);
 		}
 
-		
+		if(float.Parse(gt1.chooseNumber + "" + gt2.chooseNumber) > 23){
+			gt1.Set_number(0);
+			gt2.Set_number(0);
+		}
+
+		if(float.Parse(st3.chooseNumber + "" + st4.chooseNumber) > 59){
+			st3.Set_number(0);
+			st4.Set_number(0);
+		}
+
+		if(float.Parse(gt3.chooseNumber + "" + gt4.chooseNumber) > 59){
+			gt3.Set_number(0);
+			gt4.Set_number(0);
+		}
+
 	}
 
 	void Time_click(GameObject obj){
-
 		time_error.transform.localPosition = new Vector3 (-600 , 0 , 0);
-
-
-
 	}
 
 	void Cs_mail_click(GameObject obj){
-
-
 		cs_mail.transform.localPosition = new Vector3 (600,0,0);
-
-
 	}
 
 	void Cs_click(GameObject obj){
 		cs_mail.transform.localPosition = new Vector3 (0 , 0 ,0);
-
-
 	}
 
 
 	void Clock_click(GameObject obj){
-
 		try{
 			note_time ();
-
-
 			Application.LoadLevel ("Water_clock");
 		}catch(Exception e){
-
-
 			LwError.Show("Setting.Start() : " + e);
-
 			time_error.transform.localPosition = new Vector3(0 , 0 , 0);
-
 		}
-
 	}
 
 	void Password_click(GameObject obj){
