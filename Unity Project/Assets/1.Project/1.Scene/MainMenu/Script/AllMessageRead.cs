@@ -18,13 +18,18 @@ public class AllMessageRead : MonoBehaviour {
 
 	IEnumerator Start () {
 
+		//--------------------------------------------------------------------- Get ID
+
 		string JsonUserDataPath = Application.persistentDataPath + "/User.txt";
 		JObject obj = JsonConvert.DeserializeObject<JObject> (File.ReadAllText(JsonUserDataPath));
+		string id = obj ["ID"].ToString ();
+
+		//--------------------------------------------------------------------- Get Friend Message Count
 
 		string [] msgs;
 
 		WWWForm f = new WWWForm ();
-		f.AddField ("id", obj["ID"].ToString());
+		f.AddField ("id", id);
 
 		using (WWW w = new WWW (LwInit.HttpServerPath+"/GetFriend", f)) {
 			yield return w;
@@ -40,7 +45,7 @@ public class AllMessageRead : MonoBehaviour {
 			string friend_id = data.Split(',')[0];
 
 			WWWForm f2 = new WWWForm ();
-			f2.AddField ("id", obj["ID"].ToString());
+			f2.AddField ("id", id);
 			f2.AddField ("friend_id", friend_id);
 
 			using (WWW w = new WWW (LwInit.HttpServerPath+"/GetReadMessage", f2)) {
@@ -56,6 +61,20 @@ public class AllMessageRead : MonoBehaviour {
 				count++;
 			}
 		}
+
+		//--------------------------------------------------------------------- Get Wait Friend Count
+
+		WWWForm wwwF = new WWWForm();
+		wwwF.AddField("id", id);
+		using (WWW www = new WWW(LwInit.HttpServerPath+"/GetWaitFriend", wwwF)) {
+			yield return www;
+			if (www.text != "") {
+				string [] unit = www.text.Split (';');
+				count += unit.Length - 1;
+			}
+		}
+
+		//--------------------------------------------------------------------- Show
 
 		if(count > 0){
 			gobj_show.SetActive(true);

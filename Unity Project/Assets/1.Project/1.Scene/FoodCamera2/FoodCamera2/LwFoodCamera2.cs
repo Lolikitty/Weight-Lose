@@ -254,7 +254,7 @@ public class LwFoodCamera2 : MonoBehaviour {
 //		GUILayout.Label ("Height : "+imageOgject.height);
 //		GUILayout.Label ("Scale : "+imageOgject.transform.localScale);
 
-		GUI.DrawTexture (new Rect (0, 0, imageOgject.width, imageOgject.height), imageOgject.mainTexture);
+//		GUI.DrawTexture (new Rect (0, 0, imageOgject.width, imageOgject.height), imageOgject.mainTexture);
 	}
 
 
