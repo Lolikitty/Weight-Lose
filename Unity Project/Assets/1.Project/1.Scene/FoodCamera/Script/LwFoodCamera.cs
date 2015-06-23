@@ -32,7 +32,7 @@ public class LwFoodCamera : MonoBehaviour {
 		}
 
 		c = new WebCamTexture (WebCamTexture.devices[0].name);
-		DisplayTextureObject.renderer.material.mainTexture = c;
+		DisplayTextureObject.GetComponent<Renderer>().material.mainTexture = c;
 		c.Play ();
 
 		DisplayTextureObject.transform.localScale =

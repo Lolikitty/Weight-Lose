@@ -6,18 +6,17 @@ Netbeans Project/ServerData/
 # =============== #
 Unity Project/Temp/
 Unity Project/Library/
+Unity Project/obj/
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
-ExportedObj/
-obj/
 *.svd
 *.userprefs
-/*.csproj
+*.csproj
 *.pidb
 *.suo
-/*.sln
+*.sln
 *.user
 *.unityproj
 *.booproj

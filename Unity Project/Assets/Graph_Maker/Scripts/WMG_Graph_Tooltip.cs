@@ -43,7 +43,7 @@ public class WMG_Graph_Tooltip : WMG_GUI_Functions {
 		Vector3 position;
 		RectTransformUtility.ScreenPointToWorldPointInRectangle(theGraph.toolTipPanel.GetComponent<RectTransform>(), 
 		                                                        new Vector2(Input.mousePosition.x, Input.mousePosition.y),
-		                                                        camera,
+		                                                        GetComponent<Camera>(),
 		                                                        out position);
 		// Without an offset, the tooltip's top left corner will be at the cursor position
 		float offsetX = theGraph.tooltipOffset.x;

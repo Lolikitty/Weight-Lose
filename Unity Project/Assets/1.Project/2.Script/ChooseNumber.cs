@@ -18,7 +18,7 @@ public class ChooseNumber : MonoBehaviour {
 	public void SetNumber(int number){
 		chooseNumber = number;
 		offset = (float)number / 10.0f;
-		renderer.material.mainTextureOffset = new Vector2(0, offset);
+		GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, offset);
 	}
 
 	public void Stop(){
@@ -51,7 +51,7 @@ public class ChooseNumber : MonoBehaviour {
 			int p2 = (int)(offset * 100) - (((int)(offset * 10)) * 10);
 			if(p2!=0){
 				offset+= p2 > 5? 0.001f : -0.001f;
-				renderer.material.mainTextureOffset = new Vector2(0, offset);
+				GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, offset);
 			}
 		}
 
@@ -72,7 +72,7 @@ public class ChooseNumber : MonoBehaviour {
 				}
 			}
 			offset += move3/4000;
-			renderer.material.mainTextureOffset = new Vector2(0, offset);
+			GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, offset);
 		}
 
 		// 手動移動
@@ -84,7 +84,7 @@ public class ChooseNumber : MonoBehaviour {
 			move2 = y1-y2;
 			move3 = Mathf.Lerp(move1, move2, Time.time);
 			offset += move3/1000;
-			renderer.material.mainTextureOffset = new Vector2(0, offset);
+			GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, offset);
 		}
 		chooseNumberBuffer = ((float.Parse((offset % 1).ToString ("0.0"))) * 10);
 		if(offset < 0){

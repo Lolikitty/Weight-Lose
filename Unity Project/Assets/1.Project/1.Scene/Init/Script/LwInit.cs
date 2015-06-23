@@ -31,8 +31,8 @@ public class LwInit : MonoBehaviour {
 	public bool go = false;
 
 //	public static string ServerIP = "54.69.109.145";
-//	public static string ServerIP = "192.168.1.103";
-	public static string ServerIP = "192.168.2.187";
+	public static string ServerIP = "52.69.77.17";
+//	public static string ServerIP = "192.168.2.187";
 	public static int ServerPort = 4040;
 	public static int TalkGroupServerPort = 4041;
 	public static int TalkServerPort = 4042;

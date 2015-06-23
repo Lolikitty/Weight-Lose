@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
-using Prime31;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -41,7 +40,6 @@ public class LwFoodChoose : MonoBehaviour {
 		bgDIY = buttonFoodDIY.transform.GetChild(0).gameObject;
 		bgDIY.SetActive (true);
 		buttonDIY_Add.SetActive (true);
-		EtceteraAndroid.initTTS();
 		ReadMyFoodMenu ();
 
 		isDIY = true;

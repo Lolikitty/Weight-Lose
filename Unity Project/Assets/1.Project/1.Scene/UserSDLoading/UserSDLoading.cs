@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Prime31;
+using AndroidMediaBrowser;
 
 public class UserSDLoading : MonoBehaviour {
 
@@ -13,29 +13,17 @@ public class UserSDLoading : MonoBehaviour {
 
 	void Awake () {
 		#if UNITY_ANDROID
-		EtceteraAndroid.initTTS();
-		EtceteraAndroid.promptForPictureFromAlbum( "a" );
-		#endif
-	}
+		ImageBrowser.OnPicked += (image) => {
+			StartCoroutine (imageLoaded2 (image.Path));
+		};
 
-	void OnEnable(){
-		#if UNITY_ANDROID
-		EtceteraAndroidManager.albumChooserSucceededEvent += imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent += imageLoaded;
-		#endif
-	}
-	
-	
-	void OnDisable(){
-		#if UNITY_ANDROID
-		EtceteraAndroidManager.albumChooserSucceededEvent -= imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent -= imageLoaded;
-		#endif
-	}
+		ImageBrowser.OnPickCanceled += () => {
+			Application.LoadLevel ("User3");
+		};
 
+		ImageBrowser.Pick();
 
-	public void imageLoaded(string imagePath){
-		StartCoroutine (imageLoaded2 (imagePath));
+		#endif
 	}
 	
 	IEnumerator imageLoaded2(string imagePath){

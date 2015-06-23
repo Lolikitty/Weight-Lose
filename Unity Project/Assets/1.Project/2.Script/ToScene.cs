@@ -88,13 +88,13 @@ public class ToScene : MonoBehaviour {
 		}
 
 		if(isClick){
-			if(animationBG != null){
-				if(animationBG.localPosition.y < 0){
-					animationBG.Translate (0,10 * Time.deltaTime, 0);
-				}else{
+//			if(animationBG != null){
+//				if(animationBG.localPosition.y < 0){
+//					animationBG.Translate (0,10 * Time.deltaTime, 0);
+//				}else{
 					GoToScene();
-				}
-			}
+//				}
+//			}
 		}
 	}
 

@@ -12,7 +12,7 @@ namespace Opencoding.Console.Editor
 		[PostProcessBuild(200)]
 		public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
 		{
-			if (target != BuildTarget.iPhone)
+			if (target != BuildTarget.iOS)
 				return;
 
 			// Unity 5 can copy files in sub folders of Plugins without this

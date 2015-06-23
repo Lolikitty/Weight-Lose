@@ -4,35 +4,38 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Prime31;
+using AndroidMediaBrowser;
 
 public class FoodSDLoading : MonoBehaviour {
 	
 	void Awake () {
 		#if UNITY_ANDROID
-		EtceteraAndroid.initTTS();
-		EtceteraAndroid.promptForPictureFromAlbum( "a" );
+		ImageBrowser.OnPicked += (image) => {
+			StartCoroutine (imageLoaded2 (image.Path));
+		};
+		
+		ImageBrowser.OnPickCanceled += () => {
+			Application.LoadLevel ("FoodCamera");
+		};
+		
+		ImageBrowser.Pick();
+		
 		#endif
 	}
 	
 	void OnEnable(){
 		#if UNITY_ANDROID
-		EtceteraAndroidManager.albumChooserSucceededEvent += imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent += imageLoaded;
+//		EtceteraAndroidManager.albumChooserSucceededEvent += imageLoaded;
+//		EtceteraAndroidManager.photoChooserSucceededEvent += imageLoaded;
 		#endif
 	}
 	
 	
 	void OnDisable(){
 		#if UNITY_ANDROID
-		EtceteraAndroidManager.albumChooserSucceededEvent -= imageLoaded;
-		EtceteraAndroidManager.photoChooserSucceededEvent -= imageLoaded;
+//		EtceteraAndroidManager.albumChooserSucceededEvent -= imageLoaded;
+//		EtceteraAndroidManager.photoChooserSucceededEvent -= imageLoaded;
 		#endif
-	}
-	
-	
-	public void imageLoaded(string imagePath){
-		StartCoroutine (imageLoaded2 (imagePath));
 	}
 	
 	IEnumerator imageLoaded2(string imagePath){
