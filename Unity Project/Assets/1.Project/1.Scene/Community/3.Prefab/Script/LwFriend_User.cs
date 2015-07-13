@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 
 public class LwFriend_User : MonoBehaviour {
 
+	public LwFriend friend;
 	public UITexture head;
 	public UILabel name;
 	public string friendID;
@@ -57,6 +58,10 @@ public class LwFriend_User : MonoBehaviour {
 	}
 
 	void ButtonInfo(GameObject button){
+
+		userInfo.GetComponent<UserInfo> ().id.text = friendID;
+		userInfo.GetComponent<UserInfo> ().name.text = name.text;
+		userInfo.GetComponent<UserInfo> ().head.mainTexture = head.mainTexture;
 
 		userInfo.SetActive (true);
 

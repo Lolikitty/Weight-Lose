@@ -21,6 +21,8 @@ public class LwTalk : MonoBehaviour {
 
 	public GameObject buttonAddBgOk;
 	public GameObject buttonAddBgCancel;
+
+	public GameObject noNet;
 	
 	void Awake () {
 		UIEventListener.Get (button_AddFriend).onClick = Button_AddFriend;
@@ -114,6 +116,16 @@ public class LwTalk : MonoBehaviour {
 	}
 	
 	IEnumerator Start (){
+
+		using(WWW w = new WWW(LwInit.HttpServerPath + "/connectedCheck.html")){
+			yield return w;
+			if(!string.IsNullOrEmpty(w.error)){
+				noNet.SetActive(true);
+			}else{
+				noNet.SetActive(false);
+			}
+		}
+
 		WWWForm wwwF = new WWWForm();
 		wwwF.AddField("id", JsonConvert.DeserializeObject<JObject> (File.ReadAllText(Application.persistentDataPath + "/User.txt"))["ID"].ToString());
 		

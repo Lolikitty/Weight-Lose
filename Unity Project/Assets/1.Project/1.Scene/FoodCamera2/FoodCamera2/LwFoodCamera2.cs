@@ -13,10 +13,10 @@ public class LwFoodCamera2 : MonoBehaviour {
 	public GameObject buttonDone;
 	public GameObject buttonCancel;
 
-	public ChooseNumber number1;
-	public ChooseNumber number2;
-	public ChooseNumber number3;
-	public ChooseNumber number4;
+	public ChooseNumberNGUI number1;
+	public ChooseNumberNGUI number2;
+	public ChooseNumberNGUI number3;
+	public ChooseNumberNGUI number4;
 
 	void Awake () {
 
@@ -69,7 +69,7 @@ public class LwFoodCamera2 : MonoBehaviour {
 
 	void ButtonDone(GameObject button){
 
-		if (name.text == "請輸入食物名稱") {
+		if (name.text == "請輸入食物名稱" || string.IsNullOrEmpty(name.text)) {
 			warningObj.SetActive (true);
 			return;
 		}

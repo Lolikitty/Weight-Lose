@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LwSports2 : MonoBehaviour {
 
@@ -10,10 +11,18 @@ public class LwSports2 : MonoBehaviour {
 	public GameObject[] sportButton; //[11]
 	public static string nowSelectItem; //判斷現在選擇的項目
 
+	public UICenterOnChild sv_coc;
+
+	public ChooseNumber cn3;
 
 	// Unity Override Methods ==============================================================================================================================
 
+	List<string> arr = new List<string>();
+
 	void Awake () {
+
+		cn3.SetNumber (1);
+
 		UIEventListener.Get(buttonOk).onClick = ButtonOk;
 
 		//print("AA = "+SportsButton.clickButton);
@@ -32,6 +41,7 @@ public class LwSports2 : MonoBehaviour {
 				g.transform.localPosition = new Vector3(x,50,0);
 				g.transform.localScale = new Vector3(2.0f,2.0f,2.0f);//Vector3.one;
 				x += 200;
+				arr.Add(g.name);
 			}
 		}
 //
@@ -41,6 +51,13 @@ public class LwSports2 : MonoBehaviour {
 //			g.transform.localPosition = new Vector3(x,0,0);
 //			g.transform.localScale = Vector3.one;
 //		}
+	}
+
+	void Update(){
+		SpringPanel sp= sv_coc.GetComponent<SpringPanel> ();
+		int id = (int) Mathf.Round ((sp.target.x-150)/-200);
+		nowSelectItem = arr [id];
+//		print  ( arr[id] );
 	}
 
 

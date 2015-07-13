@@ -29,6 +29,8 @@ public class LwFriend : MonoBehaviour {
 	public GameObject userInfoExit;
 	public Transform userInfoFoodRoot;
 
+	public GameObject noNet;
+
 	public static string ID;
 
 	void Awake () {
@@ -43,6 +45,15 @@ public class LwFriend : MonoBehaviour {
 	}
 
 	IEnumerator Start (){
+
+		using(WWW w = new WWW(LwInit.HttpServerPath + "/connectedCheck.html")){
+			yield return w;
+			if(!string.IsNullOrEmpty(w.error)){
+				noNet.SetActive(true);
+			}else{
+				noNet.SetActive(false);
+			}
+		}
 
 		ID = JsonConvert.DeserializeObject<JObject> (File.ReadAllText (Application.persistentDataPath + "/User.txt")) ["ID"].ToString ();
 
@@ -61,6 +72,7 @@ public class LwFriend : MonoBehaviour {
 			f.transform.localScale = Vector3.one;
 			f.transform.localPosition = new Vector3(0, 170 - i * 110, 0);
 			LwFriend_User fu = f.GetComponent<LwFriend_User>();
+			fu.friend = this;
 			fu.userInfo = userInfo;
 			fu.userInfoFoodRoot = userInfoFoodRoot;
 			fu.friendID = id;
