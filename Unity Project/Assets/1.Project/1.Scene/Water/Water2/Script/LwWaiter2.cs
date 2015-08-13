@@ -57,7 +57,8 @@ public class LwWaiter2 : MonoBehaviour {
 
 	void ButtonOk(GameObject button){
 		print ("ok : " + WaiterValue + " c.c.");
-		Application.LoadLevel ("Water3");
+//		Application.LoadLevel ("Water3");
+		Application.LoadLevel ("Water2");
 	}
 
 	void ButtonBack(GameObject obj){
